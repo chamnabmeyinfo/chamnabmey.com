@@ -1,10 +1,13 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, ArrowUpRight, Mail, Phone } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Sparkles, Terminal } from 'lucide-react';
 import LinkedInIcon from './icons/LinkedInIcon';
+import { useStyle } from '@/context/StyleContext';
 
 export default function Hero() {
+  const { currentStyle } = useStyle();
+
   const stats = [
     { value: '10+', label: 'Years Experience', note: 'Marketing & Ad Ops' },
     { value: '3.8x', label: 'Average Client ROAS', note: 'Paid acquisition' },
@@ -21,7 +24,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="pt-36 pb-20 sm:pt-44 sm:pb-28 theme-canvas border-b theme-border transition-colors duration-300">
+    <section className="pt-36 pb-20 sm:pt-44 sm:pb-28 theme-canvas border-b theme-border transition-colors duration-400">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         
         {/* Main Hero Grid */}
@@ -30,10 +33,54 @@ export default function Hero() {
           {/* Left Text Block */}
           <div className="lg:col-span-7 space-y-8">
             
-            {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 text-xs font-medium theme-badge px-3 py-1 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[var(--accent-color)] animate-pulse" />
-              <span>Available for Selective Partnerships & Strategy</span>
+            {/* Dynamic Style-Specific Reactive Badge */}
+            <div className="flex flex-wrap items-center gap-2">
+              {currentStyle === 'retro' ? (
+                <div className="theme-card px-3 py-1.5 font-mono text-xs inline-flex items-center gap-2 shadow-xs">
+                  <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span>C:\CHAMNAB&gt; marketing.exe --launch</span>
+                  <span className="retro-cursor font-bold">█</span>
+                </div>
+              ) : currentStyle === 'brutalism' ? (
+                <div className="inline-flex items-center gap-2">
+                  <span className="theme-badge px-3 py-1 text-xs font-black uppercase tracking-wider">
+                    ⚡ 3.8X ROAS
+                  </span>
+                  <span className="theme-badge px-3 py-1 text-xs font-black uppercase tracking-wider rotate-[3deg]">
+                    🔥 NO FLUFF ADS
+                  </span>
+                </div>
+              ) : currentStyle === 'maximalism' ? (
+                <div className="theme-badge px-4 py-1 text-xs font-black uppercase tracking-widest inline-flex items-center gap-2 animate-pulse">
+                  <span>🚀 10X REVENUE ENGINE</span>
+                  <span>•</span>
+                  <span>ACTIVE</span>
+                </div>
+              ) : currentStyle === 'aurora' ? (
+                <div className="theme-badge px-4 py-1.5 text-xs font-mono tracking-wider shadow-lg shadow-cyan-500/20 inline-flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                  <span>● Luminous Attribution Pipeline</span>
+                </div>
+              ) : currentStyle === 'claymorphism' ? (
+                <div className="theme-badge px-4 py-1.5 text-xs font-bold shadow-md inline-flex items-center gap-2">
+                  <Sparkles className="w-3.5 h-3.5 text-rose-500" />
+                  <span>Tactile Digital Growth Architecture</span>
+                </div>
+              ) : currentStyle === 'collage' ? (
+                <div className="theme-badge px-3.5 py-1 text-xs font-serif italic border-dashed rotate-[-1deg] shadow-xs">
+                  ✦ A Decade of Commercial Brand Engineering
+                </div>
+              ) : currentStyle === 'skeuomorphism' ? (
+                <div className="theme-badge px-3.5 py-1 text-xs font-mono uppercase tracking-wider shadow-inner inline-flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
+                  <span>STATUS: ATTRIBUTION ONLINE</span>
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-2 text-xs font-medium theme-badge px-3 py-1 shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-[var(--accent-color)] animate-pulse" />
+                  <span>Available for Selective Partnerships & Strategy</span>
+                </div>
+              )}
             </div>
 
             {/* Headline */}
@@ -97,9 +144,28 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Portrait Column */}
+          {/* Right Portrait Column with Adaptive Style Chrome */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="w-full max-w-[340px]">
+            <div className="w-full max-w-[340px] relative">
+              
+              {/* Optional Retro OS Window Header */}
+              {currentStyle === 'retro' && (
+                <div className="bg-[#000080] text-white px-3 py-1 flex items-center justify-between text-[11px] font-mono font-bold mb-1 border-2 border-t-white border-l-white border-r-black border-b-black">
+                  <span>chamnab_portrait.bmp</span>
+                  <div className="flex gap-1">
+                    <span className="px-1 bg-[#C0C0C0] text-black border border-white text-[9px]">_</span>
+                    <span className="px-1 bg-[#C0C0C0] text-black border border-white text-[9px]">X</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Optional Neo-Brutalism Floating Badge */}
+              {currentStyle === 'brutalism' && (
+                <div className="absolute -top-3 -right-3 z-10 bg-[#FFE600] border-2 border-black px-3 py-1 font-black text-xs rotate-[4deg] shadow-[3px_3px_0px_#000]">
+                  TOP 1% MARKETER
+                </div>
+              )}
+
               <div className="relative theme-card overflow-hidden aspect-[4/5]">
                 <img
                   src="/images/chamnab-mey.jpg"
@@ -107,6 +173,7 @@ export default function Hero() {
                   className="w-full h-full object-cover object-top filter grayscale-[10%] hover:grayscale-0 transition-all duration-700"
                 />
               </div>
+
               <div className="mt-3 flex items-center justify-between text-[11px] theme-text-faint uppercase tracking-wider font-mono px-1">
                 <span>Chamnab Mey</span>
                 <span>Phnom Penh, KH</span>
@@ -116,7 +183,7 @@ export default function Hero() {
 
         </div>
 
-        {/* Dynamic Proof Metric Row */}
+        {/* Proof Metric Row */}
         <div className="mt-20 pt-12 border-t theme-border grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, idx) => (
             <div key={idx} className="theme-card p-5 space-y-1">

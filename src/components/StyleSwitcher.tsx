@@ -2,7 +2,21 @@
 
 import React, { useState, useEffect } from 'react';
 import { useStyle, UIStyle } from '@/context/StyleContext';
-import { Palette, Check, ChevronUp, Sparkles, X, Share2, RotateCcw } from 'lucide-react';
+import { Palette, Check, ChevronUp, Sparkles, X, Share2, RotateCcw, Activity } from 'lucide-react';
+
+const STYLE_PHYSICS: Record<UIStyle, string> = {
+  minimalism: 'Silent Swiss Editorial Ease',
+  maximalism: 'Continuous Neon Glow Pulse & Spring',
+  flat: 'Instant Mechanical 2D Linear Snap',
+  neumorphism: 'Physical Silicone Inset Depressions',
+  claymorphism: 'Rubbery 3D Jelly Float & Squash',
+  aurora: 'Atmospheric Northern Lights Fluid Drift',
+  brutalism: 'Solid Black Shadow Collapse Snap',
+  collage: 'Organic Paper Flutter & Tactile Tilts',
+  skeuomorphism: 'Analog Hardware Specular Sheen Beam',
+  retro: 'Windows 95 Bevel Inversion & CRT Blink',
+  glassmorphism: 'Prismatic Frosted Glass Shimmer',
+};
 
 export default function StyleSwitcher() {
   const { currentStyle, setStyle, styleMeta, stylesList } = useStyle();
@@ -70,11 +84,11 @@ export default function StyleSwitcher() {
                 <div className="flex items-center gap-2">
                   <Palette className="w-4 h-4 text-amber-400" />
                   <h3 className="text-base sm:text-lg font-extrabold tracking-tight text-white">
-                    UI Design Style Lab (11 Styles)
+                    UI Design Style Lab (11 Styles + Signature Animations)
                   </h3>
                 </div>
                 <p className="text-xs text-neutral-400">
-                  Select any design archetype below to transform this entire website in real time.
+                  Select any design archetype to transform the visual styling and motion physics in real time.
                 </p>
               </div>
 
@@ -101,6 +115,7 @@ export default function StyleSwitcher() {
             <div className="p-4 sm:p-6 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {stylesList.map((item) => {
                 const isActive = currentStyle === item.id;
+                const physics = STYLE_PHYSICS[item.id];
                 return (
                   <button
                     key={item.id}
@@ -117,7 +132,7 @@ export default function StyleSwitcher() {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <span
-                            className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-xs"
+                            className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-xs shrink-0"
                             style={{ backgroundColor: item.accentColor }}
                           />
                           <span className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">
@@ -132,6 +147,11 @@ export default function StyleSwitcher() {
                       <p className="text-[11px] text-neutral-400 leading-snug line-clamp-2">
                         {item.tagline}
                       </p>
+
+                      <div className="flex items-center gap-1 text-[10px] text-amber-300/80 font-mono pt-1">
+                        <Activity className="w-2.5 h-2.5 shrink-0" />
+                        <span className="truncate">{physics}</span>
+                      </div>
                     </div>
 
                     <div className="mt-3 pt-2 border-t border-neutral-800/70 flex items-center justify-between text-[10px]">
@@ -154,12 +174,13 @@ export default function StyleSwitcher() {
               })}
             </div>
 
-            {/* Footer with Share URL */}
+            {/* Footer with Active Physics Banner & Share URL */}
             <div className="p-4 sm:p-5 border-t border-neutral-800 bg-neutral-950/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2 text-neutral-400 text-center sm:text-left">
                 <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>
-                  Current active: <strong className="text-white">{styleMeta.name}</strong> ({styleMeta.badge})
+                <span className="truncate">
+                  Active Physics:{' '}
+                  <strong className="text-white">{STYLE_PHYSICS[currentStyle]}</strong>
                 </span>
               </div>
 
