@@ -153,8 +153,8 @@ export default function Hero() {
                 <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
                   <ShieldCheck className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-slate-200 font-semibold block text-xs uppercase tracking-wider">IT & Engineering Foundation</span>
-                    <p className="text-slate-400 text-xs mt-0.5">Setec Institute & IU IT background. Bridging the gap between technical infrastructure and high ROI marketing.</p>
+                    <span className="text-slate-200 font-semibold block text-xs uppercase tracking-wider">Tracking & Conversion Tech</span>
+                    <p className="text-slate-400 text-xs mt-0.5">Full-funnel attribution, Meta CAPI, Google Tag Manager & GA4 to ensure zero wasted ad spend.</p>
                   </div>
                 </div>
               </div>
