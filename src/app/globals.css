@@ -2,13 +2,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F2EEED;
-  --foreground: #0F0F0F;
-  --color-stone: #F2EEED;
-  --color-dark: #0F0F0F;
-  --color-card-dark: #171717;
-  --color-purple: #9175FF;
-  --color-text-body: #555555;
+  --background: #FAFAFA;
+  --foreground: #111111;
+  --surface: #FFFFFF;
+  --border: #E5E5E5;
+  --muted: #737373;
 }
 
 body {
@@ -18,65 +16,25 @@ body {
   overflow-x: hidden;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom editorial scrollbar */
+/* Minimalist refined scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F2EEED;
+  background: #FAFAFA;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D8D2D0;
-  border-radius: 4px;
+  background: #E5E5E5;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0F0F0F;
+  background: #A3A3A3;
 }
 
-/* Subtle biogra background texture */
-.biogra-bg {
-  background-color: #F2EEED;
-}
-
-.biogra-card {
-  background-color: #FFFFFF;
-  border: 1px solid rgba(15, 15, 15, 0.08);
-  border-radius: 20px;
-}
-
-/* Biogra button styles */
-.biogra-btn-purple {
-  background-color: #9175FF;
-  color: #FFFFFF;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.biogra-btn-purple:hover {
-  background-color: #7A5AF8;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(145, 117, 255, 0.4);
-}
-
-.biogra-btn-dark {
-  background-color: #0F0F0F;
-  color: #FFFFFF;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.biogra-btn-dark:hover {
-  background-color: #232323;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(15, 15, 15, 0.3);
-}
-
-.biogra-btn-border {
-  border: 1px solid rgba(15, 15, 15, 0.2);
-  background-color: transparent;
-  color: #0F0F0F;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.biogra-btn-border:hover {
-  background-color: #0F0F0F;
-  color: #FFFFFF;
-  border-color: #0F0F0F;
+/* Subtle hairline utility */
+.hairline-border {
+  border-color: rgba(0, 0, 0, 0.08);
 }

@@ -11,81 +11,117 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0F0F0F] text-white pt-20 pb-12 border-t border-black/10 overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#111111] text-white pt-20 pb-12 border-t border-neutral-800 overflow-hidden relative">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         
-        {/* Top Callout & Giant Watermark (Exact Biogra footer-4-area style) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pb-16 border-b border-white/10">
+        {/* Top Minimalist Callout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end pb-16 border-b border-neutral-800">
           
-          <div className="lg:col-span-7 space-y-6">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] text-white">
-              Unlock your brand’s <br />
-              <span className="text-[#9175FF]">full growth potential.</span>
+          <div className="lg:col-span-8 space-y-4">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
+              Direct Engagement
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight leading-tight text-white">
+              Ready to engineer high-ROI growth for your business?
             </h2>
-            <div className="pt-2">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-white bg-[#9175FF] hover:bg-[#7A5AF8] shadow-lg shadow-[#9175FF]/30 transition-all hover:-translate-y-0.5"
-              >
-                <span>Get Free Consultation</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-            </div>
+            <p className="text-xs sm:text-sm text-neutral-400 max-w-xl font-light leading-relaxed">
+              Available for high-impact advisory, performance media management, and end-to-end web & attribution infrastructure.
+            </p>
           </div>
 
-          <div className="lg:col-span-5 text-left lg:text-right">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter text-white/10 uppercase select-none">
-              CHAMNAB
-            </h1>
-            <p className="text-xs text-[#888888] tracking-widest uppercase mt-2">
-              Digital Marketing & Growth Partner
-            </p>
+          <div className="lg:col-span-4 flex flex-col items-start lg:items-end gap-3">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-medium text-neutral-950 bg-white hover:bg-neutral-100 transition-all hover:scale-[1.02]"
+            >
+              <span>Book Strategic Consultation</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+            <span className="text-[11px] text-neutral-400">Response within 24 business hours</span>
           </div>
 
         </div>
 
-        {/* Middle Navigation & Socials */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-white/10 text-xs text-[#888888]">
+        {/* Middle Navigation & Information Grid */}
+        <div className="py-14 grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 border-b border-neutral-800 text-xs text-neutral-400">
+          
+          {/* Column 1: Contact Direct */}
           <div className="space-y-3">
-            <h4 className="font-bold text-white uppercase tracking-wider text-xs">Direct Contact</h4>
-            <p className="leading-relaxed text-[#AAAAAA]">
-              Phone/Telegram: +855 15 705 703 <br />
-              Email: admin@chamnabmey.com <br />
-              Phnom Penh, Cambodia
-            </p>
+            <h4 className="text-[11px] font-mono font-medium text-white uppercase tracking-wider">
+              Direct Office
+            </h4>
+            <div className="space-y-2 leading-relaxed text-neutral-400 font-light">
+              <p>
+                <span className="text-neutral-400 block text-[10px] uppercase">Telegram / Call</span>
+                <a href="tel:+85515705703" className="hover:text-white transition-colors text-neutral-200">
+                  +855 15 705 703
+                </a>
+              </p>
+              <p>
+                <span className="text-neutral-400 block text-[10px] uppercase">Official Email</span>
+                <a href="mailto:admin@chamnabmey.com" className="hover:text-white transition-colors text-neutral-200">
+                  admin@chamnabmey.com
+                </a>
+              </p>
+              <p>
+                <span className="text-neutral-400 block text-[10px] uppercase">Location</span>
+                <span className="text-neutral-200">Phnom Penh, Cambodia</span>
+              </p>
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <h4 className="font-bold text-white uppercase tracking-wider text-xs">Core Services</h4>
-            <ul className="space-y-1.5 text-[#AAAAAA]">
-              <li><a href="#services" className="hover:text-white transition-colors">Performance Paid Ads</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">High-Speed Web Development</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Meta CAPI & Tracking Setup</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">E-Commerce Scaling</a></li>
+          {/* Column 2: Core Capabilities */}
+          <div className="space-y-3">
+            <h4 className="text-[11px] font-mono font-medium text-white uppercase tracking-wider">
+              Capabilities
+            </h4>
+            <ul className="space-y-2 text-neutral-400 font-light">
+              <li><a href="#services" className="hover:text-white transition-colors">Meta & Google Ads Management</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Full-Funnel CRO Architecture</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Server-Side Tracking & CAPI</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">E-Commerce & Scale Infrastructure</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Executive Growth Advisory</a></li>
             </ul>
           </div>
 
-          <div className="space-y-2">
-            <h4 className="font-bold text-white uppercase tracking-wider text-xs">Navigation</h4>
-            <ul className="space-y-1.5 text-[#AAAAAA]">
-              <li><a href="#about" className="hover:text-white transition-colors">About Chamnab</a></li>
-              <li><a href="#case-studies" className="hover:text-white transition-colors">Case Studies</a></li>
+          {/* Column 3: Navigation */}
+          <div className="space-y-3">
+            <h4 className="text-[11px] font-mono font-medium text-white uppercase tracking-wider">
+              Directory
+            </h4>
+            <ul className="space-y-2 text-neutral-400 font-light">
+              <li><a href="#about" className="hover:text-white transition-colors">Executive Background</a></li>
+              <li><a href="#case-studies" className="hover:text-white transition-colors">Verified Case Studies</a></li>
               <li><a href="#skills" className="hover:text-white transition-colors">Marketing Tech Stack</a></li>
-              <li><a href="/Resume-CHAMNAB-MEY.pdf" target="_blank" className="hover:text-white transition-colors">Download Resume (PDF)</a></li>
+              <li><a href="#calculator" className="hover:text-white transition-colors">Growth & ROI Simulator</a></li>
+              <li>
+                <a
+                  href="/Resume-CHAMNAB-MEY.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1 text-neutral-200 font-medium"
+                >
+                  <span>Resume (PDF)</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </li>
             </ul>
           </div>
 
-          <div className="space-y-2">
-            <h4 className="font-bold text-white uppercase tracking-wider text-xs">Social & Network</h4>
-            <ul className="space-y-1.5 text-[#AAAAAA]">
+          {/* Column 4: Professional Presence */}
+          <div className="space-y-3">
+            <h4 className="text-[11px] font-mono font-medium text-white uppercase tracking-wider">
+              Network
+            </h4>
+            <ul className="space-y-2 text-neutral-400 font-light">
               <li>
                 <a
                   href="https://www.linkedin.com/in/chamnabmey"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#9175FF] transition-colors flex items-center gap-1.5"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1.5 text-neutral-200"
                 >
-                  <LinkedInIcon className="w-3.5 h-3.5" />
+                  <LinkedInIcon className="w-3.5 h-3.5 text-neutral-400" />
                   <span>LinkedIn Profile</span>
                 </a>
               </li>
@@ -94,35 +130,43 @@ export default function Footer() {
                   href="https://t.me/chamnabmey"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#9175FF] transition-colors"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1 text-neutral-200"
                 >
-                  Telegram Direct (@chamnabmey)
+                  <span>Telegram Direct</span>
+                  <ArrowUpRight className="w-3 h-3 text-neutral-400" />
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:admin@chamnabmey.com"
-                  className="hover:text-[#9175FF] transition-colors"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1 text-neutral-200"
                 >
-                  Official Email Channel
+                  <span>Direct Inquiry Mail</span>
+                  <ArrowUpRight className="w-3 h-3 text-neutral-400" />
                 </a>
               </li>
             </ul>
           </div>
+
         </div>
 
-        {/* Copyright & Scroll to Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#666666]">
-          <p>© {new Date().getFullYear()} CHAMNAB MEY. All Rights Reserved.</p>
-          
+        {/* Bottom Bar: Copyright & Back to Top */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-400 font-mono">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span>© {new Date().getFullYear()} Chamnab Mey.</span>
+            <span>All Rights Reserved.</span>
+            <span className="hidden sm:inline text-neutral-400">•</span>
+            <span>Senior Digital Marketing Strategist</span>
+          </div>
+
           <div className="flex items-center gap-4">
-            <span>Powered by Next.js & Google Cloud</span>
+            <span className="text-neutral-400 font-sans text-xs">Next.js & Google Cloud</span>
             <button
               onClick={scrollToTop}
-              className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#9175FF] text-white flex items-center justify-center transition-colors"
+              className="w-8 h-8 rounded-full border border-neutral-800 hover:border-neutral-600 bg-neutral-900/50 hover:bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition-colors"
               aria-label="Back to top"
             >
-              <ArrowUp className="w-4 h-4" />
+              <ArrowUp className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
