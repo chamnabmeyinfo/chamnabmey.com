@@ -11,7 +11,8 @@ import {
   Download, 
   ShieldCheck, 
   Zap,
-  Briefcase
+  Briefcase,
+  Sparkles
 } from 'lucide-react';
 
 export default function About() {
@@ -100,13 +101,13 @@ export default function About() {
         </div>
 
         {/* 3 Core Marketing Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {marketingPillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
               <div
                 key={idx}
-                className="bg-slate-950/80 rounded-3xl p-8 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between shadow-xl group"
+                className="bg-slate-950/80 rounded-3xl p-8 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between shadow-xl group hover:-translate-y-1"
               >
                 <div>
                   <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
@@ -133,7 +134,60 @@ export default function About() {
           })}
         </div>
 
-        {/* Proven Growth Milestones (Curated) */}
+        {/* Strategic Agency Workflow Visual Showcase */}
+        <div className="mb-16 rounded-3xl overflow-hidden border border-slate-800 relative bg-slate-950 shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+            <div className="lg:col-span-7 p-8 sm:p-12 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+                <Zap className="w-3.5 h-3.5" />
+                <span>The Full-Funnel Advantage</span>
+              </div>
+
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                How Modern Campaigns Win in Today&apos;s Market
+              </h3>
+
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                Ad platforms have evolved. Machine learning algorithms on Meta and Google prioritize campaigns backed by <strong className="text-white">deep signal tracking</strong> and <strong className="text-white">high-converting creative hooks</strong>. 
+              </p>
+
+              <p className="text-sm text-slate-400 leading-relaxed">
+                By unifying media buying, direct-response copywriting, and server-side tracking, we eliminate wasted spend and feed the ad algorithms the exact conversion signals needed to drive lower cost-per-lead and higher returns.
+              </p>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
+                <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+                  <span className="text-xs text-slate-400 block">Ad Spend Efficiency</span>
+                  <span className="text-lg font-bold text-emerald-400">+45%</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+                  <span className="text-xs text-slate-400 block">Attribution Accuracy</span>
+                  <span className="text-lg font-bold text-cyan-400">99.8%</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 col-span-2 sm:col-span-1">
+                  <span className="text-xs text-slate-400 block">Lead Qualification</span>
+                  <span className="text-lg font-bold text-amber-400">High Intent</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 relative h-72 lg:h-full min-h-[320px] bg-slate-900 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
+                alt="Digital Strategy and Growth Review Demo"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-l from-slate-950/90 via-slate-950/40 to-transparent" />
+              
+              <div className="absolute bottom-4 left-4 backdrop-blur-md bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-1.5 flex items-center gap-2 text-xs text-slate-300">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Strategy Room Demo Visual</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Proven Growth Milestones */}
         <div className="bg-slate-950 rounded-3xl border border-slate-800 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 mb-8 border-b border-slate-800">
             <div>

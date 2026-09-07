@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Services from '@/components/Services';
+import GrowthEstimator from '@/components/GrowthEstimator';
 import CaseStudies from '@/components/CaseStudies';
 import SkillsMatrix from '@/components/SkillsMatrix';
 import Testimonials from '@/components/Testimonials';
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <About />
       <Services />
+      <GrowthEstimator />
       <CaseStudies />
       <SkillsMatrix />
       <Testimonials />
