@@ -23,6 +23,7 @@ export interface StyleMeta {
   badge: string;
   accentColor: string;
   bgPreview: string;
+  isDefault?: boolean;
 }
 
 export const STYLES_LIST: StyleMeta[] = [
@@ -31,9 +32,10 @@ export const STYLES_LIST: StyleMeta[] = [
     num: '01',
     name: 'Minimalism',
     tagline: 'Warm gallery canvas, hairline borders, pure negative space',
-    badge: 'Default Corporate',
+    badge: 'Default Official Style',
     accentColor: '#111111',
     bgPreview: '#FAFAFA',
+    isDefault: true,
   },
   {
     id: 'maximalism',
@@ -130,6 +132,7 @@ export const STYLES_LIST: StyleMeta[] = [
 interface StyleContextType {
   currentStyle: UIStyle;
   setStyle: (style: UIStyle) => void;
+  resetToDefault: () => void;
   styleMeta: StyleMeta;
   stylesList: StyleMeta[];
 }
@@ -139,7 +142,7 @@ const StyleContext = createContext<StyleContextType | undefined>(undefined);
 export function StyleProvider({ children }: { children: React.ReactNode }) {
   const [currentStyle, setCurrentStyleState] = useState<UIStyle>('minimalism');
 
-  // Load style from URL parameter or localStorage on mount
+  // Initialize and check URL param or user preference
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
@@ -158,6 +161,8 @@ export function StyleProvider({ children }: { children: React.ReactNode }) {
         setCurrentStyleState(savedStyle);
         document.documentElement.setAttribute('data-style', savedStyle);
       } else {
+        // Strict Default: Minimalism
+        setCurrentStyleState('minimalism');
         document.documentElement.setAttribute('data-style', 'minimalism');
       }
     }
@@ -169,11 +174,19 @@ export function StyleProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('chamnabmey_ui_style', style);
       document.documentElement.setAttribute('data-style', style);
       
-      // Update URL query without full reload
+      // Update URL query
       const url = new URL(window.location.href);
-      url.searchParams.set('style', style);
+      if (style === 'minimalism') {
+        url.searchParams.delete('style');
+      } else {
+        url.searchParams.set('style', style);
+      }
       window.history.replaceState({}, '', url.toString());
     }
+  };
+
+  const resetToDefault = () => {
+    setStyle('minimalism');
   };
 
   const styleMeta = STYLES_LIST.find((s) => s.id === currentStyle) || STYLES_LIST[0];
@@ -183,6 +196,7 @@ export function StyleProvider({ children }: { children: React.ReactNode }) {
       value={{
         currentStyle,
         setStyle,
+        resetToDefault,
         styleMeta,
         stylesList: STYLES_LIST,
       }}
