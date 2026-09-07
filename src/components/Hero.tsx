@@ -1,249 +1,216 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { 
   ArrowRight, 
   CheckCircle2, 
   TrendingUp, 
-  Users, 
-  ShieldCheck, 
-  Mail, 
-  Phone, 
+  Award, 
+  Sparkles, 
   ExternalLink,
-  Award,
-  Sparkles,
-  BarChart2
+  Mail, 
+  Phone,
+  BarChart3,
+  Layers
 } from 'lucide-react';
 import LinkedInIcon from './icons/LinkedInIcon';
 
 export default function Hero() {
-  // Demo executive portrait reference. Chamnab can easily swap this with his own photo at '/images/profile.jpg'
-  const [profileImage, setProfileImage] = useState(
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'
+  // Demo portrait image for Biogra right-side display
+  const [heroImage, setHeroImage] = useState(
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80'
   );
 
   const stats = [
-    { label: 'Years Experience', value: '10+', sub: 'Digital & Web Ops' },
-    { label: 'Proven Client ROI', value: '3.5x+', sub: 'Average Ad Return' },
-    { label: 'Projects Delivered', value: '50+', sub: 'Websites & Funnels' },
+    { label: 'Years Experience', value: '10+', sub: 'Digital & Growth' },
+    { label: 'Proven Client ROI', value: '3.8x', sub: 'Average Ad Return' },
+    { label: 'Projects Completed', value: '50+', sub: 'Funnels & Websites' },
     { label: 'Ad Spend Managed', value: '$1M+', sub: 'Meta & Google Ads' },
   ];
 
-  const brandLogos = [
-    { name: 'Solis Cambodia', type: 'Agricultural Machinery', tag: 'Lead Funnel & Web' },
-    { name: 'KHB Media PLC', type: 'Digital Media Agency', tag: 'General Manager' },
-    { name: 'Riich Me', type: 'E-Commerce Marketplace', tag: 'Operations & Growth' },
-    { name: 'EPOS-GODIGITAL', type: 'Retail Tech Platform', tag: 'Digital Strategy' },
-    { name: 'KMall Events', type: 'Commercial Retail', tag: 'Event Marketing' },
+  const brandTicker = [
+    'Solis Cambodia',
+    'KHB Media PLC',
+    'Riich Me',
+    'EPOS-GODIGITAL',
+    'KMall Events',
   ];
 
   return (
-    <section className="relative min-h-screen pt-32 pb-16 flex flex-col justify-center bg-slate-950 overflow-hidden">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 my-auto">
+    <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 bg-[#F2EEED] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Main Biogra Hero Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Main Hero Copy */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Availability Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              Available for Q3/Q4 Client Consultations & Retainers
+          {/* Left Hero Content */}
+          <div className="lg:col-span-7 space-y-8">
+            
+            {/* Author Intro Pill (Exact Biogra index-4 style) */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-black/8 shadow-sm">
+              <div className="w-8 h-8 rounded-full overflow-hidden border border-black/10 shrink-0">
+                <img
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+                  alt="Chamnab Mey Avatar"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-xs sm:text-sm font-semibold text-[#0F0F0F]">
+                Hello, I’m <strong className="text-[#9175FF]">Chamnab Mey</strong>, a Senior Digital Marketer
+              </p>
             </div>
 
-            {/* Powerful Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Transforming Clicks into Revenue with{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
-                Data-Driven Marketing
-              </span>{' '}
-              & Modern Web Solutions.
-            </h1>
+            {/* Huge Display Headline (Biogra signature font sizing) */}
+            <div className="space-y-1">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-extrabold tracking-tight text-[#0F0F0F] leading-[1.08]">
+                Digital Marketer <br />
+                <span className="text-[#0F0F0F]">Helping Grow</span> <br />
+                <span className="text-[#9175FF]">Your Brands.</span>
+              </h1>
+            </div>
 
-            {/* Subheading */}
-            <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Hello, I&apos;m <strong className="text-white font-semibold">CHAMNAB MEY</strong>. Senior Digital Marketing Strategist and Web Developer in Phnom Penh. I help SMEs and commercial brands scale through profitable Meta & Google Ads, high-converting lead funnels, and enterprise-grade web platforms.
-            </p>
+            {/* Biogra Thumb Content Split Row */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-2">
+              <div className="w-16 h-16 rounded-2xl bg-white border border-black/10 flex items-center justify-center text-[#9175FF] shrink-0 shadow-sm">
+                <BarChart3 className="w-8 h-8" />
+              </div>
+              <div className="space-y-4">
+                <p className="text-sm sm:text-base text-[#555555] leading-relaxed max-w-lg">
+                  As an experienced Digital Growth Specialist, I specialize in developing and executing strategic Meta & Google advertising funnels, conversion architecture, and scalable e-commerce systems.
+                </p>
+                
+                <div className="flex flex-wrap items-center gap-3">
+                  <a
+                    href="#case-studies"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold text-[#0F0F0F] border-2 border-[#0F0F0F] hover:bg-[#0F0F0F] hover:text-white transition-all"
+                  >
+                    <span>Explore Works</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
 
-            {/* Value bullets */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-sm text-slate-300">
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Meta (Facebook) & Google Ads Funnels</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>High-Speed SEO & Next.js/WordPress Sites</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>End-to-End E-commerce Operations</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Server & Tracking Infrastructure (GTM/CAPI)</span>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold text-white bg-[#9175FF] hover:bg-[#7A5AF8] shadow-md shadow-[#9175FF]/30 transition-all"
+                  >
+                    <span>Book Strategy Call</span>
+                  </a>
+                </div>
               </div>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-              <a
-                href="#contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-base font-bold text-slate-950 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all"
-              >
-                <span>Book Free Growth Audit</span>
-                <ArrowRight className="w-5 h-5" />
-              </a>
-
-              <a
-                href="#case-studies"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-semibold text-slate-200 bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 transition-all"
-              >
-                <span>View Proven Results</span>
-              </a>
-            </div>
-
-            {/* Fast Connect Bar */}
-            <div className="pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-400">
+            {/* Quick Contact & Socials Bar */}
+            <div className="pt-6 border-t border-black/10 flex flex-wrap items-center gap-6 text-xs text-[#555555]">
               <a
                 href="mailto:admin@chamnabmey.com"
-                className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors"
+                className="flex items-center gap-1.5 hover:text-[#9175FF] transition-colors font-medium"
               >
-                <Mail className="w-4 h-4 text-emerald-400" />
+                <Mail className="w-3.5 h-3.5 text-[#9175FF]" />
                 <span>admin@chamnabmey.com</span>
               </a>
               <a
                 href="tel:+85515705703"
-                className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors"
+                className="flex items-center gap-1.5 hover:text-[#9175FF] transition-colors font-medium"
               >
-                <Phone className="w-4 h-4 text-emerald-400" />
+                <Phone className="w-3.5 h-3.5 text-[#9175FF]" />
                 <span>+855 15 705 703</span>
               </a>
               <a
                 href="https://www.linkedin.com/in/chamnabmey"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors"
+                className="flex items-center gap-1.5 hover:text-[#9175FF] transition-colors font-medium"
               >
-                <LinkedInIcon className="w-4 h-4 text-cyan-400" />
+                <LinkedInIcon className="w-3.5 h-3.5 text-[#9175FF]" />
                 <span>LinkedIn Profile</span>
                 <ExternalLink className="w-3 h-3 opacity-60" />
               </a>
             </div>
+
           </div>
 
-          {/* Professional Visual Showcase Card */}
+          {/* Right Hero Image (Exact Biogra hero-right-thumb styling with rounded-30px) */}
           <div className="lg:col-span-5 relative flex justify-center">
             <div className="relative w-full max-w-md">
-              {/* Glowing aura frame */}
-              <div className="absolute -inset-1.5 bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl blur-lg opacity-40 group-hover:opacity-75 transition duration-500" />
-
-              <div className="relative bg-slate-900 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl">
-                {/* Image Container with Dark Gradient Overlay */}
-                <div className="relative h-96 w-full bg-slate-850 overflow-hidden">
+              
+              {/* Image Frame with 30px rounded corners and subtle shadow */}
+              <div className="relative rounded-[32px] overflow-hidden bg-white border border-black/10 shadow-2xl shadow-black/10">
+                <div className="relative h-[480px] w-full overflow-hidden bg-[#E8E3E2]">
                   <img
-                    src={profileImage}
-                    alt="CHAMNAB MEY - Professional Digital Marketer & Strategist"
-                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                    src={heroImage}
+                    alt="CHAMNAB MEY - Senior Digital Marketer"
+                    className="w-full h-full object-cover object-top hover:scale-102 transition-transform duration-500"
                     onError={() => {
-                      // Fallback placeholder if remote is blocked
-                      setProfileImage('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80');
+                      setHeroImage('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80');
                     }}
                   />
-                  {/* Subtle vignette gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
-                  
+
                   {/* Top Floating Badge */}
-                  <div className="absolute top-4 left-4 backdrop-blur-md bg-slate-950/80 border border-slate-700/80 rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-xs font-semibold text-slate-200">Meta & Google Ads Specialist</span>
+                  <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md rounded-2xl px-4 py-2 border border-black/5 shadow-md flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#9175FF] animate-pulse" />
+                    <span className="text-xs font-bold text-[#0F0F0F]">Meta & Google Certified</span>
                   </div>
 
-                  {/* Demo reference note badge */}
-                  <div className="absolute top-4 right-4 backdrop-blur-md bg-emerald-950/80 border border-emerald-500/40 rounded-lg px-2.5 py-1 flex items-center gap-1.5 text-[10px] text-emerald-300 font-medium">
-                    <Sparkles className="w-3 h-3 text-emerald-400" />
+                  {/* Demo Photo Indicator Badge */}
+                  <div className="absolute top-5 right-5 bg-black/75 backdrop-blur-md text-white text-[10px] font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-[#9175FF]" />
                     <span>Demo Photo</span>
                   </div>
-                </div>
 
-                {/* Profile Card Body */}
-                <div className="p-6 bg-slate-900 space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                  {/* Bottom Floating Stats Card */}
+                  <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-black/5 shadow-lg flex items-center justify-between">
                     <div>
-                      <h3 className="text-xl font-bold text-white tracking-tight">CHAMNAB MEY</h3>
-                      <p className="text-xs text-emerald-400 font-medium">Senior Digital Marketing & Growth Partner</p>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#696969] block">
+                        Proven Track Record
+                      </span>
+                      <span className="text-base font-extrabold text-[#0F0F0F]">
+                        $1M+ Ad Spend Managed
+                      </span>
                     </div>
-                    <span className="text-xs text-slate-400 px-2.5 py-1 bg-slate-950 rounded-lg border border-slate-800">
-                      Phnom Penh 🇰🇭
-                    </span>
-                  </div>
-
-                  {/* Highlights with Live Metrics */}
-                  <div className="grid grid-cols-2 gap-3 pt-1">
-                    <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
-                      <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold mb-1">
-                        <TrendingUp className="w-3.5 h-3.5" />
-                        <span>3.8x Avg ROAS</span>
-                      </div>
-                      <p className="text-[11px] text-slate-400">High-converting paid acquisition funnels</p>
-                    </div>
-
-                    <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
-                      <div className="flex items-center gap-1.5 text-xs text-cyan-400 font-semibold mb-1">
-                        <Award className="w-3.5 h-3.5" />
-                        <span>Ex-General Manager</span>
-                      </div>
-                      <p className="text-[11px] text-slate-400">Led 5 agency teams at KHB Media PLC</p>
+                    <div className="text-right">
+                      <span className="text-xs font-bold text-[#9175FF] block">
+                        3.8x Avg ROAS
+                      </span>
+                      <span className="text-[10px] text-[#696969]">Across Clients</span>
                     </div>
                   </div>
-
-                  <a
-                    href="#contact"
-                    className="w-full block text-center py-3 rounded-xl text-xs sm:text-sm font-bold bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 transition-colors"
-                  >
-                    Start A Project With Chamnab →
-                  </a>
                 </div>
               </div>
+
             </div>
           </div>
 
         </div>
 
-        {/* Stats Strip */}
-        <div className="mt-16 pt-10 border-t border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        {/* Counter Stats Section (Biogra Style) */}
+        <div className="mt-16 pt-10 border-t border-black/10 grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((s, idx) => (
-            <div key={idx} className="p-4 rounded-2xl bg-slate-900/40 border border-slate-800/60">
-              <div className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+            <div key={idx} className="bg-white rounded-2xl p-5 border border-black/6 shadow-xs text-center">
+              <div className="text-3xl sm:text-4xl font-extrabold text-[#0F0F0F]">
                 {s.value}
               </div>
-              <div className="text-sm font-semibold text-slate-200 mt-1">{s.label}</div>
-              <div className="text-xs text-slate-400">{s.sub}</div>
+              <div className="text-xs sm:text-sm font-bold text-[#0F0F0F] mt-1">
+                {s.label}
+              </div>
+              <div className="text-[11px] text-[#696969] mt-0.5">
+                {s.sub}
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Brand & Organization Credibility Ticker */}
-        <div className="mt-12 pt-8 border-t border-slate-900">
-          <p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-500 mb-6">
-            Organizations, Brands & Platforms Led and Scaled by Chamnab Mey
+        {/* Brand Track Record Ticker */}
+        <div className="mt-12 pt-8 border-t border-black/10 text-center">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-[#777777] mb-5">
+            Brands & Platforms Scaled by Chamnab Mey
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
-            {brandLogos.map((brand, bIdx) => (
-              <div
-                key={bIdx}
-                className="px-4 py-2 rounded-xl bg-slate-900/60 border border-slate-800/80 flex items-center gap-2 text-xs font-medium text-slate-300 hover:border-emerald-500/40 transition-colors"
+            {brandTicker.map((name, i) => (
+              <span
+                key={i}
+                className="px-4 py-2 rounded-full bg-white border border-black/8 text-xs font-bold text-[#222222] shadow-xs"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span className="font-bold text-white">{brand.name}</span>
-                <span className="text-slate-500 hidden sm:inline">•</span>
-                <span className="text-slate-400 hidden sm:inline text-[11px]">{brand.tag}</span>
-              </div>
+                {name}
+              </span>
             ))}
           </div>
         </div>

@@ -1,13 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Calculator, ArrowRight, TrendingUp, DollarSign, Users, Target, Sparkles } from 'lucide-react';
+import { Calculator, ArrowRight, TrendingUp, Sparkles } from 'lucide-react';
 
 export default function GrowthEstimator() {
   const [budget, setBudget] = useState(1500);
   const [goal, setGoal] = useState<'leads' | 'ecommerce' | 'branding'>('leads');
 
-  // Multipliers based on historical campaign benchmarks in Cambodia & SEA
   const multipliers = {
     leads: {
       cpc: 0.28,
@@ -38,37 +37,34 @@ export default function GrowthEstimator() {
   const estimatedPipeline = (estimatedConversions * current.avgValue).toLocaleString();
 
   return (
-    <section className="py-20 bg-slate-950 border-y border-slate-800/80 relative">
+    <section className="py-20 bg-[#EBE5E3] border-y border-black/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-2xl relative overflow-hidden">
-          {/* Ambient Glow */}
-          <div className="absolute -right-20 -top-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-black/8 shadow-xl relative overflow-hidden">
+          
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
             {/* Left Column: Interactive Controls */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold">
-                <Calculator className="w-3.5 h-3.5" />
-                <span>Interactive Growth Simulator</span>
-              </div>
+              <span className="text-xs font-bold uppercase tracking-widest text-[#9175FF] block">
+                Interactive Simulator
+              </span>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F0F0F] tracking-tight">
                 Simulate Your Potential Ad Return & Lead Volume
               </h3>
 
-              <p className="text-sm text-slate-400">
-                Adjust your monthly marketing budget and objective to estimate projected campaign reach, conversion volume, and ROAS.
+              <p className="text-sm text-[#555555] leading-relaxed">
+                Adjust your monthly marketing budget and objective to estimate projected campaign reach, conversion volume, and ROAS based on real Cambodian & SEA benchmarks.
               </p>
 
               {/* Goal Selector */}
               <div className="space-y-2">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#0F0F0F]">
                   Target Objective:
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   {[
-                    { id: 'leads', label: 'B2B & High-Ticket Leads' },
+                    { id: 'leads', label: 'B2B & Sales Leads' },
                     { id: 'ecommerce', label: 'E-Commerce Orders' },
                     { id: 'branding', label: 'Local Store Traffic' },
                   ].map((item) => (
@@ -76,10 +72,10 @@ export default function GrowthEstimator() {
                       key={item.id}
                       type="button"
                       onClick={() => setGoal(item.id as any)}
-                      className={`p-3 rounded-xl text-xs font-semibold text-center transition-all ${
+                      className={`p-3 rounded-xl text-xs font-bold text-center transition-all ${
                         goal === item.id
-                          ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                          : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                          ? 'bg-[#0F0F0F] text-white shadow-md'
+                          : 'bg-[#F2EEED] text-[#555555] hover:text-[#0F0F0F] border border-black/5'
                       }`}
                     >
                       {item.label}
@@ -91,10 +87,10 @@ export default function GrowthEstimator() {
               {/* Budget Slider */}
               <div className="space-y-3 pt-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
-                    Estimated Monthly Ad Budget:
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#0F0F0F]">
+                    Monthly Ad Budget:
                   </span>
-                  <span className="text-xl font-extrabold text-emerald-400">
+                  <span className="text-xl font-extrabold text-[#9175FF]">
                     ${budget.toLocaleString()} / mo
                   </span>
                 </div>
@@ -105,52 +101,52 @@ export default function GrowthEstimator() {
                   step={100}
                   value={budget}
                   onChange={(e) => setBudget(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-emerald-400"
+                  className="w-full h-2 bg-[#EBE5E3] rounded-lg appearance-none cursor-pointer accent-[#9175FF]"
                 />
-                <div className="flex justify-between text-[11px] text-slate-500">
+                <div className="flex justify-between text-[11px] text-[#777777]">
                   <span>$300 (Starter)</span>
                   <span>$2,500 (Growth)</span>
-                  <span>$5,000 (Scaling)</span>
-                  <span>$10,000+ (Dominance)</span>
+                  <span>$5,000 (Scale)</span>
+                  <span>$10,000+ (Market Lead)</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Projected Results Card */}
+            {/* Right Column: Projected Results Card (Biogra Dark Style) */}
             <div className="lg:col-span-5">
-              <div className="bg-slate-950 rounded-2xl p-6 sm:p-8 border border-emerald-500/30 shadow-xl space-y-6 relative">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <div className="bg-[#171717] rounded-2xl p-6 sm:p-8 text-white shadow-2xl space-y-6 relative">
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#888888]">
                     Projected Outcomes
                   </span>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    Benchmark: Cambodia & SEA
+                  <span className="text-[11px] font-semibold px-2.5 py-1 rounded bg-[#9175FF]/20 text-[#9175FF] border border-[#9175FF]/30">
+                    Cambodia Benchmark
                   </span>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <span className="text-xs text-slate-400 block">Est. Monthly High-Intent Traffic</span>
+                    <span className="text-xs text-[#888888] block">Est. Monthly Targeted Traffic</span>
                     <div className="text-2xl font-black text-white">
-                      ~{estimatedClicks.toLocaleString()} <span className="text-xs font-normal text-slate-400">targeted clicks</span>
+                      ~{estimatedClicks.toLocaleString()} <span className="text-xs font-normal text-[#888888]">targeted clicks</span>
                     </div>
                   </div>
 
                   <div>
-                    <span className="text-xs text-slate-400 block">Est. {current.type}</span>
-                    <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
-                      {estimatedConversions.toLocaleString()} <span className="text-sm font-semibold text-emerald-400">monthly conversions</span>
+                    <span className="text-xs text-[#888888] block">Est. {current.type}</span>
+                    <div className="text-3xl font-black text-[#9175FF]">
+                      {estimatedConversions.toLocaleString()} <span className="text-xs font-medium text-white/70">monthly conversions</span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 pt-2">
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
-                      <span className="text-[11px] text-slate-400 block">Projected ROAS</span>
-                      <span className="text-base font-bold text-cyan-400">{current.roas}</span>
+                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                      <span className="text-[11px] text-[#888888] block">Projected ROAS</span>
+                      <span className="text-base font-bold text-white">{current.roas}</span>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
-                      <span className="text-[11px] text-slate-400 block">Pipeline Value</span>
-                      <span className="text-base font-bold text-emerald-400">${estimatedPipeline}</span>
+                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                      <span className="text-[11px] text-[#888888] block">Pipeline Value</span>
+                      <span className="text-base font-bold text-[#9175FF]">${estimatedPipeline}</span>
                     </div>
                   </div>
                 </div>
@@ -158,7 +154,7 @@ export default function GrowthEstimator() {
                 <div className="pt-2">
                   <a
                     href="#contact"
-                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-slate-950 bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 transition-all shadow-md shadow-emerald-500/20"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-xs sm:text-sm text-white bg-[#9175FF] hover:bg-[#7A5AF8] transition-all shadow-md shadow-[#9175FF]/30"
                   >
                     <span>Claim Your Growth Plan</span>
                     <ArrowRight className="w-4 h-4" />

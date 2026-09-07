@@ -2,24 +2,24 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'CHAMNAB MEY | Senior Digital Marketer & Web Solutions Strategist',
+  title: 'CHAMNAB MEY | Senior Digital Marketing & Web Growth Strategist',
   description:
     'Official portfolio of Chamnab Mey. Digital Growth Strategist, Performance Ad Buyer (Meta & Google), and Full-Stack Web Developer based in Phnom Penh, Cambodia. Proven track record driving customer acquisition and ROI.',
   keywords: [
     'Chamnab Mey',
     'Digital Marketing Cambodia',
+    'SEO Specialist Phnom Penh',
     'Facebook Ads Specialist',
     'Google Ads Manager',
-    'SEO Consultant Phnom Penh',
     'Web Developer Cambodia',
     'Performance Marketing',
-    'E-commerce Strategy',
+    'Solis Cambodia',
   ],
   authors: [{ name: 'CHAMNAB MEY', url: 'https://chamnabmey.com' }],
   creator: 'CHAMNAB MEY',
   metadataBase: new URL('https://chamnabmey.com'),
   openGraph: {
-    title: 'CHAMNAB MEY | Senior Digital Marketer & Web Strategist',
+    title: 'CHAMNAB MEY | Senior Digital Marketing & Web Growth Strategist',
     description:
       'Transforming clicks into revenue with data-driven marketing funnels and high-performance web engineering. Explore case studies and book a consultation.',
     url: 'https://chamnabmey.com',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CHAMNAB MEY | Senior Digital Marketer & Web Solutions Strategist',
+    title: 'CHAMNAB MEY | Senior Digital Marketer & Web Growth Strategist',
     description:
       'Scaling businesses with data-driven funnels, Google & Meta Ads, and high-performance websites.',
   },
@@ -45,7 +45,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
+      <body className="bg-[#F2EEED] text-[#0F0F0F] antialiased selection:bg-[#9175FF] selection:text-white">
         {children}
       </body>
     </html>
