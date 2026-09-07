@@ -47,90 +47,89 @@ export default function CaseStudies() {
   ];
 
   return (
-    <section id="case-studies" className="py-24 bg-[#FAFAFA] border-b border-neutral-200/70">
+    <section id="case-studies" className="py-24 theme-canvas border-b theme-border transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
           <div className="space-y-3 max-w-xl">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-400 block">
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.2em] theme-text-faint block">
               02 / Selected Works
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold theme-text-main tracking-tight">
               Commercial Wins & Transformations
             </h2>
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm theme-text-muted font-light">
               Verified outcomes delivered across high-ticket B2B, digital agency operations, and e-commerce platforms.
             </p>
           </div>
 
           <a
             href="#contact"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#111111] hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold theme-text-main hover:underline"
           >
             <span>Start a project</span>
             <ArrowUpRight className="w-3 h-3" />
           </a>
         </div>
 
-        {/* Minimalist Projects List */}
+        {/* Selected Projects List */}
         <div className="space-y-12">
-          {projects.map((proj) => (
+          {projects.map((item) => (
             <div
-              key={proj.id}
-              className="bg-white rounded-2xl overflow-hidden border border-neutral-200/80 hover:border-neutral-900 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 group"
+              key={item.id}
+              className="theme-card overflow-hidden grid grid-cols-1 lg:grid-cols-12 group transition-all duration-300 hover:scale-[1.005]"
             >
-              {/* Project Image */}
-              <div className="lg:col-span-6 relative h-64 sm:h-80 lg:h-auto min-h-[280px] bg-neutral-100 overflow-hidden">
+              {/* Image Side */}
+              <div className="lg:col-span-6 relative h-64 sm:h-80 lg:h-auto min-h-[280px] bg-neutral-800/20 overflow-hidden">
                 <img
-                  src={proj.image}
-                  alt={proj.title}
-                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700"
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
 
-              {/* Project Content */}
+              {/* Text Side */}
               <div className="lg:col-span-6 p-8 sm:p-10 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between text-xs text-neutral-400">
-                    <span>{proj.client}</span>
-                    <span>{proj.period}</span>
+                  <div className="flex items-center justify-between text-xs theme-text-faint font-mono">
+                    <span>{item.client}</span>
+                    <span>{item.period}</span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#111111] tracking-tight leading-snug">
-                    {proj.title}
+                  <h3 className="text-xl sm:text-2xl font-bold theme-text-main tracking-tight leading-snug">
+                    {item.title}
                   </h3>
 
-                  {/* Highlight Metric */}
-                  <div className="py-2 border-y border-neutral-100">
-                    <span className="text-2xl font-extrabold text-[#111111] tracking-tight block">
-                      {proj.metric}
+                  <div className="py-3 border-y theme-border">
+                    <span className="text-2xl font-extrabold theme-text-main tracking-tight block font-mono">
+                      {item.metric}
                     </span>
-                    <span className="text-xs text-neutral-500">
-                      {proj.metricSub}
+                    <span className="text-xs theme-text-muted font-light">
+                      {item.metricSub}
                     </span>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
-                    {proj.summary}
+                  <p className="text-xs sm:text-sm theme-text-muted leading-relaxed font-light">
+                    {item.summary}
                   </p>
                 </div>
 
                 <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex flex-wrap gap-1.5">
-                    {proj.tags.map((t, i) => (
+                    {item.tags.map((tag) => (
                       <span
-                        key={i}
-                        className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-600"
+                        key={tag}
+                        className="text-[11px] font-medium px-2.5 py-1 theme-badge"
                       >
-                        {t}
+                        {tag}
                       </span>
                     ))}
                   </div>
 
                   <a
                     href="#contact"
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#111111] group-hover:underline"
+                    className="inline-flex items-center gap-1 text-xs font-semibold theme-text-main group-hover:underline"
                   >
                     <span>Replicate results</span>
                     <ArrowUpRight className="w-3 h-3" />

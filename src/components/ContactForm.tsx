@@ -58,14 +58,15 @@ export default function ContactForm() {
         message: '',
       });
     } catch (err: any) {
-      setError(err?.message || 'Something went wrong. Please try again or reach out directly.');
+      console.error('Submission error:', err);
+      setError(err.message || 'An error occurred while sending your message. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#FAFAFA] border-b border-neutral-200/70">
+    <section id="contact" className="py-24 theme-canvas border-b theme-border transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -73,63 +74,63 @@ export default function ContactForm() {
           {/* Left Column: Direct Info */}
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-3">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-400 block">
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.2em] theme-text-faint block">
                 07 / Contact
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111] tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold theme-text-main tracking-tight">
                 Initiate a Partnership
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+              <p className="text-xs sm:text-sm theme-text-muted leading-relaxed font-light">
                 Whether you need a performance ad strategy audit, high-converting landing page, or full-funnel customer acquisition, send your project details below.
               </p>
             </div>
 
             <div className="space-y-4 pt-2 text-xs">
-              <div className="pb-3 border-b border-neutral-200/70">
-                <span className="text-[11px] uppercase tracking-wider text-neutral-400 block mb-1">
+              <div className="pb-3 border-b theme-border">
+                <span className="text-[11px] font-mono uppercase tracking-wider theme-text-faint block mb-1">
                   Official Email
                 </span>
                 <a
                   href="mailto:admin@chamnabmey.com"
-                  className="font-medium text-[#111111] hover:underline block"
+                  className="font-medium theme-text-main hover:underline block"
                 >
                   admin@chamnabmey.com
                 </a>
-                <span className="text-neutral-500 text-[11px]">chamnabmey.info@gmail.com</span>
+                <span className="theme-text-faint text-[11px]">chamnabmey.info@gmail.com</span>
               </div>
 
-              <div className="pb-3 border-b border-neutral-200/70">
-                <span className="text-[11px] uppercase tracking-wider text-neutral-400 block mb-1">
+              <div className="pb-3 border-b theme-border">
+                <span className="text-[11px] font-mono uppercase tracking-wider theme-text-faint block mb-1">
                   Phone & Messaging
                 </span>
                 <a
                   href="tel:+85515705703"
-                  className="font-medium text-[#111111] hover:underline block"
+                  className="font-medium theme-text-main hover:underline block"
                 >
                   +855 15 705 703
                 </a>
-                <span className="text-neutral-500 text-[11px]">Telegram & WhatsApp available</span>
+                <span className="theme-text-faint text-[11px]">Telegram & WhatsApp available</span>
               </div>
 
-              <div className="pb-3 border-b border-neutral-200/70">
-                <span className="text-[11px] uppercase tracking-wider text-neutral-400 block mb-1">
+              <div className="pb-3 border-b theme-border">
+                <span className="text-[11px] font-mono uppercase tracking-wider theme-text-faint block mb-1">
                   Location
                 </span>
-                <span className="font-medium text-[#111111] block">
+                <span className="font-medium theme-text-main block">
                   #75, Toulsambo, Prey Veng, Dongkor
                 </span>
-                <span className="text-neutral-500 text-[11px]">12000 Phnom Penh, Cambodia</span>
+                <span className="theme-text-faint text-[11px]">12000 Phnom Penh, Cambodia</span>
               </div>
 
               <div>
-                <span className="text-[11px] uppercase tracking-wider text-neutral-400 block mb-1">
+                <span className="text-[11px] font-mono uppercase tracking-wider theme-text-faint block mb-1">
                   Network
                 </span>
                 <a
                   href="https://www.linkedin.com/in/chamnabmey"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-[#111111] hover:underline inline-flex items-center gap-1"
+                  className="font-medium theme-text-main hover:underline inline-flex items-center gap-1"
                 >
                   <LinkedInIcon className="w-3 h-3" />
                   <span>linkedin.com/in/chamnabmey</span>
@@ -137,65 +138,63 @@ export default function ContactForm() {
               </div>
             </div>
 
-            <div className="pt-2 text-[11px] text-neutral-400">
-              * Database synchronization active with Google Cloud Firestore.
+            <div className="pt-2 text-[11px] theme-text-faint font-mono">
+              Inquiries dispatched instantly to private Telegram and logged in Google Cloud.
             </div>
           </div>
 
-          {/* Right Column: Minimalist Form */}
+          {/* Right Column: Dynamic Form Card */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-2xl p-8 sm:p-10 border border-neutral-200/80 shadow-xs">
-              
+            <div className="theme-card p-8 sm:p-10 shadow-sm">
+              <h3 className="text-xl font-bold theme-text-main tracking-tight mb-2">
+                Project Scope Inquiry
+              </h3>
+              <p className="text-xs theme-text-muted mb-6 font-light">
+                Fill out the form below. Chamnab Mey will review your goals and reply within 24 business hours.
+              </p>
+
               {success ? (
-                <div className="py-12 text-center space-y-4">
-                  <div className="w-12 h-12 bg-neutral-100 text-neutral-900 rounded-full flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-6 h-6" />
+                <div className="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                    <h4 className="font-bold text-sm">Inquiry Received Successfully</h4>
                   </div>
-                  <h4 className="text-xl font-bold text-[#111111]">Inquiry Received</h4>
-                  <p className="text-xs sm:text-sm text-neutral-600 max-w-sm mx-auto">
-                    Thank you for reaching out. Chamnab will review your business requirements and reply within 4 hours.
+                  <p className="text-xs leading-relaxed">
+                    Thank you! Your project request has been logged. Chamnab will review your parameters and follow up via email or Telegram shortly.
                   </p>
-                  {resultDetails?.id && (
-                    <div className="text-[11px] font-mono text-neutral-400 pt-2">
-                      Reference: {resultDetails.id}
-                    </div>
-                  )}
-                  <div className="pt-4">
-                    <button
-                      onClick={() => setSuccess(false)}
-                      type="button"
-                      className="px-5 py-2 rounded-full text-xs font-medium text-neutral-700 border border-neutral-300 hover:border-neutral-900"
-                    >
-                      Send another message
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => setSuccess(false)}
+                    className="theme-btn-primary text-xs px-4 py-2 mt-2"
+                  >
+                    Submit Another Inquiry
+                  </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   {error && (
-                    <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-xs flex items-center gap-2">
+                    <div className="p-3.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs flex items-center gap-2">
                       <AlertCircle className="w-4 h-4 shrink-0" />
                       <span>{error}</span>
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-neutral-700 mb-1.5">
-                        Your Name *
+                      <label className="block text-xs font-medium theme-text-main mb-1.5">
+                        Your Full Name *
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Sokha Keo"
+                        placeholder="e.g., Sok Dara"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#FAFAFA] border border-neutral-200 text-xs text-[#111111] placeholder-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                        className="theme-input w-full px-3.5 py-2.5 text-xs placeholder-[var(--text-faint)] focus:outline-none"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-neutral-700 mb-1.5">
+                      <label className="block text-xs font-medium theme-text-main mb-1.5">
                         Email Address *
                       </label>
                       <input
@@ -204,69 +203,69 @@ export default function ContactForm() {
                         placeholder="name@company.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#FAFAFA] border border-neutral-200 text-xs text-[#111111] placeholder-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                        className="theme-input w-full px-3.5 py-2.5 text-xs placeholder-[var(--text-faint)] focus:outline-none"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-neutral-700 mb-1.5">
+                      <label className="block text-xs font-medium theme-text-main mb-1.5">
                         Phone / Telegram *
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="+855 ... or @username"
+                        placeholder="+855 12 345 678 or @handle"
                         value={formData.phoneOrTelegram}
                         onChange={(e) => setFormData({ ...formData, phoneOrTelegram: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#FAFAFA] border border-neutral-200 text-xs text-[#111111] placeholder-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                        className="theme-input w-full px-3.5 py-2.5 text-xs placeholder-[var(--text-faint)] focus:outline-none"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-neutral-700 mb-1.5">
+                      <label className="block text-xs font-medium theme-text-main mb-1.5">
                         Company / Brand
                       </label>
                       <input
                         type="text"
-                        placeholder="e.g. Acme Enterprise"
+                        placeholder="Company name or URL"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#FAFAFA] border border-neutral-200 text-xs text-[#111111] placeholder-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                        className="theme-input w-full px-3.5 py-2.5 text-xs placeholder-[var(--text-faint)] focus:outline-none"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-neutral-700 mb-1.5">
-                        Primary Service Needed *
+                      <label className="block text-xs font-medium theme-text-main mb-1.5">
+                        Primary Service Needed
                       </label>
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#FAFAFA] border border-neutral-200 text-xs text-[#111111] focus:outline-none focus:border-neutral-900 transition-colors"
+                        className="theme-input w-full px-3.5 py-2.5 text-xs focus:outline-none"
                       >
-                        {services.map((srv, idx) => (
-                          <option key={idx} value={srv}>
-                            {srv}
+                        {services.map((s) => (
+                          <option key={s} value={s} className="theme-canvas text-[var(--text-main)]">
+                            {s}
                           </option>
                         ))}
                       </select>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-neutral-700 mb-1.5">
-                        Monthly Budget Scope
+                      <label className="block text-xs font-medium theme-text-main mb-1.5">
+                        Estimated Budget (Monthly / Scope)
                       </label>
                       <select
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#FAFAFA] border border-neutral-200 text-xs text-[#111111] focus:outline-none focus:border-neutral-900 transition-colors"
+                        className="theme-input w-full px-3.5 py-2.5 text-xs focus:outline-none"
                       >
-                        {budgets.map((b, idx) => (
-                          <option key={idx} value={b}>
+                        {budgets.map((b) => (
+                          <option key={b} value={b} className="theme-canvas text-[var(--text-main)]">
                             {b}
                           </option>
                         ))}
@@ -275,7 +274,7 @@ export default function ContactForm() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-neutral-700 mb-1.5">
+                    <label className="block text-xs font-medium theme-text-main mb-1.5">
                       Project Goals & Context *
                     </label>
                     <textarea
@@ -284,14 +283,14 @@ export default function ContactForm() {
                       placeholder="Briefly describe your objectives, current challenges, and timeline..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-[#FAFAFA] border border-neutral-200 text-xs text-[#111111] placeholder-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors resize-none"
+                      className="theme-input w-full px-3.5 py-2.5 text-xs placeholder-[var(--text-faint)] focus:outline-none resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3.5 px-6 rounded-full font-medium text-xs text-white bg-[#111111] hover:bg-black transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="theme-btn-primary w-full py-3.5 px-6 font-medium text-xs gap-2 disabled:opacity-50"
                   >
                     {loading ? (
                       <>

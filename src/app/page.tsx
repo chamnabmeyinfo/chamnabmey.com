@@ -9,10 +9,11 @@ import SkillsMatrix from '@/components/SkillsMatrix';
 import Testimonials from '@/components/Testimonials';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
+import StyleSwitcher from '@/components/StyleSwitcher';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#FAFAFA] text-[#111111]">
+    <main className="min-h-screen theme-canvas transition-colors duration-300 relative">
       <Navbar />
       <Hero />
       <About />
@@ -23,6 +24,7 @@ export default function Home() {
       <Testimonials />
       <ContactForm />
       <Footer />
+      <StyleSwitcher />
     </main>
   );
 }

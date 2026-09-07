@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { StyleProvider } from '@/context/StyleContext';
 
 export const metadata: Metadata = {
   title: 'CHAMNAB MEY — Digital Marketing Strategist & Growth Engineer',
@@ -43,9 +44,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="bg-[#FAFAFA] text-[#111111] antialiased selection:bg-[#111111] selection:text-white">
-        {children}
+    <html lang="en" className="scroll-smooth" data-style="minimalism">
+      <body className="theme-canvas antialiased selection:bg-[#111111] selection:text-white relative">
+        <StyleProvider>
+          {/* Ambient Glow Atmosphere for Aurora & Glassmorphism styles */}
+          <div className="aurora-glow-container fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+            <div className="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-[#7928CA]/25 blur-[120px]" />
+            <div className="absolute top-[30%] -right-[10%] w-[50vw] h-[50vw] rounded-full bg-[#0070F3]/20 blur-[130px]" />
+            <div className="absolute -bottom-[20%] left-[20%] w-[60vw] h-[60vw] rounded-full bg-[#FF0080]/15 blur-[140px]" />
+          </div>
+
+          {children}
+        </StyleProvider>
       </body>
     </html>
   );

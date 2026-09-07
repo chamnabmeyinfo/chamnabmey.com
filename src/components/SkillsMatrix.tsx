@@ -51,30 +51,30 @@ export default function SkillsMatrix() {
   ];
 
   return (
-    <section id="skills" className="py-24 bg-[#FAFAFA] border-b border-neutral-200/70">
+    <section id="skills" className="py-24 theme-canvas border-b theme-border transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-xl mb-16 space-y-3">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-400 block">
+          <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.2em] theme-text-faint block">
             04 / Technical Stack
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold theme-text-main tracking-tight">
             Capabilities & Infrastructure
           </h2>
         </div>
 
-        {/* 4-Column Minimal Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {groups.map((grp, idx) => (
-            <div key={idx} className="space-y-4">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[#111111] pb-2 border-b border-neutral-200">
+        {/* 4-Column Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {groups.map((grp) => (
+            <div key={grp.category} className="theme-card p-6 space-y-4">
+              <h3 className="text-xs font-bold uppercase tracking-wider theme-text-main pb-2 border-b theme-border font-mono">
                 {grp.category}
               </h3>
-              <ul className="space-y-2.5 text-xs text-neutral-600">
-                {grp.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="text-neutral-400">•</span>
+              <ul className="space-y-2.5 text-xs theme-text-muted font-light">
+                {grp.items.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="theme-text-faint">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
