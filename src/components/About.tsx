@@ -69,8 +69,8 @@ export default function About() {
                   </div>
                 </div>
 
-                <div className="absolute top-4 right-4 bg-black/70 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm">
-                  Demo Visual
+                <div className="absolute top-4 right-4 bg-white/95 text-[#0F0F0F] text-[10px] font-bold px-3 py-1 rounded-full backdrop-blur-sm shadow-sm">
+                  Verified Track Record
                 </div>
               </div>
             </div>

@@ -16,10 +16,7 @@ import {
 import LinkedInIcon from './icons/LinkedInIcon';
 
 export default function Hero() {
-  // Demo portrait image for Biogra right-side display
-  const [heroImage, setHeroImage] = useState(
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80'
-  );
+  const [heroImage, setHeroImage] = useState('/images/chamnab-mey.jpg');
 
   const stats = [
     { label: 'Years Experience', value: '10+', sub: 'Digital & Growth' },
@@ -50,9 +47,9 @@ export default function Hero() {
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-black/8 shadow-sm">
               <div className="w-8 h-8 rounded-full overflow-hidden border border-black/10 shrink-0">
                 <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
-                  alt="Chamnab Mey Avatar"
-                  className="w-full h-full object-cover"
+                  src="/images/chamnab-mey.jpg"
+                  alt="Chamnab Mey"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
               <p className="text-xs sm:text-sm font-semibold text-[#0F0F0F]">
@@ -150,10 +147,10 @@ export default function Hero() {
                     <span className="text-xs font-bold text-[#0F0F0F]">Meta & Google Certified</span>
                   </div>
 
-                  {/* Demo Photo Indicator Badge */}
-                  <div className="absolute top-5 right-5 bg-black/75 backdrop-blur-md text-white text-[10px] font-semibold px-3 py-1 rounded-full flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-[#9175FF]" />
-                    <span>Demo Photo</span>
+                  {/* Verified Indicator Badge */}
+                  <div className="absolute top-5 right-5 bg-white/95 backdrop-blur-md rounded-2xl px-3 py-1.5 border border-black/5 shadow-md flex items-center gap-1.5 text-xs font-bold text-[#0F0F0F]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#9175FF]" />
+                    <span>Official Profile</span>
                   </div>
 
                   {/* Bottom Floating Stats Card */}
