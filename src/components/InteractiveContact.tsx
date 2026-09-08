@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 interface InteractiveContactProps {
   profile: {
@@ -25,6 +25,9 @@ export default function InteractiveContact({ profile }: InteractiveContactProps)
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [copiedField, setCopiedField] = useState<'email' | 'phone' | null>(null);
+  const [attachment, setAttachment] = useState<{ name: string; url: string } | null>(null);
+  const [isAttaching, setIsAttaching] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const cleanPhone = profile.phone.replace(/\s+/g, '');
 
@@ -43,12 +46,16 @@ export default function InteractiveContact({ profile }: InteractiveContactProps)
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          attachmentName: attachment?.name || '',
+          attachmentUrl: attachment?.url || '',
+        }),
       });
 
       if (res.ok) {
         setIsSuccess(true);
-        setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', phone: '', email: '', subject: '', message: '' }); setAttachment(null);
       } else {
         const data = await res.text();
         setErrorMessage(data || 'Failed to submit form. Please try again or message via Telegram.');
@@ -340,6 +347,67 @@ export default function InteractiveContact({ profile }: InteractiveContactProps)
                               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                             ></textarea>
                           </div>
+                        </div>
+
+                        {/* File Upload Option */}
+                        <div className="col-lg-12">
+                          <input
+                            type="file"
+                            ref={fileInputRef}
+                            accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                            style={{ display: 'none' }}
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (!file) return;
+                              setIsAttaching(true);
+                              const reader = new FileReader();
+                              reader.onload = () => {
+                                setAttachment({ name: file.name, url: reader.result as string });
+                                setIsAttaching(false);
+                              };
+                              reader.readAsDataURL(file);
+                            }}
+                          />
+
+                          {attachment ? (
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', borderRadius: '10px', backgroundColor: 'rgba(19, 155, 253, 0.1)', border: '1px solid rgba(19, 155, 253, 0.35)', marginBottom: '14px' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#FFFFFF' }}>
+                                <i className="fa-solid fa-paperclip" style={{ color: '#139BFD' }}></i>
+                                <span style={{ fontWeight: 600 }}>{attachment.name}</span>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => setAttachment(null)}
+                                style={{ background: 'transparent', border: 'none', color: '#F87171', fontSize: '12px', cursor: 'pointer', fontWeight: 600 }}
+                              >
+                                Remove File
+                              </button>
+                            </div>
+                          ) : (
+                            <div style={{ marginBottom: '14px' }}>
+                              <button
+                                type="button"
+                                onClick={() => fileInputRef.current?.click()}
+                                disabled={isAttaching}
+                                style={{
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '8px',
+                                  padding: '8px 16px',
+                                  borderRadius: '8px',
+                                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                                  border: '1px dashed rgba(255, 255, 255, 0.25)',
+                                  color: '#BEBEBE',
+                                  fontSize: '12px',
+                                  cursor: 'pointer',
+                                  fontWeight: 600,
+                                }}
+                              >
+                                <i className="fa-solid fa-cloud-arrow-up" style={{ color: '#139BFD' }}></i>
+                                <span>{isAttaching ? 'Attaching File...' : 'Attach Project Brief / File (Optional)'}</span>
+                              </button>
+                            </div>
+                          )}
                         </div>
 
                         <div className="col-lg-12">

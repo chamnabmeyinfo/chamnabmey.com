@@ -13,6 +13,8 @@ export interface InboxMessage {
   message: string;
   createdAt: string;
   source?: string;
+  attachmentName?: string;
+  attachmentUrl?: string;
 }
 
 // In-memory cache for fast serverless reads

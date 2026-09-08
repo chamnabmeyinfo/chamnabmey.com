@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { PortfolioContent, defaultPortfolioContent } from '@/data/portfolioContent';
+import FileUploadButton from '@/components/FileUploadButton';
 
 interface InboxMessage {
   id: string;
@@ -357,22 +358,26 @@ export default function AdminPage() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '13px', color: '#A0AEC0', marginBottom: '6px' }}>Portrait Photo Path</label>
-                  <input
-                    type="text"
-                    value={content.profile.photo}
-                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, photo: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 14px', backgroundColor: '#0B1D28', border: '1px solid #1A365D', borderRadius: '10px', color: '#FFF' }}
+                  <FileUploadButton
+                    label="Portrait Profile Photo"
+                    currentValue={content.profile.photo}
+                    onUpload={(url) => setContent({ ...content, profile: { ...content.profile, photo: url } })}
+                    accept="image/*"
+                    fileType="image"
+                    buttonText="Upload Photo File"
+                    helperText="Upload JPG, PNG, or WebP. Automatically updates across sidebar and hero."
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '13px', color: '#A0AEC0', marginBottom: '6px' }}>Resume Download Link</label>
-                  <input
-                    type="text"
-                    value={content.profile.resumeUrl}
-                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, resumeUrl: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 14px', backgroundColor: '#0B1D28', border: '1px solid #1A365D', borderRadius: '10px', color: '#FFF' }}
+                  <FileUploadButton
+                    label="Resume / CV Document"
+                    currentValue={content.profile.resumeUrl}
+                    onUpload={(url) => setContent({ ...content, profile: { ...content.profile, resumeUrl: url } })}
+                    accept=".pdf,.doc,.docx"
+                    fileType="file"
+                    buttonText="Upload PDF / Resume"
+                    helperText="Upload your latest PDF CV. Visitors will download this file."
                   />
                 </div>
               </div>
@@ -739,6 +744,21 @@ export default function AdminPage() {
                     </div>
                   </div>
 
+                  <div style={{ marginBottom: '14px' }}>
+                    <FileUploadButton
+                      label="Project Cover Image"
+                      currentValue={proj.image}
+                      onUpload={(url) => {
+                        const updated = [...content.projects];
+                        updated[idx].image = url;
+                        setContent({ ...content, projects: updated });
+                      }}
+                      accept="image/*"
+                      fileType="image"
+                      buttonText="Upload Project Image"
+                    />
+                  </div>
+
                   <div>
                     <label style={{ display: 'block', fontSize: '12px', color: '#A0AEC0', marginBottom: '4px' }}>Description</label>
                     <textarea
@@ -862,6 +882,21 @@ export default function AdminPage() {
                         setContent({ ...content, testimonials: updated });
                       }}
                       style={{ width: '100%', padding: '10px 14px', backgroundColor: '#06131B', border: '1px solid #1A365D', borderRadius: '8px', color: '#FFF' }}
+                    />
+                  </div>
+
+                  <div style={{ marginTop: '14px' }}>
+                    <FileUploadButton
+                      label="Client Avatar Photo"
+                      currentValue={test.avatar}
+                      onUpload={(url) => {
+                        const updated = [...content.testimonials];
+                        updated[idx].avatar = url;
+                        setContent({ ...content, testimonials: updated });
+                      }}
+                      accept="image/*"
+                      fileType="image"
+                      buttonText="Upload Client Photo"
                     />
                   </div>
                 </div>

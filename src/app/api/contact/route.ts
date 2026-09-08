@@ -10,6 +10,9 @@ export async function POST(request: Request) {
     let subject = '';
     let message = '';
 
+    let attachmentName = '';
+    let attachmentUrl = '';
+
     if (contentType.includes('application/x-www-form-urlencoded')) {
       const formData = await request.formData();
       name = formData.get('name')?.toString() || '';
@@ -17,6 +20,8 @@ export async function POST(request: Request) {
       phone = formData.get('phone')?.toString() || '';
       subject = formData.get('subject')?.toString() || '';
       message = formData.get('message')?.toString() || '';
+      attachmentName = formData.get('attachmentName')?.toString() || '';
+      attachmentUrl = formData.get('attachmentUrl')?.toString() || '';
     } else if (contentType.includes('application/json')) {
       const data = await request.json();
       name = data.name || '';
@@ -24,6 +29,8 @@ export async function POST(request: Request) {
       phone = data.phone || '';
       subject = data.subject || '';
       message = data.message || '';
+      attachmentName = data.attachmentName || '';
+      attachmentUrl = data.attachmentUrl || '';
     }
 
     // Save to admin inbox
@@ -34,7 +41,9 @@ export async function POST(request: Request) {
         phone,
         subject,
         message,
-        source: 'Website Contact Form'
+        source: 'Website Contact Form',
+        attachmentName,
+        attachmentUrl,
       });
     }
 
