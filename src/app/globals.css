@@ -1,779 +1,154 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap");
 @import "tailwindcss";
 
 /* ----------------------------------------------------
-   11 DYNAMIC UI DESIGN STYLES ENGINE
+   ELITE MODERN DESIGN SYSTEM (DARK OBSIDIAN & TITANIUM)
 ---------------------------------------------------- */
 
-/* 1. MINIMALISM (Default) */
-:root,
-html[data-style="minimalism"] {
-  --canvas-bg: #FAFAFA;
-  --text-main: #111111;
-  --text-muted: #666666;
-  --text-faint: #999999;
-  --card-bg: #FFFFFF;
-  --card-border: 1px solid rgba(0, 0, 0, 0.08);
-  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --card-radius: 14px;
-  --btn-primary-bg: #111111;
-  --btn-primary-text: #FFFFFF;
-  --btn-primary-radius: 9999px;
-  --btn-primary-shadow: none;
-  --btn-primary-border: none;
-  --btn-secondary-bg: transparent;
-  --btn-secondary-text: #111111;
-  --btn-secondary-border: 1px solid #D4D4D4;
-  --btn-secondary-radius: 9999px;
-  --badge-bg: #F0F0F0;
-  --badge-text: #555555;
-  --badge-border: 1px solid rgba(0, 0, 0, 0.05);
-  --input-bg: #FFFFFF;
-  --input-border: 1px solid #E5E5E5;
-  --input-radius: 8px;
-  --accent-color: #111111;
-  --font-heading: 'Inter Tight', sans-serif;
-  --motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
-  --motion-duration: 0.35s;
+:root {
+  --canvas-bg: #08090C;
+  --canvas-surface: #0E1015;
+  --canvas-card: #12151C;
+  --text-main: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --text-faint: #6B7280;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.18);
+  --accent-cyan: #00F0FF;
+  --accent-emerald: #10B981;
+  --accent-indigo: #6366F1;
+  --font-heading: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
 }
 
-/* 2. MAXIMALISM */
-html[data-style="maximalism"] {
-  --canvas-bg: #140126;
-  --text-main: #FFFFFF;
-  --text-muted: #E2D9F3;
-  --text-faint: #B388FF;
-  --card-bg: #22033D;
-  --card-border: 3px solid #FFE600;
-  --card-shadow: 0 0 25px rgba(255, 0, 128, 0.45), inset 0 0 15px rgba(0, 245, 212, 0.2);
-  --card-radius: 20px;
-  --btn-primary-bg: #FFE600;
-  --btn-primary-text: #000000;
-  --btn-primary-radius: 12px;
-  --btn-primary-shadow: 0 0 20px #FFE600;
-  --btn-primary-border: 2px solid #000000;
-  --btn-secondary-bg: #FF007F;
-  --btn-secondary-text: #FFFFFF;
-  --btn-secondary-border: 2px solid #FFE600;
-  --btn-secondary-radius: 12px;
-  --badge-bg: #FF0055;
-  --badge-text: #FFFFFF;
-  --badge-border: 2px solid #FFE600;
-  --input-bg: #1D0233;
-  --input-border: 2px solid #00F5D4;
-  --input-radius: 10px;
-  --accent-color: #FF0055;
-  --font-heading: 'Space Grotesk', sans-serif;
-  --motion-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --motion-duration: 0.2s;
-}
-
-/* 3. FLAT DESIGN */
-html[data-style="flat"] {
-  --canvas-bg: #ECF0F1;
-  --text-main: #2C3E50;
-  --text-muted: #7F8C8D;
-  --text-faint: #95A5A6;
-  --card-bg: #FFFFFF;
-  --card-border: 2px solid #BDC3C7;
-  --card-shadow: none;
-  --card-radius: 4px;
-  --btn-primary-bg: #3498DB;
-  --btn-primary-text: #FFFFFF;
-  --btn-primary-radius: 4px;
-  --btn-primary-shadow: none;
-  --btn-primary-border: none;
-  --btn-secondary-bg: #FFFFFF;
-  --btn-secondary-text: #2C3E50;
-  --btn-secondary-border: 2px solid #2C3E50;
-  --btn-secondary-radius: 4px;
-  --badge-bg: #18BC9C;
-  --badge-text: #FFFFFF;
-  --badge-border: none;
-  --input-bg: #FFFFFF;
-  --input-border: 2px solid #BDC3C7;
-  --input-radius: 4px;
-  --accent-color: #3498DB;
-  --font-heading: 'Inter Tight', sans-serif;
-  --motion-easing: linear;
-  --motion-duration: 0.12s;
-}
-
-/* 4. NEUMORPHISM */
-html[data-style="neumorphism"] {
-  --canvas-bg: #E0E5EC;
-  --text-main: #31344B;
-  --text-muted: #5D697B;
-  --text-faint: #7A8699;
-  --card-bg: #E0E5EC;
-  --card-border: none;
-  --card-shadow: 9px 9px 18px #b8b9be, -9px -9px 18px #ffffff;
-  --card-radius: 24px;
-  --btn-primary-bg: #E0E5EC;
-  --btn-primary-text: #31344B;
-  --btn-primary-radius: 16px;
-  --btn-primary-shadow: 6px 6px 12px #b8b9be, -6px -6px 12px #ffffff;
-  --btn-primary-border: none;
-  --btn-secondary-bg: #E0E5EC;
-  --btn-secondary-text: #31344B;
-  --btn-secondary-border: none;
-  --btn-secondary-radius: 16px;
-  --badge-bg: #E0E5EC;
-  --badge-text: #4C6EF5;
-  --badge-border: none;
-  --input-bg: #E0E5EC;
-  --input-border: none;
-  --input-radius: 14px;
-  --accent-color: #4C6EF5;
-  --font-heading: 'Inter Tight', sans-serif;
-  --motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
-  --motion-duration: 0.25s;
-}
-
-/* 5. CLAYMORPHISM */
-html[data-style="claymorphism"] {
-  --canvas-bg: #F4F5FB;
-  --text-main: #2D3748;
-  --text-muted: #718096;
-  --text-faint: #A0AEC0;
-  --card-bg: #FFFFFF;
-  --card-border: 1px solid rgba(255, 255, 255, 0.9);
-  --card-shadow: 14px 14px 28px rgba(166, 180, 200, 0.35), -8px -8px 20px rgba(255, 255, 255, 0.9), inset 4px 4px 8px rgba(255, 255, 255, 0.8), inset -6px -6px 12px rgba(166, 180, 200, 0.2);
-  --card-radius: 28px;
-  --btn-primary-bg: #FF6B6B;
-  --btn-primary-text: #FFFFFF;
-  --btn-primary-radius: 9999px;
-  --btn-primary-shadow: 0 10px 20px rgba(255, 107, 107, 0.35), inset 0 4px 6px rgba(255, 255, 255, 0.4), inset 0 -4px 6px rgba(0, 0, 0, 0.15);
-  --btn-primary-border: none;
-  --btn-secondary-bg: #FFFFFF;
-  --btn-secondary-text: #2D3748;
-  --btn-secondary-border: none;
-  --btn-secondary-radius: 9999px;
-  --badge-bg: #EBF8FF;
-  --badge-text: #3182CE;
-  --badge-border: none;
-  --input-bg: #FFFFFF;
-  --input-border: none;
-  --input-radius: 16px;
-  --accent-color: #FF6B6B;
-  --font-heading: 'Inter Tight', sans-serif;
-  --motion-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --motion-duration: 0.35s;
-}
-
-/* 6. AURORA UI */
-html[data-style="aurora"] {
-  --canvas-bg: #0A0A0F;
-  --text-main: #FFFFFF;
-  --text-muted: #94A3B8;
-  --text-faint: #64748B;
-  --card-bg: rgba(15, 23, 42, 0.7);
-  --card-border: 1px solid rgba(255, 255, 255, 0.15);
-  --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  --card-radius: 20px;
-  --btn-primary-bg: linear-gradient(135deg, #00F0FF, #7928CA);
-  --btn-primary-text: #FFFFFF;
-  --btn-primary-radius: 9999px;
-  --btn-primary-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-  --btn-primary-border: none;
-  --btn-secondary-bg: rgba(255, 255, 255, 0.08);
-  --btn-secondary-text: #FFFFFF;
-  --btn-secondary-border: 1px solid rgba(255, 255, 255, 0.2);
-  --btn-secondary-radius: 9999px;
-  --badge-bg: rgba(0, 240, 255, 0.15);
-  --badge-text: #00F0FF;
-  --badge-border: 1px solid rgba(0, 240, 255, 0.3);
-  --input-bg: rgba(255, 255, 255, 0.06);
-  --input-border: 1px solid rgba(255, 255, 255, 0.15);
-  --input-radius: 12px;
-  --accent-color: #00F0FF;
-  --font-heading: 'Space Grotesk', sans-serif;
-  --motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
-  --motion-duration: 0.4s;
-}
-
-/* 7. BRUTALISM / NEO-BRUTALISM */
-html[data-style="brutalism"] {
-  --canvas-bg: #F5F5ED;
-  --text-main: #000000;
-  --text-muted: #222222;
-  --text-faint: #555555;
-  --card-bg: #FFFFFF;
-  --card-border: 3px solid #000000;
-  --card-shadow: 6px 6px 0px #000000;
-  --card-radius: 6px;
-  --btn-primary-bg: #FFE600;
-  --btn-primary-text: #000000;
-  --btn-primary-radius: 6px;
-  --btn-primary-shadow: 4px 4px 0px #000000;
-  --btn-primary-border: 2px solid #000000;
-  --btn-secondary-bg: #FFFFFF;
-  --btn-secondary-text: #000000;
-  --btn-secondary-border: 2px solid #000000;
-  --btn-secondary-radius: 6px;
-  --badge-bg: #000000;
-  --badge-text: #FFE600;
-  --badge-border: 2px solid #000000;
-  --input-bg: #FFFFFF;
-  --input-border: 3px solid #000000;
-  --input-radius: 4px;
-  --accent-color: #FFE600;
-  --font-heading: 'Space Grotesk', sans-serif;
-  --motion-easing: cubic-bezier(0.2, 0, 0, 1);
-  --motion-duration: 0.1s;
-}
-
-/* 8. COLLAGE ART */
-html[data-style="collage"] {
-  --canvas-bg: #F5EFE6;
-  --text-main: #1C1917;
-  --text-muted: #57534E;
-  --text-faint: #78716C;
-  --card-bg: #FFFFFF;
-  --card-border: 1px dashed #A8A29E;
-  --card-shadow: 2px 4px 12px rgba(87, 83, 78, 0.1);
-  --card-radius: 8px;
-  --btn-primary-bg: #D9534F;
-  --btn-primary-text: #FFFFFF;
-  --btn-primary-radius: 6px;
-  --btn-primary-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
-  --btn-primary-border: 1px solid #C9302C;
-  --btn-secondary-bg: #FFFFFF;
-  --btn-secondary-text: #1C1917;
-  --btn-secondary-border: 1px dashed #78716C;
-  --btn-secondary-radius: 6px;
-  --badge-bg: #F7EAE8;
-  --badge-text: #D9534F;
-  --badge-border: 1px dashed #D9534F;
-  --input-bg: #FAF6F0;
-  --input-border: 1px solid #D6D3D1;
-  --input-radius: 6px;
-  --accent-color: #D9534F;
-  --font-heading: 'Playfair Display', serif;
-  --motion-easing: cubic-bezier(0.25, 1, 0.5, 1);
-  --motion-duration: 0.3s;
-}
-
-/* 9. SKEUOMORPHISM */
-html[data-style="skeuomorphism"] {
-  --canvas-bg: #22262E;
-  --text-main: #F1F5F9;
-  --text-muted: #94A3B8;
-  --text-faint: #64748B;
-  --card-bg: linear-gradient(180deg, #2E3440 0%, #1F232B 100%);
-  --card-border: 1px solid #434C5E;
-  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  --card-radius: 16px;
-  --btn-primary-bg: linear-gradient(180deg, #3B82F6 0%, #1D4ED8 100%);
-  --btn-primary-text: #FFFFFF;
-  --btn-primary-radius: 10px;
-  --btn-primary-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  --btn-primary-border: 1px solid #1E3A8A;
-  --btn-secondary-bg: linear-gradient(180deg, #374151 0%, #1F2937 100%);
-  --btn-secondary-text: #E5E7EB;
-  --btn-secondary-border: 1px solid #4B5563;
-  --btn-secondary-radius: 10px;
-  --badge-bg: #1E293B;
-  --badge-text: #60A5FA;
-  --badge-border: 1px solid #3B82F6;
-  --input-bg: #191C22;
-  --input-border: 1px solid #374151;
-  --input-radius: 8px;
-  --accent-color: #3B82F6;
-  --font-heading: 'Inter Tight', sans-serif;
-  --motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
-  --motion-duration: 0.2s;
-}
-
-/* 10. RETRO Y2K */
-html[data-style="retro"] {
-  --canvas-bg: #008080;
-  --text-main: #000000;
-  --text-muted: #222222;
-  --text-faint: #444444;
-  --card-bg: #C0C0C0;
-  --card-border: 2px solid;
-  --card-shadow: 3px 3px 0px #000000;
-  --card-radius: 0px;
-  --btn-primary-bg: #C0C0C0;
-  --btn-primary-text: #000000;
-  --btn-primary-radius: 0px;
-  --btn-primary-shadow: none;
-  --btn-primary-border: 2px solid;
-  --btn-secondary-bg: #C0C0C0;
-  --btn-secondary-text: #000000;
-  --btn-secondary-border: 2px solid;
-  --btn-secondary-radius: 0px;
-  --badge-bg: #000080;
-  --badge-text: #FFFFFF;
-  --badge-border: none;
-  --input-bg: #FFFFFF;
-  --input-border: 2px solid;
-  --input-radius: 0px;
-  --accent-color: #000080;
-  --font-heading: 'VT323', 'Courier New', monospace;
-  --motion-easing: steps(2, start);
-  --motion-duration: 0.1s;
-}
-
-/* 11. GLASSMORPHISM */
-html[data-style="glassmorphism"] {
-  --canvas-bg: #0B0F19;
-  --text-main: #FFFFFF;
-  --text-muted: #94A3B8;
-  --text-faint: #64748B;
-  --card-bg: rgba(255, 255, 255, 0.08);
-  --card-border: 1px solid rgba(255, 255, 255, 0.18);
-  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  --card-radius: 20px;
-  --btn-primary-bg: rgba(255, 255, 255, 0.15);
-  --btn-primary-text: #FFFFFF;
-  --btn-primary-radius: 9999px;
-  --btn-primary-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  --btn-primary-border: 1px solid rgba(255, 255, 255, 0.25);
-  --btn-secondary-bg: rgba(0, 0, 0, 0.25);
-  --btn-secondary-text: #FFFFFF;
-  --btn-secondary-border: 1px solid rgba(255, 255, 255, 0.15);
-  --btn-secondary-radius: 9999px;
-  --badge-bg: rgba(56, 189, 248, 0.15);
-  --badge-text: #38BDF8;
-  --badge-border: 1px solid rgba(56, 189, 248, 0.3);
-  --input-bg: rgba(255, 255, 255, 0.07);
-  --input-border: 1px solid rgba(255, 255, 255, 0.2);
-  --input-radius: 12px;
-  --accent-color: #38BDF8;
-  --font-heading: 'Space Grotesk', sans-serif;
-  --motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
-  --motion-duration: 0.35s;
+/* Light Theme Overrides (Optional Toggle) */
+html[data-theme="light"] {
+  --canvas-bg: #F8FAFC;
+  --canvas-surface: #FFFFFF;
+  --canvas-card: #FFFFFF;
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --text-faint: #94A3B8;
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.16);
+  --accent-cyan: #0284C7;
+  --accent-emerald: #059669;
+  --accent-indigo: #4F46E5;
 }
 
 /* Base Body Application */
 body {
   background-color: var(--canvas-bg);
   color: var(--text-main);
-  font-family: var(--font-heading), -apple-system, BlinkMacSystemFont, sans-serif;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  font-family: var(--font-heading);
   overflow-x: hidden;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  selection-background-color: #00F0FF;
+  selection-color: #000000;
 }
 
 /* ----------------------------------------------------
-   SIGNATURE ANIMATION KEYFRAMES PER STYLE
+   SIGNATURE HARDWARE-ACCELERATED ANIMATIONS
 ---------------------------------------------------- */
 
-/* Aurora Drift (Cosmic Northern Lights) */
-@keyframes aurora-drift-1 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
+/* Continuous Marquee Loop */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
   }
-  50% {
-    transform: translate(8vw, 6vh) scale(1.15);
-  }
-}
-
-@keyframes aurora-drift-2 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1.1);
-  }
-  50% {
-    transform: translate(-10vw, -8vh) scale(0.9);
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-@keyframes aurora-drift-3 {
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Slow Ambient Aurora Light Bloom */
+@keyframes ambient-pulse {
   0%, 100% {
-    transform: translate(0, 0) scale(1);
+    transform: scale(1) translate(0, 0);
+    opacity: 0.25;
   }
   50% {
-    transform: translate(6vw, -10vh) scale(1.2);
+    transform: scale(1.1) translate(20px, -15px);
+    opacity: 0.35;
   }
 }
 
-/* Claymorphism 3D Floating Bob */
-@keyframes clay-bob {
+.animate-ambient-pulse {
+  animation: ambient-pulse 16s ease-in-out infinite;
+}
+
+/* Subtle Floating Bob */
+@keyframes float-gentle {
   0%, 100% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
   }
 }
 
-/* Maximalism Neon Glow Shimmer */
-@keyframes neon-pulse {
-  0%, 100% {
-    filter: drop-shadow(0 0 10px rgba(255, 0, 128, 0.6)) drop-shadow(0 0 25px rgba(255, 230, 0, 0.4));
-  }
-  50% {
-    filter: drop-shadow(0 0 20px rgba(255, 0, 128, 0.9)) drop-shadow(0 0 35px rgba(0, 245, 212, 0.6));
-  }
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
 }
 
-/* Brutalism Sticker Playful Wobble */
-@keyframes sticker-wobble {
-  0%, 100% {
-    transform: rotate(-2deg);
-  }
-  50% {
-    transform: rotate(2deg);
-  }
-}
-
-/* Retro Terminal Blinking Cursor */
-@keyframes retro-blink {
-  0%, 49% {
-    opacity: 1;
-  }
-  50%, 100% {
-    opacity: 0;
-  }
-}
-
-/* Glassmorphism & Skeuomorphism Specular Sheen */
-@keyframes sheen-sweep {
+/* Specular Border Beam Sweep */
+@keyframes border-beam {
   0% {
-    transform: translateX(-100%) skewX(-25deg);
+    offset-distance: 0%;
   }
   100% {
-    transform: translateX(200%) skewX(-25deg);
+    offset-distance: 100%;
   }
 }
 
-/* ----------------------------------------------------
-   UNIVERSAL THEME UTILITY CLASSES & ADAPTIVE PHYSICS
----------------------------------------------------- */
-.theme-canvas {
-  background-color: var(--canvas-bg);
-  color: var(--text-main);
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
-
-.theme-card {
-  background: var(--card-bg);
-  border: var(--card-border);
-  box-shadow: var(--card-shadow);
-  border-radius: var(--card-radius);
-  transition: all var(--motion-duration) var(--motion-easing);
-  position: relative;
-}
-
-/* Style-Specific Card Hover & Motion Physics */
-
-/* 1. Minimalism: Calm, serene elevation */
-html[data-style="minimalism"] .theme-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.15);
-}
-
-/* 2. Maximalism: Neon pulse on hover */
-html[data-style="maximalism"] .theme-card {
-  animation: neon-pulse 4s ease-in-out infinite alternate;
-}
-html[data-style="maximalism"] .theme-card:hover {
-  transform: scale(1.02) rotate(-0.5deg);
-  box-shadow: 0 0 35px rgba(255, 0, 128, 0.8), 0 0 60px rgba(0, 245, 212, 0.4);
-}
-
-/* 3. Flat: Instant mechanical snap, zero elevation */
-html[data-style="flat"] .theme-card:hover {
-  border-color: #3498DB;
-  transform: translateY(-1px);
-}
-
-/* 4. Neumorphism: Soft physical compliance */
-html[data-style="neumorphism"] .theme-card:hover {
-  box-shadow: 12px 12px 24px #b8b9be, -12px -12px 24px #ffffff;
-}
-
-/* 5. Claymorphism: Gentle 3D bobbing physics */
-html[data-style="claymorphism"] .theme-card {
-  animation: clay-bob 6s ease-in-out infinite;
-}
-html[data-style="claymorphism"] .theme-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 18px 18px 36px rgba(166, 180, 200, 0.45), -12px -12px 28px rgba(255, 255, 255, 0.95);
-}
-
-/* 6. Aurora: Chromatic border glow */
-html[data-style="aurora"] .theme-card {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-html[data-style="aurora"] .theme-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0, 240, 255, 0.4);
-  box-shadow: 0 25px 60px rgba(0, 240, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-/* 7. Brutalism: Solid mechanical displacement */
-html[data-style="brutalism"] .theme-card:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0px #000000;
-}
-
-/* 8. Collage Art: Organic paper tilt */
-html[data-style="collage"] .theme-card {
-  transform: rotate(-0.4deg);
-}
-html[data-style="collage"] .theme-card:nth-child(even) {
-  transform: rotate(0.4deg);
-}
-html[data-style="collage"] .theme-card:hover {
-  transform: translateY(-4px) rotate(0deg);
-  box-shadow: 6px 12px 24px rgba(87, 83, 78, 0.18);
-}
-
-/* 9. Skeuomorphism: Specular metallic gleam */
-html[data-style="skeuomorphism"] .theme-card:hover {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-/* 10. Retro Y2K: Authentic Windows 95 Bevel */
-html[data-style="retro"] .theme-card {
-  border-top-color: #FFFFFF !important;
-  border-left-color: #FFFFFF !important;
-  border-right-color: #808080 !important;
-  border-bottom-color: #808080 !important;
-}
-
-/* 11. Glassmorphism: Prismatic sheen */
-html[data-style="glassmorphism"] .theme-card {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-html[data-style="glassmorphism"] .theme-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 12px 40px 0 rgba(56, 189, 248, 0.25);
-}
-
-/* ----------------------------------------------------
-   BUTTONS INTERACTIVE PHYSICS
----------------------------------------------------- */
-.theme-btn-primary {
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-  border-radius: var(--btn-primary-radius);
-  box-shadow: var(--btn-primary-shadow);
-  border: var(--btn-primary-border);
-  transition: all var(--motion-duration) var(--motion-easing);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  user-select: none;
-}
-
-/* 1. Minimalism: Smooth scale */
-html[data-style="minimalism"] .theme-btn-primary:hover {
-  transform: translateY(-1px) scale(1.02);
-  filter: brightness(1.1);
-}
-html[data-style="minimalism"] .theme-btn-primary:active {
-  transform: translateY(1px) scale(0.99);
-}
-
-/* 2. Maximalism: Spring pop */
-html[data-style="maximalism"] .theme-btn-primary:hover {
-  transform: scale(1.08) rotate(-1deg);
-  box-shadow: 0 0 30px #FFE600, 0 0 50px #FF0055;
-}
-html[data-style="maximalism"] .theme-btn-primary:active {
-  transform: scale(0.95);
-}
-
-/* 3. Flat: Snap push */
-html[data-style="flat"] .theme-btn-primary:hover {
-  background-color: #2980B9;
-}
-html[data-style="flat"] .theme-btn-primary:active {
-  transform: translateY(2px);
-}
-
-/* 4. Neumorphism: Silicone Inset Press! */
-html[data-style="neumorphism"] .theme-btn-primary:hover {
-  box-shadow: 8px 8px 16px #b8b9be, -8px -8px 16px #ffffff;
-}
-html[data-style="neumorphism"] .theme-btn-primary:active {
-  box-shadow: inset 4px 4px 8px #b8b9be, inset -4px -4px 8px #ffffff !important;
-  transform: scale(0.98);
-}
-
-/* 5. Claymorphism: Rubbery jelly squash */
-html[data-style="claymorphism"] .theme-btn-primary:hover {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 14px 28px rgba(255, 107, 107, 0.45), inset 0 4px 6px rgba(255, 255, 255, 0.5);
-}
-html[data-style="claymorphism"] .theme-btn-primary:active {
-  transform: translateY(2px) scale(0.96);
-  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
-}
-
-/* 6. Aurora: Glowing energy flare */
-html[data-style="aurora"] .theme-btn-primary:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 0 35px rgba(0, 240, 255, 0.6), 0 0 50px rgba(121, 40, 202, 0.4);
-}
-
-/* 7. Brutalism: Solid shadow collapse press */
-html[data-style="brutalism"] .theme-btn-primary:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000 !important;
-}
-html[data-style="brutalism"] .theme-btn-primary:active {
-  transform: translate(3px, 3px);
-  box-shadow: 1px 1px 0px #000000 !important;
-}
-
-/* 8. Collage Art: Stamp press */
-html[data-style="collage"] .theme-btn-primary:hover {
-  transform: translateY(-2px) rotate(0.8deg);
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.25);
-}
-
-/* 9. Skeuomorphism: Analog physical depression */
-html[data-style="skeuomorphism"] .theme-btn-primary:hover {
-  filter: brightness(1.12);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-html[data-style="skeuomorphism"] .theme-btn-primary:active {
-  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.7);
-  transform: translateY(2px);
-}
-
-/* 10. Retro Y2K: 90s Win95 Bevel Invert! */
-html[data-style="retro"] .theme-btn-primary {
-  border-top-color: #FFFFFF !important;
-  border-left-color: #FFFFFF !important;
-  border-right-color: #000000 !important;
-  border-bottom-color: #000000 !important;
-}
-html[data-style="retro"] .theme-btn-primary:active {
-  border-top-color: #000000 !important;
-  border-left-color: #000000 !important;
-  border-right-color: #FFFFFF !important;
-  border-bottom-color: #FFFFFF !important;
-  transform: translate(1px, 1px);
-}
-
-/* 11. Glassmorphism: Frosted sheen glint */
-html[data-style="glassmorphism"] .theme-btn-primary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.35);
-}
-
-/* Secondary Button Styling */
-.theme-btn-secondary {
-  background: var(--btn-secondary-bg);
-  color: var(--btn-secondary-text);
-  border: var(--btn-secondary-border);
-  border-radius: var(--btn-secondary-radius);
-  transition: all var(--motion-duration) var(--motion-easing);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.theme-btn-secondary:hover {
-  filter: brightness(1.06);
-  transform: translateY(-1px);
-}
-
-.theme-badge {
-  background: var(--badge-bg);
-  color: var(--badge-text);
-  border: var(--badge-border);
-  border-radius: var(--btn-primary-radius);
-  transition: all 0.25s ease;
-}
-
-html[data-style="brutalism"] .theme-badge {
-  box-shadow: 2px 2px 0px #000;
-  animation: sticker-wobble 3s ease-in-out infinite alternate;
-}
-
-.theme-input {
-  background: var(--input-bg);
-  border: var(--input-border);
-  border-radius: var(--input-radius);
-  color: var(--text-main);
-  transition: all var(--motion-duration) var(--motion-easing);
-}
-.theme-input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--accent-color);
-}
-
-html[data-style="neumorphism"] .theme-input {
-  box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #ffffff;
-}
-html[data-style="retro"] .theme-input {
-  border-top-color: #808080 !important;
-  border-left-color: #808080 !important;
-  border-right-color: #FFFFFF !important;
-  border-bottom-color: #FFFFFF !important;
-}
-
-.theme-text-main {
-  color: var(--text-main);
-}
-.theme-text-muted {
-  color: var(--text-muted);
-}
-.theme-text-faint {
-  color: var(--text-faint);
-}
-
-.theme-border {
-  border-color: rgba(0, 0, 0, 0.08);
-}
-html[data-style="aurora"] .theme-border,
-html[data-style="glassmorphism"] .theme-border,
-html[data-style="skeuomorphism"] .theme-border,
-html[data-style="maximalism"] .theme-border {
-  border-color: rgba(255, 255, 255, 0.14);
-}
-html[data-style="brutalism"] .theme-border {
-  border-color: #000000;
-}
-html[data-style="flat"] .theme-border {
-  border-color: #BDC3C7;
-}
-
-/* Ambient Glow Atmosphere with Fluid Animation */
-.aurora-glow-container {
-  display: none;
-}
-html[data-style="aurora"] .aurora-glow-container,
-html[data-style="glassmorphism"] .aurora-glow-container {
-  display: block;
-}
-
-.aurora-blob-1 {
-  animation: aurora-drift-1 18s ease-in-out infinite alternate;
-}
-.aurora-blob-2 {
-  animation: aurora-drift-2 22s ease-in-out infinite alternate;
-}
-.aurora-blob-3 {
-  animation: aurora-drift-3 16s ease-in-out infinite alternate;
-}
-
-/* Retro Blinking Terminal Cursor */
-.retro-cursor {
-  display: inline-block;
-  animation: retro-blink 0.9s steps(2, start) infinite;
-}
-
-/* Refined scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--canvas-bg);
+  background: #08090C;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--text-faint);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Modern Gradient Text Classes */
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FDE047 70%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Modern Glass Card */
+.glass-panel {
+  background: rgba(14, 16, 21, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }

@@ -1,33 +1,41 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
+import { ArrowRight, Calculator, TrendingUp, DollarSign, Users, Target, Sparkles } from 'lucide-react';
+import SpotlightCard from './SpotlightCard';
 
 export default function GrowthEstimator() {
   const [budget, setBudget] = useState(1500);
-  const [goal, setGoal] = useState<'leads' | 'ecommerce' | 'branding'>('leads');
+  const [goal, setGoal] = useState<'leads' | 'ecommerce' | 'local'>('leads');
 
   const multipliers = {
     leads: {
+      name: 'B2B & High-Ticket Inquiries',
       cpc: 0.28,
       convRate: 0.08,
       avgValue: 250,
-      roas: '3.2x – 4.5x',
+      roas: '3.5x – 4.8x',
       type: 'Qualified Inquiries',
+      channel: 'Meta Lead Ads + Google Search',
     },
     ecommerce: {
+      name: 'E-Commerce Transactions',
       cpc: 0.18,
       convRate: 0.035,
       avgValue: 45,
-      roas: '3.5x – 5.2x',
+      roas: '3.8x – 5.5x',
       type: 'Completed Orders',
+      channel: 'Meta Advantage+ Catalog & TikTok',
     },
-    branding: {
+    local: {
+      name: 'Local Store Inbound & WhatsApp',
       cpc: 0.12,
       convRate: 0.12,
       avgValue: 80,
-      roas: '2.8x – 3.8x',
-      type: 'High-Intent Engagements',
+      roas: '3.0x – 4.2x',
+      type: 'Direct Chat Inquiries',
+      channel: 'Local Map Pack + Click-to-WhatsApp',
     },
   };
 
@@ -37,167 +45,207 @@ export default function GrowthEstimator() {
   const estimatedPipeline = (estimatedConversions * current.avgValue).toLocaleString();
 
   return (
-    <section id="calculator" className="py-24 theme-canvas border-b theme-border transition-colors duration-300">
+    <section id="calculator" className="py-24 sm:py-32 relative border-b border-white/[0.06] bg-[#08090C] overflow-hidden">
+      {/* Ambient background glow */}
+      <div className="pointer-events-none absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-cyan-500/10 blur-[140px]" />
+
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         
-        <div className="theme-card p-8 sm:p-12 shadow-xs">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Controls */}
-            <div className="lg:col-span-7 space-y-6">
-              <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.2em] theme-text-faint block">
-                05 / Projection Model
-              </span>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl mb-14 space-y-3"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.03] text-neutral-400 text-xs font-mono uppercase tracking-wider">
+            <Calculator className="w-3.5 h-3.5 text-cyan-400" />
+            <span>03 / ROI Simulation Model</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Simulate Revenue Pipeline & Ad Returns
+          </h2>
+          <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-light">
+            Adjust your estimated monthly advertising budget and objective to project targeted inbound traffic, conversions, and pipeline value based on verified Cambodian & regional benchmarks.
+          </p>
+        </motion.div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold theme-text-main tracking-tight">
-                Simulate Marketing Returns & Lead Volume
-              </h3>
+        {/* Interactive Dashboard Bento */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          {/* Left Column: Interactive Inputs */}
+          <div className="lg:col-span-7">
+            <SpotlightCard
+              spotlightColor="rgba(56, 189, 248, 0.12)"
+              className="p-8 sm:p-10 h-full flex flex-col justify-between border-white/[0.1] bg-[#0D1017]/90"
+            >
+              <div className="space-y-8">
+                
+                {/* Objective Selector Tabs */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-white tracking-wide font-mono uppercase">
+                      Select Campaign Objective:
+                    </span>
+                    <span className="text-[11px] font-mono text-cyan-400">
+                      {current.channel}
+                    </span>
+                  </div>
 
-              <p className="text-xs sm:text-sm theme-text-muted leading-relaxed font-light">
-                Adjust your estimated monthly advertising budget and objective to project targeted inbound traffic, conversions, and revenue pipeline.
-              </p>
-
-              {/* Goal Pills */}
-              <div className="space-y-2">
-                <span className="text-xs font-semibold theme-text-main block">
-                  Campaign Objective:
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setGoal('leads')}
-                    className={`px-4 py-2 text-xs font-medium transition-all ${
-                      goal === 'leads'
-                        ? 'theme-btn-primary shadow-sm'
-                        : 'theme-badge opacity-80 hover:opacity-100'
-                    }`}
-                  >
-                    B2B & High-Ticket Inquiries
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setGoal('ecommerce')}
-                    className={`px-4 py-2 text-xs font-medium transition-all ${
-                      goal === 'ecommerce'
-                        ? 'theme-btn-primary shadow-sm'
-                        : 'theme-badge opacity-80 hover:opacity-100'
-                    }`}
-                  >
-                    E-Commerce Transactions
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setGoal('branding')}
-                    className={`px-4 py-2 text-xs font-medium transition-all ${
-                      goal === 'branding'
-                        ? 'theme-btn-primary shadow-sm'
-                        : 'theme-badge opacity-80 hover:opacity-100'
-                    }`}
-                  >
-                    Local Store Inbound
-                  </button>
-                </div>
-              </div>
-
-              {/* Slider */}
-              <div className="space-y-3 pt-2">
-                <div className="flex justify-between items-baseline">
-                  <span className="text-xs font-semibold theme-text-main">
-                    Monthly Ad Budget:
-                  </span>
-                  <span className="text-xl font-extrabold theme-text-main font-mono">
-                    ${budget.toLocaleString()}
-                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    {(['leads', 'ecommerce', 'local'] as const).map((key) => {
+                      const active = goal === key;
+                      return (
+                        <button
+                          key={key}
+                          type="button"
+                          onClick={() => setGoal(key)}
+                          className={`px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-tight text-left transition-all border ${
+                            active
+                              ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-300 shadow-sm'
+                              : 'bg-white/[0.02] border-white/[0.06] text-neutral-400 hover:text-white hover:bg-white/[0.05]'
+                          }`}
+                        >
+                          <div className="font-bold">{key === 'leads' ? 'B2B Leads' : key === 'ecommerce' ? 'E-Commerce' : 'Local Store'}</div>
+                          <div className="text-[10px] text-neutral-400 font-light font-mono mt-0.5">
+                            {key === 'leads' ? 'High-ticket funnels' : key === 'ecommerce' ? 'Catalog sales' : 'Direct WhatsApp'}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                <input
-                  type="range"
-                  min="300"
-                  max="10000"
-                  step="100"
-                  value={budget}
-                  onChange={(e) => setBudget(Number(e.target.value))}
-                  className="w-full h-2 bg-neutral-300 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-[var(--accent-color)]"
-                />
+                {/* Budget Slider */}
+                <div className="space-y-4 pt-2">
+                  <div className="flex justify-between items-baseline">
+                    <span className="text-xs font-semibold text-white tracking-wide font-mono uppercase">
+                      Monthly Advertising Budget:
+                    </span>
+                    <div className="text-3xl font-black text-cyan-300 font-mono">
+                      ${budget.toLocaleString()}
+                    </div>
+                  </div>
 
-                <div className="flex justify-between text-[11px] theme-text-faint font-mono">
-                  <span>$300 (Starter)</span>
-                  <span>$2,500 (Growth)</span>
-                  <span>$5,000 (Scaling)</span>
-                  <span>$10,000+ (Market Lead)</span>
+                  {/* Range Track */}
+                  <input
+                    type="range"
+                    min="300"
+                    max="10000"
+                    step="100"
+                    value={budget}
+                    onChange={(e) => setBudget(Number(e.target.value))}
+                    className="w-full h-2 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                  />
+
+                  {/* Range Milestones */}
+                  <div className="flex justify-between text-[11px] font-mono text-neutral-400">
+                    <span>$300 (Starter)</span>
+                    <span>$2,500 (Scaling)</span>
+                    <span>$5,000 (Growth)</span>
+                    <span>$10,000+ (Market Dominance)</span>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Projection Display */}
-            <div className="lg:col-span-5 theme-card p-6 sm:p-8 space-y-6">
-              <div className="flex items-center justify-between pb-3 border-b theme-border">
-                <span className="text-[11px] font-mono font-semibold uppercase tracking-wider theme-text-faint">
-                  Projected Outcomes
-                </span>
-                <span className="text-[11px] font-mono theme-text-faint">
-                  Cambodia Benchmarks
-                </span>
+                {/* Estimated Unit Metrics Bar */}
+                <div className="pt-4 border-t border-white/[0.06] grid grid-cols-2 gap-4 text-xs font-mono">
+                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                    <span className="text-neutral-400 block text-[10px] uppercase">Est. Avg Cost Per Click (CPC)</span>
+                    <span className="text-white font-bold">${current.cpc.toFixed(2)} USD</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                    <span className="text-neutral-400 block text-[10px] uppercase">Benchmark Conversion Rate</span>
+                    <span className="text-white font-bold">{(current.convRate * 100).toFixed(1)}% CVR</span>
+                  </div>
+                </div>
+
               </div>
 
-              <div className="space-y-4">
-                <div>
-                  <span className="text-xs theme-text-muted block">
-                    Est. High-Intent Traffic
+              <div className="pt-6 text-[11px] text-neutral-400 font-light flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                <span>Calculations reflect real 2024–2026 Meta & Google Ads performance benchmarks in Cambodia.</span>
+              </div>
+            </SpotlightCard>
+          </div>
+
+          {/* Right Column: Projected Outcomes Panel */}
+          <div className="lg:col-span-5">
+            <SpotlightCard
+              spotlightColor="rgba(34, 211, 238, 0.18)"
+              className="p-8 sm:p-10 h-full flex flex-col justify-between border-cyan-500/25 bg-gradient-to-b from-[#0F141C] to-[#0A0D12]"
+            >
+              <div className="space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">
+                    Projected Commercial Yield
                   </span>
-                  <div className="text-2xl font-black theme-text-main font-mono">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                    Active Model
+                  </span>
+                </div>
+
+                {/* Big Metric 1: Clicks */}
+                <div className="space-y-1">
+                  <span className="text-xs text-neutral-400 font-mono block">
+                    High-Intent Traffic Volume:
+                  </span>
+                  <div className="text-3xl sm:text-4xl font-black text-white font-mono tracking-tight">
                     ~{estimatedClicks.toLocaleString()}{' '}
-                    <span className="text-xs font-normal font-sans theme-text-muted">
-                      targeted clicks
+                    <span className="text-xs text-neutral-400 font-normal font-sans">
+                      targeted clicks / mo
                     </span>
                   </div>
                 </div>
 
-                <div>
-                  <span className="text-xs theme-text-muted block">
-                    Est. {current.type}
+                {/* Big Metric 2: Conversions */}
+                <div className="space-y-1 pt-2 border-t border-white/[0.06]">
+                  <span className="text-xs text-neutral-400 font-mono block">
+                    Estimated {current.type}:
                   </span>
-                  <div className="text-3xl font-black theme-text-main font-mono">
+                  <div className="text-4xl sm:text-5xl font-black text-cyan-300 font-mono tracking-tight">
                     {estimatedConversions.toLocaleString()}{' '}
-                    <span className="text-xs font-normal font-sans theme-text-muted">
-                      monthly conversions
+                    <span className="text-xs text-neutral-400 font-normal font-sans">
+                      conversions / mo
                     </span>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 pt-2">
-                  <div className="p-3 theme-card">
-                    <span className="text-[10px] uppercase theme-text-faint block font-semibold font-mono">
-                      Target ROAS
+                {/* 2-Column Mini Cards */}
+                <div className="grid grid-cols-2 gap-3 pt-3">
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08]">
+                    <span className="text-[10px] font-mono uppercase text-neutral-400 block">
+                      Target ROAS Range
                     </span>
-                    <span className="text-sm font-bold theme-text-main">
+                    <span className="text-base font-bold text-emerald-400 font-mono">
                       {current.roas}
                     </span>
                   </div>
 
-                  <div className="p-3 theme-card">
-                    <span className="text-[10px] uppercase theme-text-faint block font-semibold font-mono">
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08]">
+                    <span className="text-[10px] font-mono uppercase text-neutral-400 block">
                       Est. Pipeline Value
                     </span>
-                    <span className="text-sm font-bold theme-text-main font-mono">
+                    <span className="text-base font-bold text-white font-mono">
                       ${estimatedPipeline}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <a
-                href="#contact"
-                className="w-full theme-btn-primary gap-2 py-3 text-xs font-medium"
-              >
-                <span>Inquire Custom Plan</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-
+              {/* Action Button */}
+              <div className="pt-8">
+                <a
+                  href="#contact"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 text-xs font-bold text-black bg-cyan-400 hover:bg-cyan-300 rounded-xl shadow-lg shadow-cyan-500/20 transition-all group"
+                >
+                  <span>Inquire Custom Growth Plan</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </SpotlightCard>
           </div>
+
         </div>
 
       </div>
