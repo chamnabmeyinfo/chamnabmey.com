@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.svg" />
         {/* Bootstrap min css */}
@@ -58,7 +58,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/assets/css/style.css" />
       </head>
 
-      <body className="tmp-white-version">
+      <body className="tmp-white-version" suppressHydrationWarning>
         {children}
 
         {/* Template Scripts */}
@@ -79,13 +79,11 @@ export default function RootLayout({
         <script src="/assets/js/vendor/twinmax.js" defer></script>
         <script src="/assets/js/vendor/bootstrap.min.js" defer></script>
         <script src="/assets/js/vendor/waw.js" defer></script>
-        <script src="/assets/js/vendor/intro-video.js" defer></script>
         <script src="/assets/js/plugins/isotop.js" defer></script>
-        <script src="/assets/js/plugins/animation.js" defer></script>
         <script src="/assets/js/plugins/contact.form.js" defer></script>
         <script src="/assets/js/vendor/backtop.js" defer></script>
         <script src="/assets/js/plugins/text-type.js" defer></script>
-        <script src="/assets/js/main.js" defer></script>
+        <script src="/assets/js/main.js?v=1.0.1" defer></script>
       </body>
     </html>
   );

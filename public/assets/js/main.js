@@ -95,7 +95,7 @@
         function checkAndObserve() {
             const videoCard = document.querySelector(".tmp-intro-video-card-wrapper.position-right");
             if (!videoCard) {
-                overlay.classList.remove("active"); 
+                if (overlay) overlay.classList.remove("active"); 
                 return;
             }
             const observer = new MutationObserver((mutations) => {
@@ -117,7 +117,7 @@
     
         if (closeButton) {
           closeButton.addEventListener("click", function () {
-              overlay.classList.remove("active");
+              if (overlay) overlay.classList.remove("active");
               console.log("Overlay closed."); 
           });
         }
@@ -130,7 +130,12 @@
     tmpgradientAnimation : function name(params) {
       var e = document.querySelectorAll(".tmp-gradient-wrapper"),
         t = document.querySelectorAll(".tmp-gradient-animation");
-        gsap.to(e, { scale: 0.6, repeat: -1, duration: 3, yoyo: !0, ease: Linear.easeNone }).play(), gsap.to(t, { repeat: -1, duration: 3, rotation: 360, ease: Linear.easeNone }).play();
+      if (e.length) {
+        gsap.to(e, { scale: 0.6, repeat: -1, duration: 3, yoyo: !0, ease: Linear.easeNone }).play();
+      }
+      if (t.length) {
+        gsap.to(t, { repeat: -1, duration: 3, rotation: 360, ease: Linear.easeNone }).play();
+      }
     },
 
     tmpTiltAnimation: function () {
@@ -249,113 +254,135 @@
 
     swiperJs: function () {
       $(document).ready(function () {
-        var swiper = new Swiper(".testimonial-swiper", {
-          // slidesPerView: 2,
-          spaceBetween: 30,
-          loop: true,
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-          breakpoints: {
-            0: {
-              slidesPerView: 1,
+        var testSwiper1 = document.querySelector(".testimonial-swiper");
+        if (testSwiper1) {
+          var count1 = testSwiper1.querySelectorAll(".swiper-slide").length;
+          var swiper = new Swiper(".testimonial-swiper", {
+            spaceBetween: 30,
+            loop: count1 >= 4,
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
             },
-            800: {
-              slidesPerView: 3,
+            breakpoints: {
+              0: {
+                slidesPerView: 1,
+              },
+              800: {
+                slidesPerView: 3,
+              },
             },
-          },
-        });
+          });
+        }
       });
       $(document).ready(function () {
-        var swiper = new Swiper(".mySwiper-bentogrid", {
-          slidesPerView: 2,
-          spaceBetween: 30,
-          loop: true,
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-          speed: 1000,
-         
-          breakpoints: {
-            0: {
-              slidesPerView: 1,
+        var bentoSwiper = document.querySelector(".mySwiper-bentogrid");
+        if (bentoSwiper) {
+          var countBento = bentoSwiper.querySelectorAll(".swiper-slide").length;
+          var swiper = new Swiper(".mySwiper-bentogrid", {
+            slidesPerView: 2,
+            spaceBetween: 30,
+            loop: countBento >= 3,
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
             },
-            800: {
-              slidesPerView: 2,
+            speed: 1000,
+            breakpoints: {
+              0: {
+                slidesPerView: 1,
+              },
+              800: {
+                slidesPerView: 2,
+              },
             },
-          },
-        });
+          });
+        }
       });
       $(document).ready(function () {
-        var swiper = new Swiper(".testimonial-swiper-v2", {
-          slidesPerView: 2.5,
-          spaceBetween: 30,
-          freeMode: true,
-          centeredSlides: true,
-          loop: true,
-          autoHeight: true,
-          loopAddBlankSlides: true,
-          autoplay: false,
-          pagination: {
-            el: ".tmp-swiper-pagination",
-            clickable: true,
-          },
-          breakpoints: {
-            0: {
-              slidesPerView: 1,
-              centeredSlides: true, // Enable centering for smaller screens as well
+        var testSwiper2 = document.querySelector(".testimonial-swiper-v2");
+        if (testSwiper2) {
+          var count2 = testSwiper2.querySelectorAll(".swiper-slide").length;
+          var swiper = new Swiper(".testimonial-swiper-v2", {
+            slidesPerView: 2.5,
+            spaceBetween: 30,
+            freeMode: true,
+            centeredSlides: true,
+            loop: count2 >= 5,
+            autoHeight: true,
+            loopAddBlankSlides: true,
+            autoplay: false,
+            pagination: {
+              el: ".tmp-swiper-pagination",
+              clickable: true,
             },
-            767: {
-              slidesPerView: 2,
-              centeredSlides: true, // Enable centering for larger screens
+            navigation: {
+              nextEl: ".testimonial-arrow-v2 .swiper-button-next",
+              prevEl: ".testimonial-arrow-v2 .swiper-button-prev",
             },
-          },
-        });
+            breakpoints: {
+              0: {
+                slidesPerView: 1,
+                centeredSlides: true,
+              },
+              767: {
+                slidesPerView: 2,
+                centeredSlides: true,
+              },
+            },
+          });
+        }
       });
 
       $(document).ready(function () {
-        var swiper = new Swiper(".project-details-swiper", {
-          slidesPerView: 2,
-          spaceBetween: 30,
-          loop: true,
-          navigation: {
-            nextEl: ".project-swiper-button-next",
-            prevEl: ".project-swiper-button-prev",
-          },
-          breakpoints: {
-            0: {
-              slidesPerView: 1,
+        var projSwiper = document.querySelector(".project-details-swiper");
+        if (projSwiper) {
+          var countProj = projSwiper.querySelectorAll(".swiper-slide").length;
+          var swiper = new Swiper(".project-details-swiper", {
+            slidesPerView: 2,
+            spaceBetween: 30,
+            loop: countProj >= 3,
+            navigation: {
+              nextEl: ".project-swiper-button-next",
+              prevEl: ".project-swiper-button-prev",
             },
-            500: {
-              slidesPerView: 2,
+            breakpoints: {
+              0: {
+                slidesPerView: 1,
+              },
+              500: {
+                slidesPerView: 2,
+              },
             },
-          },
-        });
+          });
+        }
       });
       $(document).ready(function () {
-        var swiper = new Swiper(".swiper-testimonials-2", {
-          slidesPerView: 2,
-          spaceBetween: 30,
-          navigation: {
-            nextEl: ".project-swiper-button-next",
-            prevEl: ".project-swiper-button-prev",
-          },
-          loop: true,
-          autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-          },
-          breakpoints: {
-            0: {
-              slidesPerView: 1,
+        var swiperTest2 = document.querySelector(".swiper-testimonials-2");
+        if (swiperTest2) {
+          var countTest2 = swiperTest2.querySelectorAll(".swiper-slide").length;
+          var swiper = new Swiper(".swiper-testimonials-2", {
+            slidesPerView: 2,
+            spaceBetween: 30,
+            navigation: {
+              nextEl: ".project-swiper-button-next",
+              prevEl: ".project-swiper-button-prev",
             },
-            500: {
-              slidesPerView: 2,
+            loop: countTest2 >= 3,
+            autoplay: {
+              delay: 2500,
+              disableOnInteraction: false,
             },
-          },
-        });
+            breakpoints: {
+              0: {
+                slidesPerView: 1,
+              },
+              500: {
+                slidesPerView: 2,
+              },
+            },
+          });
+        }
       });
     },
 
@@ -602,7 +629,7 @@
     },
 
     fonklsAnimation: function () {
-      let endAnimation = document.getElementsByClassName('.end');
+      let endAnimation = document.querySelectorAll('.end');
       if(endAnimation.length){
         let endTl = gsap.timeline({
           repeat: -1,
@@ -709,23 +736,27 @@
             : null;
       
           // Create a timeline for each title and subtitle
-          gsap.timeline({
+          const tl = gsap.timeline({
             scrollTrigger: {
               trigger: title, // Trigger animation when the current title comes into view
               start: "top 80%", // Start when the top of the element reaches 80% of the viewport height
               end: "bottom 60%", // Optional: Define when animation ends
               toggleActions: "play none none none", // Play only once
-              // markers: true // Uncomment for debugging
             },
-          })
-            .from(splitTitle.chars, {
+          });
+
+          if (splitTitle && splitTitle.chars && splitTitle.chars.length) {
+            tl.from(splitTitle.chars, {
               duration: 0.2,
               x: -10,
               autoAlpha: .02,
               stagger: 0.02,
-            })
-            .from(
-              splitSubtitle ? splitSubtitle.words : [],
+            });
+          }
+
+          if (splitSubtitle && splitSubtitle.words && splitSubtitle.words.length) {
+            tl.from(
+              splitSubtitle.words,
               {
                 duration: 0.8,
                 x: 100,
@@ -734,6 +765,7 @@
               },
               "-=1" // Overlap with the previous animation
             );
+          }
         });
       });
       document.addEventListener("DOMContentLoaded", function () {
@@ -752,23 +784,27 @@
             : null;
       
           // Create a timeline for each title and subtitle
-          gsap.timeline({
+          const tl = gsap.timeline({
             scrollTrigger: {
               trigger: title, // Trigger animation when the current title comes into view
               start: "top 80%", // Start when the top of the element reaches 80% of the viewport height
               end: "bottom 60%", // Optional: Define when animation ends
               toggleActions: "play none none none", // Play only once
-              // markers: true // Uncomment for debugging
             },
-          })
-            .from(splitTitle.chars, {
+          });
+
+          if (splitTitle && splitTitle.chars && splitTitle.chars.length) {
+            tl.from(splitTitle.chars, {
               duration: 0.2,
               x: -10,
               autoAlpha: .06,
               stagger: 0.01,
-            })
-            .from(
-              splitSubtitle ? splitSubtitle.words : [],
+            });
+          }
+
+          if (splitSubtitle && splitSubtitle.words && splitSubtitle.words.length) {
+            tl.from(
+              splitSubtitle.words,
               {
                 duration: 0.2,
                 x: 100,
@@ -777,11 +813,9 @@
               },
               "-=1" // Overlap with the previous animation
             );
+          }
         });
       });
-      
-        
-
     },
 
     animationOnHover: function () {
@@ -846,6 +880,7 @@
         
         animatedTextElements.forEach((element) => {
           let animationSplitText = new SplitText(element, { type: "chars, words" });
+          if (animationSplitText && animationSplitText.chars && animationSplitText.chars.length) {
             gsap.from(animationSplitText.chars, {
               duration: 1,
               delay: delayValue,
@@ -855,6 +890,7 @@
               ease: easeType,
               scrollTrigger: { trigger: element, start: "top 85%"},
             });
+          }
         });		
       }
     },
@@ -897,6 +933,7 @@
         const line2 = document.querySelector('.cta__line-2');
     
         function animateLines() {
+          if (!parent || !line1 || !line2) return;
           const parentHeight = parent.offsetWidth;
     
           // Animating the first line using Timeline
@@ -939,6 +976,8 @@
 
 
 // Back To Top style here
+var windowHeight = 0;
+var documentHeight = 0;
 function updateDimensions() {
   windowHeight = window.innerHeight;
   documentHeight = document.documentElement.scrollHeight - windowHeight;

@@ -1,7 +1,6 @@
 import React from 'react';
 import ThemeToggle from '@/components/ThemeToggle';
 import NavigationController from '@/components/NavigationController';
-import FloatingContactWidget from '@/components/FloatingContactWidget';
 import { getContent } from '@/lib/contentStore';
 
 export const dynamic = 'force-dynamic';
@@ -15,7 +14,6 @@ export default async function HomePage() {
     <>
       <ThemeToggle />
       <NavigationController />
-      <FloatingContactWidget phone={profile.phone} telegram={profile.telegram} telegramUser={profile.telegramUser} email={profile.email} />
 
       
     {/*  tpm-header-area start  */}
@@ -323,7 +321,7 @@ export default async function HomePage() {
                 <div className="col-lg-6">
                     <div className="about-us-left-content-wrap">
                         <div className="years-of-experience-card tmponhover active tmp-scroll-trigger tmp-fade-in animation-order-1">
-                            <h3 className="counter card-title"><span className="odometer" data-count={about.yearsExperience || 10}>{about.yearsExperience || 10}</span>+
+                            <h3 className="counter card-title"><span className="odometer" suppressHydrationWarning data-count={about.yearsExperience || 10}>{about.yearsExperience || 10}</span>+
                             </h3>
                             <div className="tmp-light light-top-left"></div>
                             <p className="card-para">years of experience</p>
@@ -707,34 +705,41 @@ export default async function HomePage() {
         <div className="client-testimonial-swiper position-relative">
             <div className="swiper testimonial-swiper-v2">
                 <div className="swiper-wrapper">
-                    {testimonials && testimonials.map((test, tIdx) => (
-                        <div className={`swiper-slide tmp-scroll-trigger animation-order-${tIdx + 1}`} key={test.id || tIdx}>
-                            <div className="client-testimonial-card-wrap">
-                                <div className="client-card-head">
-                                    <div className="client-info">
-                                        <div className="client-img">
-                                            <img src={test.avatar || "/assets/images/testimonial/client-img-1.jpg"} alt={test.name} />
+                    {(() => {
+                        const rawTestimonials = testimonials && testimonials.length > 0 ? testimonials : [];
+                        const displayTestimonials = rawTestimonials.length > 0 && rawTestimonials.length < 5
+                            ? [...rawTestimonials, ...rawTestimonials]
+                            : rawTestimonials;
+
+                        return displayTestimonials.map((test, tIdx) => (
+                            <div className={`swiper-slide tmp-scroll-trigger animation-order-${(tIdx % (rawTestimonials.length || 1)) + 1}`} key={`${test.id || 'test'}-${tIdx}`}>
+                                <div className="client-testimonial-card-wrap">
+                                    <div className="client-card-head">
+                                        <div className="client-info">
+                                            <div className="client-img">
+                                                <img src={test.avatar || "/assets/images/testimonial/client-img-1.jpg"} alt={test.name} />
+                                            </div>
+                                            <div className="client-details">
+                                                <h3 className="client-title">{test.name}</h3>
+                                                <p className="client-para">{test.role}</p>
+                                            </div>
                                         </div>
-                                        <div className="client-details">
-                                            <h3 className="client-title">{test.name}</h3>
-                                            <p className="client-para">{test.role}</p>
+                                        <div className="tmp-star">
+                                            <ul>
+                                                {[...Array(test.stars || 5)].map((_, stIdx) => (
+                                                    <li key={stIdx}><i className="fa-solid fa-star"></i></li>
+                                                ))}
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div className="tmp-star">
-                                        <ul>
-                                            {[...Array(test.stars || 5)].map((_, stIdx) => (
-                                                <li key={stIdx}><i className="fa-solid fa-star"></i></li>
-                                            ))}
-                                        </ul>
+                                    <p className="client-para">{test.quote}</p>
+                                    <div className="quat-logo">
+                                        <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
                                     </div>
-                                </div>
-                                <p className="client-para">{test.quote}</p>
-                                <div className="quat-logo">
-                                    <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ));
+                    })()}
                 </div>
                 <div className="testimonial-arrow-v2">
                     <div className="swiper-button-next"><i className="fa-sharp fa-regular fa-arrow-right"></i></div>
@@ -1147,9 +1152,7 @@ export default async function HomePage() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="main-wrapper tmp-scroll-trigger animation-order-1">
-                            <p className="copy-right-para">© Chamnab Mey<script>
-                                    document.write(new Date().getFullYear())
-                                </script> | All Rights Reserved</p>
+                            <p className="copy-right-para" suppressHydrationWarning>© Chamnab Mey {new Date().getFullYear()} | All Rights Reserved</p>
                             <ul className="tmp-link-animation">
                                 <li><a href="#">Trams & Condition</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
@@ -1318,45 +1321,7 @@ export default async function HomePage() {
 
 
 
-    <div className="intro-video-card-wrapper">
-        <div className="background-overlay"></div>
-        <div className="tmp-intro-video-card-wrapper position-right">
-            <div className="tmp-video-inner">
-                <div className="tmp-video-progress-container playing">
-                    <video className="tmp-video-element" id="tmp-video-element" poster="/assets/images/video/01.webp">
-                        <source src="/assets/images/video/intro.mp4" />
-                    </video>
-                    <div className="tmp-video-controls">
-                        <div className="play-button" title="Play/Pause (Spacebar)">
-                            <i className="fa-solid fa-pause"></i>
-                        </div>
-                        <div className="sound-button sound-muted" title="Mute/Unmute (m)">
-                            <i className="fa-regular fa-volume"></i>
-                        </div>
-                        <div className="expand-icon" title="Expand">
-                            <i className="fa-solid fa-up-right-and-down-left-from-center"></i>
-                        </div>
-                    </div>
-                    <div className="tmp-iv-top-wrapper">
-                        <div className="tmp-iv-progress-bar">
-                            <span className="buffer-bar" style={{ width: '100%' }}></span>
-                            <span className="time-bar" style={{ width: '100%' }}></span>
-                        </div>
-                    </div>
-                </div>
-                <div className="card-greeting">
-                    <p>Hello</p>
-                </div>
-            </div>
-            <div className="tmp-iv-close-button">
-                <audio id="tmp-close-button-audio" preload="auto">
-                    <source src="/assets/images/video/intro.mp3" type="audio/mpeg" />
-                    <source src="/assets/images/video/intro.mp3" type="audio/ogg" />
-                </audio>
-                <i className="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-    </div>
+
 
     {/*  ready chatting option via email  */}
     <div className="ready-chatting-option tmp-ready-chat">

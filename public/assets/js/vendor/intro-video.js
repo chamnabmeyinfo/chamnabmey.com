@@ -1,6 +1,8 @@
 (function ($) {
     "use strict";
 
+    $(".tmp-intro-video-card-wrapper, .intro-video-card-wrapper, .background-overlay").remove();
+
     $(".tmp-intro-video-card-wrapper").each(function() {
 
         var $video_container = $(this);

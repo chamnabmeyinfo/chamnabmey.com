@@ -26799,6 +26799,8 @@ body.tmp-white-version.index-8 .tmp-contact-about-inner .info-box {
 }
 
 .tmp-intro-video-card-wrapper {
+  display: none !important;
+  visibility: hidden !important;
   position: fixed;
   z-index: 1008;
   right: 20px;
@@ -30119,4 +30121,18 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
 .active-light.demo-modal-area .wrapper .tmp-modal-inner .demo-top .subtitle {
   color: #3d3d3d !important;
 }
+
+/* Permanently hide intro video card */
+.tmp-intro-video-card-wrapper,
+.intro-video-card-wrapper,
+.background-overlay {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
 /*# sourceMappingURL=../maps/style.css.map */
+
