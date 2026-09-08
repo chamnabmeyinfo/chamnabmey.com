@@ -99,7 +99,7 @@ export default async function HomePage() {
                 <div className="content-wrapper">
                     <div className="image-area-feature">
                         <a href="index.html">
-                            <img src="/assets/images/logo/man.png" alt="personal-logo" />
+                            <img src={profile.photo || "/images/chamnab-mey.jpg"} alt={profile.name} style={{ width: "100px", height: "100px", borderRadius: "50%", objectFit: "cover" }} />
                         </a>
                     </div>
                     <h5 className="title mt--30">{profile.tagline}</h5>
@@ -218,45 +218,48 @@ export default async function HomePage() {
                 <div className="row align-items-center">
                     <div className="col-lg-6 order-lg-2">
                         <div className="banner-right-content">
-                            <div className="main-img">
-                                <img className="tmp-scroll-trigger tmp-zoom-in animation-order-1" src="/assets/images/banner/banner-user-image-two.png" alt="banner-img" />
-                                <h2 className="banner-big-text-1 up-down-2">Digital Marketer</h2>
-                                <h2 className="banner-big-text-2 up-down">Digital Marketer</h2>
-                                <div className="benner-two-bg-red-img">
-                                    <img src="/assets/images/banner/banner-user-image-two-red-bg.png" alt="red-img" />
-                                </div>
-                                <div className="logo-under-img-wrap">
-                                    <div className="logo-under-img">
-                                        <img src="/assets/images/banner/logo-under-image.png" alt="logo-under-image" />
-                                    </div>
-                                    <div className="logo-under-img-2">
-                                        <img src="/assets/images/banner/logo-under-image-2.png" alt="logo-under-image" />
-                                    </div>
-                                </div>
-
+                            <div className="main-img" style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+                                <img
+                                    className="tmp-scroll-trigger tmp-zoom-in animation-order-1"
+                                    src={profile.photo || "/images/chamnab-mey.jpg"}
+                                    alt={profile.name}
+                                    style={{
+                                        width: '100%',
+                                        maxWidth: '460px',
+                                        height: 'auto',
+                                        borderRadius: '28px',
+                                        objectFit: 'cover',
+                                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6 order-lg-1 mt--100">
                         <div className="inner">
-                            <span className="sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">I am</span>
+                            <span className="sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">{hero.greeting || "Welcome to My World"}</span>
                             <h1 className="title tmp-scroll-trigger tmp-fade-in animation-order-2">
-                                Chamnab Mey, a Senior <br />
+                                {hero.titlePrefix || "Chamnab Mey, a Senior"} <br />
                                 <span className="header-caption">
                                     <span className="cd-headline clip is-full-width">
                                         <span className="cd-words-wrapper">
-                                            <b className="is-visible theme-gradient">Digital Marketer</b>
-                                            <b className="is-hidden theme-gradient">Performance Ad Buyer</b>
-                                            <b className="is-hidden theme-gradient">Growth Strategist</b>
-                                            <b className="is-hidden theme-gradient">Meta CAPI Specialist</b>
-                                            <b className="is-hidden theme-gradient">Full-Funnel Architect</b>
+                                            {hero.rotatingRoles && hero.rotatingRoles.length > 0 ? (
+                                                hero.rotatingRoles.map((role, rIdx) => (
+                                                    <b key={rIdx} className={rIdx === 0 ? "is-visible theme-gradient" : "is-hidden theme-gradient"}>{role}</b>
+                                                ))
+                                            ) : (
+                                                <>
+                                                    <b className="is-visible theme-gradient">Digital Marketer</b>
+                                                    <b className="is-hidden theme-gradient">Performance Ad Buyer</b>
+                                                    <b className="is-hidden theme-gradient">Growth Strategist</b>
+                                                </>
+                                            )}
                                         </span>
                                 </span>
                                 </span>
                             </h1>
-                            <p className="disc tmp-scroll-trigger tmp-fade-in animation-order-3">
-                                Senior Digital Marketing Strategist & Performance Marketer with 10+ years scaling e-commerce, real estate, and retail brands through full-funnel Meta & Google campaigns and conversion web architecture.
-                            </p>
+                            <p className="disc tmp-scroll-trigger tmp-fade-in animation-order-3">{hero.description}</p>
                             <div className="button-area-banner-two tmp-scroll-trigger tmp-fade-in animation-order-4 d-flex flex-wrap gap-3">
                                 <a className="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon" href="#contacts">
                                     <div className="icon-reverse-wrapper">
@@ -301,9 +304,7 @@ export default async function HomePage() {
     <div className="about-content-area">
         <div className="container tmp-section-gap">
             <div className="text-para-doc-wrap">
-                <h2 className="text-para-documents tmp-scroll-trigger tmp-fade-in tmp-title-split-2 animation-order-1">
-                    A high-performance marketing engine engineered to drive <span>profitable customer acquisition</span>, infallible server-side <span>CAPI tracking</span>, and scalable business <span>revenue growth</span> across Southeast Asia.
-                </h2>
+                <h2 className="text-para-documents tmp-scroll-trigger tmp-fade-in tmp-title-split-2 animation-order-1">{statement}</h2>
                 <div className="right-bg-text-para">
                     <img src="/assets/images/banner/right-bg-text-para-doc.png" alt="" />
                 </div>
@@ -322,7 +323,7 @@ export default async function HomePage() {
                 <div className="col-lg-6">
                     <div className="about-us-left-content-wrap">
                         <div className="years-of-experience-card tmponhover active tmp-scroll-trigger tmp-fade-in animation-order-1">
-                            <h3 className="counter card-title"><span className="odometer" data-count="10">00</span>+
+                            <h3 className="counter card-title"><span className="odometer" data-count={about.yearsExperience || 10}>{about.yearsExperience || 10}</span>+
                             </h3>
                             <div className="tmp-light light-top-left"></div>
                             <p className="card-para">years of experience</p>
@@ -334,7 +335,7 @@ export default async function HomePage() {
                             <div className="tmp-light light-top-left"></div>
                             <div className="card-info">
                                 <h3 className="card-title">Paid Media & CRO</h3>
-                                <p className="card-para">240+ Campaigns</p>
+                                <p className="card-para">{about.adSpendManaged || "240+ Campaigns"}</p>
                             </div>
                         </div>
                     </div>
@@ -374,11 +375,10 @@ export default async function HomePage() {
                                         <div className="logo-img">
                                             <img src="/assets/images/about/logo-2.svg" alt="logo" />
                                         </div>
-                                        <h3 className="card-title">Full-Funnel CRO</h3>
+                                        <h3 className="card-title">{about.card2Title || "Full-Funnel CRO"}</h3>
                                     </div>
                                     <div className="tmp-light light-top-left"></div>
-                                    <p className="card-para">High-converting landing pages and automated lead capture infrastructure.
-                                    </p>
+                                    <p className="card-para">{about.card2Desc || "High-converting landing pages and automated lead capture infrastructure."}</p>
                                 </div>
                             </div>
 
@@ -503,54 +503,16 @@ export default async function HomePage() {
                             <h2 className="custom-title mb--30 tmp-scroll-trigger tmp-fade-in animation-order-1">
                                 Paid Media & Performance Skills
                             </h2>
-                            {/*  Start Single Progress Charts  */}
-                            <div className="progress-charts">
-                                <h6 className="heading heading-h6">
-                                    PHOTOSHOT</h6>
-                                <div className="progress">
-                                    <div className="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".3s" role="progressbar" style={{ width: '100%', visibility: 'visible', animationDuration: '0.5s', animationDelay: '0.3s', animationName: 'fadeInLeft' }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">100%</span>
+                            {skills.paidMedia && skills.paidMedia.map((skill, sIdx) => (
+                                <div className="progress-charts" key={sIdx}>
+                                    <h6 className="heading heading-h6">{skill.name}</h6>
+                                    <div className="progress">
+                                        <div className="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay={`${0.2 + sIdx * 0.1}s`} role="progressbar" style={{ width: `${skill.percentage}%`, visibility: 'visible' }} aria-valuenow={skill.percentage} aria-valuemin={0} aria-valuemax={100}>
+                                            <span className="percent-label">{skill.percentage}%</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {/*  End Single Progress Charts  */}
-
-                            {/*  Start Single Progress Charts  */}
-                            <div className="progress-charts">
-                                <h6 className="heading heading-h6">
-                                    GOOGLE SEARCH & PERFORMANCE MAX</h6>
-                                <div className="progress">
-                                    <div className="progress-bar wow fadeInLeft" data-wow-duration="0.6s" data-wow-delay=".4s" role="progressbar" style={{ width: '95%', visibility: 'visible', animationDuration: '0.6s', animationDelay: '0.4s', animationName: 'fadeInLeft' }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">95%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {/*  End Single Progress Charts  */}
-
-                            {/*  Start Single Progress Charts  */}
-                            <div className="progress-charts">
-                                <h6 className="heading heading-h6">
-                                    TIKTOK ADS & CREATIVE TESTING</h6>
-                                <div className="progress">
-                                    <div className="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style={{ width: '60%', visibility: 'visible', animationDuration: '0.7s', animationDelay: '0.5s', animationName: 'fadeInLeft' }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">60%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {/*  End Single Progress Charts  */}
-
-                            {/*  Start Single Progress Charts  */}
-                            <div className="progress-charts">
-                                <h6 className="heading heading-h6">
-                                    LEAD GENERATION & SALES FUNNELS</h6>
-                                <div className="progress">
-                                    <div className="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style={{ width: '70%', visibility: 'visible', animationDuration: '0.8s', animationDelay: '0.6s', animationName: 'fadeInLeft' }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">70%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {/*  End Single Progress Charts  */}
-
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -560,54 +522,16 @@ export default async function HomePage() {
                             <h2 className="custom-title mb--30 tmp-scroll-trigger tmp-fade-in animation-order-1">
                                 Tracking, CRO & Tech Skills
                             </h2>
-                            {/*  Start Single Progress Charts  */}
-                            <div className="progress-charts">
-                                <h6 className="heading heading-h6">
-                                    META CONVERSION API (CAPI)</h6>
-                                <div className="progress">
-                                    <div className="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".3s" role="progressbar" style={{ width: '100%', visibility: 'visible', animationDuration: '0.5s', animationDelay: '0.3s', animationName: 'fadeInLeft' }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">100%</span>
+                            {skills.tracking && skills.tracking.map((skill, sIdx) => (
+                                <div className="progress-charts" key={sIdx}>
+                                    <h6 className="heading heading-h6">{skill.name}</h6>
+                                    <div className="progress">
+                                        <div className="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay={`${0.2 + sIdx * 0.1}s`} role="progressbar" style={{ width: `${skill.percentage}%`, visibility: 'visible' }} aria-valuenow={skill.percentage} aria-valuemin={0} aria-valuemax={100}>
+                                            <span className="percent-label">{skill.percentage}%</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {/*  End Single Progress Charts  */}
-
-                            {/*  Start Single Progress Charts  */}
-                            <div className="progress-charts">
-                                <h6 className="heading heading-h6">
-                                    GOOGLE TAG MANAGER & GA4 ATTRIBUTION</h6>
-                                <div className="progress">
-                                    <div className="progress-bar wow fadeInLeft" data-wow-duration="0.6s" data-wow-delay=".4s" role="progressbar" style={{ width: '95%', visibility: 'visible', animationDuration: '0.6s', animationDelay: '0.4s', animationName: 'fadeInLeft' }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">95%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {/*  End Single Progress Charts  */}
-
-                            {/*  Start Single Progress Charts  */}
-                            <div className="progress-charts">
-                                <h6 className="heading heading-h6">
-                                    CONVERSION RATE OPTIMIZATION (CRO)</h6>
-                                <div className="progress">
-                                    <div className="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style={{ width: '60%', visibility: 'visible', animationDuration: '0.7s', animationDelay: '0.5s', animationName: 'fadeInLeft' }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">60%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {/*  End Single Progress Charts  */}
-
-                            {/*  Start Single Progress Charts  */}
-                            <div className="progress-charts">
-                                <h6 className="heading heading-h6">
-                                    HIGH-CONVERTING LANDING PAGES</h6>
-                                <div className="progress">
-                                    <div className="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style={{ width: '70%', visibility: 'visible', animationDuration: '0.8s', animationDelay: '0.6s', animationName: 'fadeInLeft' }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">70%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {/*  End Single Progress Charts  */}
-
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -637,826 +561,88 @@ export default async function HomePage() {
                             <button className="nav-link active" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all" aria-selected="true">All</button>
                         </li>
                         <li>
-                            <button className="nav-link" id="nav-branding-tab" data-bs-toggle="tab" data-bs-target="#nav-branding" type="button" role="tab" aria-controls="nav-branding" aria-selected="false">Branding</button>
+                            <button className="nav-link" id="nav-meta-tab" data-bs-toggle="tab" data-bs-target="#nav-meta" type="button" role="tab" aria-controls="nav-meta" aria-selected="false">Meta Ads</button>
                         </li>
                         <li>
-                            <button className="nav-link" id="nav-design-tab" data-bs-toggle="tab" data-bs-target="#nav-design" type="button" role="tab" aria-controls="nav-design" aria-selected="false">Design</button>
+                            <button className="nav-link" id="nav-tracking-tab" data-bs-toggle="tab" data-bs-target="#nav-tracking" type="button" role="tab" aria-controls="nav-tracking" aria-selected="false">Tracking / CAPI</button>
                         </li>
                         <li>
-                            <button className="nav-link" id="nav-content-writing-tab" data-bs-toggle="tab" data-bs-target="#nav-content-writing" type="button" role="tab" aria-controls="nav-content-writing" aria-selected="false">Content writing</button>
+                            <button className="nav-link" id="nav-cro-tab" data-bs-toggle="tab" data-bs-target="#nav-cro" type="button" role="tab" aria-controls="nav-cro" aria-selected="false">Sales Funnels & CRO</button>
                         </li>
                         <li>
-                            <button className="nav-link" id="nav-marketing-tab" data-bs-toggle="tab" data-bs-target="#nav-marketing" type="button" role="tab" aria-controls="nav-marketing" aria-selected="false">Marketing</button>
+                            <button className="nav-link" id="nav-ecommerce-tab" data-bs-toggle="tab" data-bs-target="#nav-ecommerce" type="button" role="tab" aria-controls="nav-ecommerce" aria-selected="false">E-Commerce</button>
                         </li>
                     </ul>
                 </nav>
                 <div className="tab-content bg-blur-style-one" id="nav-tabContent">
-                    <div className="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab" tabIndex={0}>
-                        <div className="row animation-action-3">
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation active tmponhover tmp-fade-in animation-order-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-1.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">SAAS website
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Figma</a>
-                                                    </li>
-                                                </ul>
+                    {[
+                        { id: 'nav-all', filter: () => true },
+                        { id: 'nav-meta', filter: (p: any) => p.category === 'meta' },
+                        { id: 'nav-tracking', filter: (p: any) => p.category === 'tracking' },
+                        { id: 'nav-cro', filter: (p: any) => p.category === 'cro' },
+                        { id: 'nav-ecommerce', filter: (p: any) => p.category === 'ecommerce' },
+                    ].map((tab, tIdx) => {
+                        const filtered = projects.filter(tab.filter);
+                        return (
+                            <div
+                                key={tab.id}
+                                className={`tab-pane fade ${tIdx === 0 ? 'show active' : ''}`}
+                                id={tab.id}
+                                role="tabpanel"
+                                tabIndex={0}
+                            >
+                                <div className="row animation-action-3 g-4">
+                                    {filtered.map((proj, pIdx) => (
+                                        <div className="col-lg-6 col-md-6 paralax-image" key={proj.id || pIdx}>
+                                            <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation active tmponhover tmp-fade-in animation-order-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                                <div className="portfoli-card-img">
+                                                    <div className="img-box v2" style={{ maxHeight: '280px', overflow: 'hidden' }}>
+                                                        <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="javascript:void(0);">
+                                                            <img className="w-100" src={proj.image || "/assets/images/latest-portfolio/portfoli-img-1.jpg"} alt={proj.title} style={{ objectFit: 'cover', height: '280px' }} />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div className="portfolio-card-content-wrap">
+                                                    <div className="content-left">
+                                                        <h3 className="portfolio-card-title">
+                                                            <a href="javascript:void(0);">{proj.title}</a>
+                                                        </h3>
+                                                        <div className="tag-items">
+                                                            <ul>
+                                                                {proj.tags && proj.tags.map((tag: string, tgIdx: number) => (
+                                                                    <li key={tgIdx}>
+                                                                        <a href="javascript:void(0);" className="tag-item">{tag}</a>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                        {proj.metrics && (
+                                                            <div style={{ marginTop: '8px', fontSize: '12px', fontWeight: 700, color: '#139BFD' }}>
+                                                                {proj.metrics}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
+                                                        <div className="icon-reverse-wrapper">
+                                                            <span className="btn-text">View Details</span>
+                                                            <div className="btn-hack"></div>
+                                                            <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
+                                                            <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
+                                                            <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
+                                                            <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div className="tmp-light light-center"></div>
                                             </div>
                                         </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
+                                    ))}
                                 </div>
                             </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-3.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Workout App
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Ai</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-3" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-4.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Business Analytics</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Figma</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Wordpress</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-4" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-2.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Dashboard
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="tab-pane fade" id="nav-branding" role="tabpanel" aria-labelledby="nav-branding-tab" tabIndex={0}>
-                        <div className="row animation-action-1">
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-1.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">SAAS website
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Figma</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-3.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Chatbots & AI Support</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Ai</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-3" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-4.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Content Marketing</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Figma</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Framer</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Wordpress</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-4" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-2.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Dashboard
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="tab-pane fade" id="nav-design" role="tabpanel" aria-labelledby="nav-design-tab" tabIndex={0}>
-                        <div className="row animation-action-1">
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-1.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">SAAS website
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Figma</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-3.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Content Marketing</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Ai</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-3" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-4.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Digital Marketing</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Framer</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Wordpress</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-4" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-2.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Dashboard
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="tab-pane fade" id="nav-content-writing" role="tabpanel" aria-labelledby="nav-content-writing-tab" tabIndex={0}>
-                        <div className="row animation-action-1">
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-1.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">SAAS website
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Figma</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-3.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Digital Marketing</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Ai</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-3" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-4.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Workout App
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Figma</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Framer</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Wordpress</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-4" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-2.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Dashboard
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="tab-pane fade" id="nav-marketing" role="tabpanel" aria-labelledby="nav-marketing-tab" tabIndex={0}>
-                        <div className="row animation-action-1">
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-1.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">SAAS website
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Figma</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-3.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">SEO & Digital Marketing</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Ai</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-3" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-4.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Workout App
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Figma</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Framer</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Wordpress</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 paralax-image">
-                                <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation tmponhover tmp-fade-in animation-order-4" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                    <div className="portfoli-card-img">
-                                        <div className="img-box v2">
-                                            <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="jacascript:void(0);">
-                                                <img className="w-100" src="/assets/images/latest-portfolio/portfoli-img-2.jpg" alt="Thumbnail" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="portfolio-card-content-wrap">
-                                        <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="jacascript:void(0);">Dashboard
-                                                    design</a></h3>
-                                            <div className="tag-items">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
-                                            <div className="icon-reverse-wrapper">
-                                                <span className="btn-text">View Details</span>
-                                                <div className="btn-hack"></div>
-                                                <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                                <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                <span className="btn-icon"><i className="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="tmp-light light-center"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        );
+                    })}
                 </div>
             </div>
-
         </div>
     </section>
     {/*  tmp Latest Portfolio end  */}
@@ -1479,64 +665,27 @@ export default async function HomePage() {
                 </div>
             </div>
             <div className="services-widget v2">
-                <div className="service-item current tmp-scroll-trigger tmp-fade-in animation-order-1">
-                    <div className="my-expertise-card-wrap">
-                        <div className="expertise-card-left">
-                            <div className="expertise-card-logo">
-                                <img src="/assets/images/my-expertise/logo-4.svg" alt="logo" />
+                {services && services.map((serv, sIdx) => (
+                    <div className={`service-item ${sIdx === 0 ? 'current' : ''} tmp-scroll-trigger tmp-fade-in animation-order-${sIdx + 1}`} key={serv.id || sIdx}>
+                        <div className="my-expertise-card-wrap">
+                            <div className="expertise-card-left">
+                                <div className="expertise-card-logo">
+                                    <img src={serv.icon || `/assets/images/my-expertise/logo-${sIdx + 4}.svg`} alt={serv.title} />
+                                </div>
+                                <h3 className="title">{serv.title}</h3>
                             </div>
-                            <h3 className="title">Meta & Performance Ads</h3>
-                        </div>
-                        <div className="single-progress-circle sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="1000">
-                            <svg className="radial-progress" data-countervalue="90" viewBox="0 0 80 80">
-                                <circle className="bar-static" cx="40" cy="40" r="35"></circle>
-                                <circle className="bar--animated" cx="40" cy="40" r="35" style={{ strokeDashoffset: '131.947px' }}></circle>
-                                <text className="countervalue" x="50%" y="55%" transform="matrix(0, 1, -1, 0, 80, 0)">90%</text>
-                            </svg>
-                        </div>
-                        <p className="para">A personal portfolio is a curated collection of an individual&apos;s professional
-                            work, showcasing their skills</p>
-                    </div>
-                    <button className="service-link modal-popup"></button>
-                </div>
-                <div className="service-item tmp-scroll-trigger tmp-fade-in animation-order-2">
-                    <div className="my-expertise-card-wrap">
-                        <div className="expertise-card-left">
-                            <div className="expertise-card-logo">
-                                <img src="/assets/images/my-expertise/logo-5.svg" alt="logo" />
+                            <div className="single-progress-circle sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="1000">
+                                <svg className="radial-progress" data-countervalue={serv.score} viewBox="0 0 80 80">
+                                    <circle className="bar-static" cx="40" cy="40" r="35"></circle>
+                                    <circle className="bar--animated" cx="40" cy="40" r="35" style={{ strokeDashoffset: `${220 - (220 * serv.score) / 100}px` }}></circle>
+                                    <text className="countervalue" x="50%" y="55%" transform="matrix(0, 1, -1, 0, 80, 0)">{serv.score}%</text>
+                                </svg>
                             </div>
-                            <h3 className="title">Conversion API & Tracking</h3>
+                            <p className="para">{serv.description}</p>
                         </div>
-                        <div className="single-progress-circle sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="1000">
-                            <svg className="radial-progress" data-countervalue="40" viewBox="0 0 80 80">
-                                <circle className="bar-static" cx="40" cy="40" r="35"></circle>
-                                <circle className="bar--animated" cx="40" cy="40" r="35" style={{ strokeDashoffset: '131.947px' }}></circle>
-                                <text className="countervalue" x="50%" y="55%" transform="matrix(0, 1, -1, 0, 80, 0)">75%</text>
-                            </svg>
-                        </div>
-                        <p className="para">I specialize in creating solutions that are not only visually engaging but also align with business goals</p>
+                        <button className="service-link modal-popup"></button>
                     </div>
-                    <button className="service-link modal-popup"></button>
-                </div>
-                <div className="service-item tmp-scroll-trigger tmp-fade-in animation-order-3">
-                    <div className="my-expertise-card-wrap">
-                        <div className="expertise-card-left">
-                            <div className="expertise-card-logo">
-                                <img src="/assets/images/my-expertise/logo-6.svg" alt="logo" />
-                            </div>
-                            <h3 className="title">Full-Funnel CRO & Growth</h3>
-                        </div>
-                        <div className="single-progress-circle sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="1000">
-                            <svg className="radial-progress" data-countervalue="40" viewBox="0 0 80 80">
-                                <circle className="bar-static" cx="40" cy="40" r="35"></circle>
-                                <circle className="bar--animated" cx="40" cy="40" r="35" style={{ strokeDashoffset: '131.947px' }}></circle>
-                                <text className="countervalue" x="50%" y="55%" transform="matrix(0, 1, -1, 0, 80, 0)">80%</text>
-                            </svg>
-                        </div>
-                        <p className="para">Each one showcases my approach and dedication to detail, creativity, and results-driven outcomes.</p>
-                    </div>
-                    <button className="service-link modal-popup"></button>
-                </div>
+                ))}
                 <div className="active-bg wow fadeInUp mleave"></div>
             </div>
         </div>
@@ -1558,251 +707,40 @@ export default async function HomePage() {
         <div className="client-testimonial-swiper position-relative">
             <div className="swiper testimonial-swiper-v2">
                 <div className="swiper-wrapper">
-                    <div className="swiper-slide tmp-scroll-trigger animation-order-1">
-                        <div className="client-testimonial-card-wrap">
-                            <div className="client-card-head">
-                                <div className="client-info">
-                                    <div className="client-img">
-                                        <img src="/assets/images/testimonial/client-img-1.jpg" alt="" />
-
+                    {testimonials && testimonials.map((test, tIdx) => (
+                        <div className={`swiper-slide tmp-scroll-trigger animation-order-${tIdx + 1}`} key={test.id || tIdx}>
+                            <div className="client-testimonial-card-wrap">
+                                <div className="client-card-head">
+                                    <div className="client-info">
+                                        <div className="client-img">
+                                            <img src={test.avatar || "/assets/images/testimonial/client-img-1.jpg"} alt={test.name} />
+                                        </div>
+                                        <div className="client-details">
+                                            <h3 className="client-title">{test.name}</h3>
+                                            <p className="client-para">{test.role}</p>
+                                        </div>
                                     </div>
-                                    <div className="client-details">
-                                        <h3 className="client-title">Tim Vutha</h3>
-                                        <p className="client-para">CEO, KHB Media PLC</p>
+                                    <div className="tmp-star">
+                                        <ul>
+                                            {[...Array(test.stars || 5)].map((_, stIdx) => (
+                                                <li key={stIdx}><i className="fa-solid fa-star"></i></li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </div>
-                                <div className="tmp-star">
-                                    <ul>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                    </ul>
+                                <p className="client-para">{test.quote}</p>
+                                <div className="quat-logo">
+                                    <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
                                 </div>
-                            </div>
-                            <p className="client-para">Their expertise is apparent in every step of the project. I&apos;m thrilled with the outcome and would definitely work with them again! definitely work with them again. Their expertise is apparent in every step of the project. I&apos;m thrilled with the outcome and would definitely work with them again! definitely work with them again</p>
-                            <div className="quat-logo">
-                                <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
                             </div>
                         </div>
-                    </div>
-                    <div className="swiper-slide tmp-scroll-trigger animation-order-2">
-                        <div className="client-testimonial-card-wrap">
-                            <div className="client-card-head">
-                                <div className="client-info">
-                                    <div className="client-img">
-                                        <img src="/assets/images/testimonial/client-img-1.jpg" alt="" />
-
-                                    </div>
-                                    <div className="client-details">
-                                        <h3 className="client-title">Tim Vutha</h3>
-                                        <p className="client-para">CEO, KHB Media PLC</p>
-                                    </div>
-                                </div>
-                                <div className="tmp-star">
-                                    <ul>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <p className="client-para">They were communicative, attentive, and exceeded all project goals. The quality and attention to detail were top-notch. Five stars aren’t enough! Five stars aren’t enough. They were communicative, attentive, and exceeded all project goals. The quality and attention to detail were top-notch. Five stars aren’t enough! Five stars aren’t enough.</p>
-                            <div className="quat-logo">
-                                <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="swiper-slide tmp-scroll-trigger animation-order-3">
-                        <div className="client-testimonial-card-wrap">
-                            <div className="client-card-head">
-                                <div className="client-info">
-                                    <div className="client-img">
-                                        <img src="/assets/images/testimonial/client-img-1.jpg" alt="" />
-
-                                    </div>
-                                    <div className="client-details">
-                                        <h3 className="client-title">Tim Vutha</h3>
-                                        <p className="client-para">CEO, KHB Media PLC</p>
-                                    </div>
-                                </div>
-                                <div className="tmp-star">
-                                    <ul>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <p className="client-para">Financial planners help people knowledge about to how toio invest and
-                                save the money the most of us efficient way ever. Many people all across in the of
-                                country use them help peopl and save. Many people all across in the of
-                                country use them help peopl and save Many people all across in the of
-                                country use them help peopl and save</p>
-                            <div className="quat-logo">
-                                <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="swiper-slide tmp-scroll-trigger animation-order-4">
-                        <div className="client-testimonial-card-wrap">
-                            <div className="client-card-head">
-                                <div className="client-info">
-                                    <div className="client-img">
-                                        <img src="/assets/images/testimonial/client-img-1.jpg" alt="" />
-
-                                    </div>
-                                    <div className="client-details">
-                                        <h3 className="client-title">Tim Vutha</h3>
-                                        <p className="client-para">CEO, KHB Media PLC</p>
-                                    </div>
-                                </div>
-                                <div className="tmp-star">
-                                    <ul>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <p className="client-para">They understood my vision immediately and brought it to life even better than I’d imagined. Professional, creative, and always on time – I couldn’t be happier with the results! They understood my vision immediately and brought it to life even better than I’d imagined. Professional, creative, and!</p>
-                            <div className="quat-logo">
-                                <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="swiper-slide tmp-scroll-trigger animation-order-5">
-                        <div className="client-testimonial-card-wrap">
-                            <div className="client-card-head">
-                                <div className="client-info">
-                                    <div className="client-img">
-                                        <img src="/assets/images/testimonial/client-img-1.jpg" alt="" />
-
-                                    </div>
-                                    <div className="client-details">
-                                        <h3 className="client-title">Tim Vutha</h3>
-                                        <p className="client-para">CEO, KHB Media PLC</p>
-                                    </div>
-                                </div>
-                                <div className="tmp-star">
-                                    <ul>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <p className="client-para">Financial planners help people knowledge about to how toio invest and
-                                save the money the most of us efficient way ever. Many people all across in the of
-                                country use them help peopl and save. Many people all across in the of
-                                country use them help peopl and save Many people all across in the of
-                                country use them help peopl and save</p>
-                            <div className="quat-logo">
-                                <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="swiper-slide tmp-scroll-trigger animation-order-6">
-                        <div className="client-testimonial-card-wrap">
-                            <div className="client-card-head">
-                                <div className="client-info">
-                                    <div className="client-img">
-                                        <img src="/assets/images/testimonial/client-img-1.jpg" alt="" />
-
-                                    </div>
-                                    <div className="client-details">
-                                        <h3 className="client-title">Tim Vutha</h3>
-                                        <p className="client-para">CEO, KHB Media PLC</p>
-                                    </div>
-                                </div>
-                                <div className="tmp-star">
-                                    <ul>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i className="fa-solid fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <p className="client-para">They understood my vision immediately and brought it to life even better than I’d imagined. Professional, creative, and always on time – I couldn’t be happier with the results! They understood my vision immediately and brought it to life even better than I’d imagined.</p>
-                            <div className="quat-logo">
-                                <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
-                            </div>
-                        </div>
-                    </div>
+                    ))}
+                </div>
+                <div className="testimonial-arrow-v2">
+                    <div className="swiper-button-next"><i className="fa-sharp fa-regular fa-arrow-right"></i></div>
+                    <div className="swiper-button-prev"><i className="fa-sharp fa-regular fa-arrow-left"></i></div>
                 </div>
             </div>
-            <div className="tmp-swiper-pagination tmp-swiper-pagination-01"></div>
         </div>
     </section>
     {/*  tmp Clients Testimonial End  */}
@@ -2146,8 +1084,7 @@ export default async function HomePage() {
                                         <img src="/assets/images/logo/dark-logo-virtuo.png" alt="Virtuo - Personal Portfolio HTML Template for developers and freelancers" />
                                     </a>
                                 </div>
-                                <p className="description">The personal portfolio category includes websites or physical
-                                    displays</p>
+                                <p className="description">{footer.bio || profile.sidebarBio}</p>
                                 <div className="social-link footer">
                                     <a href="#"><i className="fa-brands fa-instagram"></i></a>
                                     <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>

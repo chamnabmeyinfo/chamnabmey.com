@@ -25,7 +25,7 @@ export default function AdminPage() {
 
   // Content
   const [content, setContent] = useState<PortfolioContent>(defaultPortfolioContent);
-  const [activeTab, setActiveTab] = useState<'profile' | 'projects' | 'services' | 'inbox'>('profile');
+  const [activeTab, setActiveTab] = useState<'profile' | 'hero_about' | 'projects' | 'services' | 'testimonials' | 'inbox'>('profile');
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -121,7 +121,7 @@ export default function AdminPage() {
   if (isAuthenticated === null) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#090D12', color: '#94A3B8', fontSize: '13px' }}>
-        Loading...
+        Loading Control Panel...
       </div>
     );
   }
@@ -134,7 +134,7 @@ export default function AdminPage() {
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#090D12', padding: '20px' }}>
         <div style={{ width: '320px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '14px', padding: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
           <div style={{ fontSize: '15px', fontWeight: 700, color: '#F1F5F9', marginBottom: '2px' }}>Chamnab Mey</div>
-          <div style={{ fontSize: '12px', color: '#64748B', marginBottom: '18px' }}>Admin Login</div>
+          <div style={{ fontSize: '12px', color: '#64748B', marginBottom: '18px' }}>Admin Control Center</div>
 
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <input
@@ -202,7 +202,7 @@ export default function AdminPage() {
         }}
       >
         {/* Left: Branding & Minimal Tabs */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <span style={{ fontWeight: 800, color: '#F1F5F9', fontSize: '13px' }}>
             <span style={{ color: '#139BFD' }}>CHAMNAB</span> MEY
           </span>
@@ -210,8 +210,10 @@ export default function AdminPage() {
           <div style={{ display: 'flex', gap: '2px', backgroundColor: '#090D12', padding: '2px', borderRadius: '6px', border: '1px solid #1E293B' }}>
             {[
               { id: 'profile', label: '👤 Profile' },
+              { id: 'hero_about', label: '🌟 Hero & Story' },
               { id: 'projects', label: `💼 Projects (${content.projects.length})` },
               { id: 'services', label: '⚡ Services & Skills' },
+              { id: 'testimonials', label: `💬 Reviews (${content.testimonials?.length || 0})` },
               { id: 'inbox', label: `📬 Inbox ${inbox.length > 0 ? `(${inbox.length})` : ''}` },
             ].map((t) => (
               <button
@@ -219,7 +221,7 @@ export default function AdminPage() {
                 type="button"
                 onClick={() => setActiveTab(t.id as any)}
                 style={{
-                  padding: '4px 10px',
+                  padding: '4px 9px',
                   borderRadius: '4px',
                   backgroundColor: activeTab === t.id ? '#139BFD' : 'transparent',
                   color: activeTab === t.id ? '#FFFFFF' : '#94A3B8',
@@ -227,6 +229,7 @@ export default function AdminPage() {
                   fontSize: '11px',
                   fontWeight: 600,
                   cursor: 'pointer',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {t.label}
@@ -312,7 +315,7 @@ export default function AdminPage() {
             <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', alignItems: 'flex-start' }}>
                 <FileUploadButton
-                  label="Profile Photo"
+                  label="Profile Photo (Hero & Sidebar)"
                   currentValue={content.profile.photo}
                   onUpload={(url) => setContent({ ...content, profile: { ...content.profile, photo: url } })}
                   accept="image/*"
@@ -378,7 +381,7 @@ export default function AdminPage() {
                 </div>
 
                 <div>
-                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Telegram User</span>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Telegram Username</span>
                   <input
                     type="text"
                     placeholder="@chamnabmey"
@@ -400,14 +403,14 @@ export default function AdminPage() {
               </div>
             </div>
 
-            {/* Box 3: Social Links & Rotating Roles */}
+            {/* Box 3: Social Links & Bio */}
             <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
               <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '8px' }}>
-                Links & Headlines
+                Social Channels & Bio
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '10px', marginBottom: '10px' }}>
                 <div>
-                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Telegram URL</span>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Telegram Link</span>
                   <input
                     type="text"
                     value={content.profile.telegram}
@@ -417,7 +420,7 @@ export default function AdminPage() {
                 </div>
 
                 <div>
-                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>LinkedIn URL</span>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>LinkedIn Link</span>
                   <input
                     type="text"
                     value={content.profile.linkedin}
@@ -427,31 +430,25 @@ export default function AdminPage() {
                 </div>
 
                 <div>
-                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Headline Roles (comma-separated)</span>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Facebook Link</span>
                   <input
                     type="text"
-                    value={content.hero.rotatingRoles.join(', ')}
-                    onChange={(e) => setContent({
-                      ...content,
-                      hero: {
-                        ...content.hero,
-                        rotatingRoles: e.target.value.split(',').map(s => s.trim()).filter(Boolean),
-                      }
-                    })}
+                    value={content.profile.facebook}
+                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, facebook: e.target.value } })}
                     style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
                   />
                 </div>
               </div>
 
               <div>
-                <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Bio Summary</span>
+                <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Sidebar & Footer Bio</span>
                 <textarea
                   rows={2}
                   value={content.profile.sidebarBio}
                   onChange={(e) => setContent({
                     ...content,
                     profile: { ...content.profile, sidebarBio: e.target.value },
-                    hero: { ...content.hero, description: e.target.value },
+                    footer: { ...content.footer, bio: e.target.value },
                   })}
                   style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px', lineHeight: 1.4 }}
                 />
@@ -483,7 +480,179 @@ export default function AdminPage() {
         )}
 
         {/* ========================================================= */}
-        {/* TAB 2: PROJECTS (COMPACT ROWS) */}
+        {/* TAB 2: HERO & STORY (FRONT-END COPY & STATS) */}
+        {/* ========================================================= */}
+        {activeTab === 'hero_about' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            
+            {/* Box 1: Hero Banner */}
+            <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '8px' }}>
+                Hero Banner Content
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '10px', marginBottom: '10px' }}>
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Hero Greeting</span>
+                  <input
+                    type="text"
+                    value={content.hero.greeting}
+                    onChange={(e) => setContent({ ...content, hero: { ...content.hero, greeting: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Title Prefix</span>
+                  <input
+                    type="text"
+                    value={content.hero.titlePrefix}
+                    onChange={(e) => setContent({ ...content, hero: { ...content.hero, titlePrefix: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+              </div>
+
+              <div style={{ marginBottom: '10px' }}>
+                <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Headline Rotating Roles (comma-separated)</span>
+                <input
+                  type="text"
+                  value={content.hero.rotatingRoles.join(', ')}
+                  onChange={(e) => setContent({
+                    ...content,
+                    hero: {
+                      ...content.hero,
+                      rotatingRoles: e.target.value.split(',').map(s => s.trim()).filter(Boolean),
+                    }
+                  })}
+                  style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#42AFFD', fontSize: '12px', fontWeight: 600 }}
+                />
+              </div>
+
+              <div>
+                <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Hero Description</span>
+                <textarea
+                  rows={2}
+                  value={content.hero.description}
+                  onChange={(e) => setContent({ ...content, hero: { ...content.hero, description: e.target.value } })}
+                  style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px', lineHeight: 1.4 }}
+                />
+              </div>
+            </div>
+
+            {/* Box 2: Statement */}
+            <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '8px' }}>
+                High-Impact Statement
+              </div>
+              <textarea
+                rows={2}
+                value={content.statement}
+                onChange={(e) => setContent({ ...content, statement: e.target.value })}
+                style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px', lineHeight: 1.4 }}
+              />
+            </div>
+
+            {/* Box 3: About Me Section */}
+            <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '8px' }}>
+                About Me Stats & Story
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 2fr', gap: '10px', marginBottom: '10px' }}>
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Years Experience</span>
+                  <input
+                    type="number"
+                    value={content.about.yearsExperience}
+                    onChange={(e) => setContent({ ...content, about: { ...content.about, yearsExperience: parseInt(e.target.value) || 0 } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Ad Spend / Campaigns</span>
+                  <input
+                    type="text"
+                    value={content.about.adSpendManaged}
+                    onChange={(e) => setContent({ ...content, about: { ...content.about, adSpendManaged: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>About Headline</span>
+                  <input
+                    type="text"
+                    value={content.about.title}
+                    onChange={(e) => setContent({ ...content, about: { ...content.about, title: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+              </div>
+
+              <div style={{ marginBottom: '10px' }}>
+                <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>About Story Narrative</span>
+                <textarea
+                  rows={2}
+                  value={content.about.description}
+                  onChange={(e) => setContent({ ...content, about: { ...content.about, description: e.target.value } })}
+                  style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px', lineHeight: 1.4 }}
+                />
+              </div>
+
+              {/* Feature Cards in About */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                <div style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', padding: '8px 10px' }}>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '2px' }}>Feature Card 1 Title</span>
+                  <input
+                    type="text"
+                    value={content.about.card1Title}
+                    onChange={(e) => setContent({ ...content, about: { ...content.about, card1Title: e.target.value } })}
+                    style={{ width: '100%', padding: '4px 8px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '4px', color: '#FFF', fontSize: '11px', marginBottom: '4px' }}
+                  />
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '2px' }}>Feature Card 1 Description</span>
+                  <input
+                    type="text"
+                    value={content.about.card1Desc}
+                    onChange={(e) => setContent({ ...content, about: { ...content.about, card1Desc: e.target.value } })}
+                    style={{ width: '100%', padding: '4px 8px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '4px', color: '#CBD5E1', fontSize: '11px' }}
+                  />
+                </div>
+
+                <div style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', padding: '8px 10px' }}>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '2px' }}>Feature Card 2 Title</span>
+                  <input
+                    type="text"
+                    value={content.about.card2Title}
+                    onChange={(e) => setContent({ ...content, about: { ...content.about, card2Title: e.target.value } })}
+                    style={{ width: '100%', padding: '4px 8px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '4px', color: '#FFF', fontSize: '11px', marginBottom: '4px' }}
+                  />
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '2px' }}>Feature Card 2 Description</span>
+                  <input
+                    type="text"
+                    value={content.about.card2Desc}
+                    onChange={(e) => setContent({ ...content, about: { ...content.about, card2Desc: e.target.value } })}
+                    style={{ width: '100%', padding: '4px 8px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '4px', color: '#CBD5E1', fontSize: '11px' }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <button
+                type="button"
+                onClick={handleSave}
+                disabled={saving}
+                style={{ padding: '7px 20px', borderRadius: '6px', backgroundColor: '#139BFD', color: '#FFF', border: 'none', fontSize: '12px', fontWeight: 700, cursor: 'pointer' }}
+              >
+                {saving ? 'Saving...' : '💾 Save Hero & Story'}
+              </button>
+            </div>
+
+          </div>
+        )}
+
+        {/* ========================================================= */}
+        {/* TAB 3: PROJECTS (COMPACT ROWS) */}
         {/* ========================================================= */}
         {activeTab === 'projects' && (
           <div>
@@ -550,7 +719,7 @@ export default function AdminPage() {
                         }}
                         accept="image/*"
                         fileType="image"
-                        buttonText="Image"
+                        buttonText="Cover"
                       />
                     </div>
 
@@ -640,7 +809,7 @@ export default function AdminPage() {
         )}
 
         {/* ========================================================= */}
-        {/* TAB 3: SERVICES & SKILLS (SIDE-BY-SIDE) */}
+        {/* TAB 4: SERVICES & SKILLS (BOTH SLIDERS & SCORES) */}
         {/* ========================================================= */}
         {activeTab === 'services' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -693,10 +862,10 @@ export default function AdminPage() {
               </div>
             </div>
 
-            {/* Skills Progress */}
+            {/* Paid Media Skills */}
             <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
               <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '10px' }}>
-                Key Skills Proficiency
+                Paid Media & Performance Skills
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '8px' }}>
@@ -723,6 +892,36 @@ export default function AdminPage() {
               </div>
             </div>
 
+            {/* Tracking & CRO Skills */}
+            <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '10px' }}>
+                Tracking, CRO & Tech Skills
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '8px' }}>
+                {content.skills.tracking && content.skills.tracking.map((skill, idx) => (
+                  <div key={skill.name + idx} style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', padding: '8px 10px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '4px' }}>
+                      <span style={{ color: '#E2E8F0', fontWeight: 600 }}>{skill.name}</span>
+                      <span style={{ color: '#139BFD', fontWeight: 700 }}>{skill.percentage}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={50}
+                      max={100}
+                      value={skill.percentage}
+                      onChange={(e) => {
+                        const updated = [...content.skills.tracking];
+                        updated[idx].percentage = parseInt(e.target.value);
+                        setContent({ ...content, skills: { ...content.skills, tracking: updated } });
+                      }}
+                      style={{ width: '100%', accentColor: '#139BFD', cursor: 'pointer', height: '4px' }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <button
                 type="button"
@@ -737,7 +936,156 @@ export default function AdminPage() {
         )}
 
         {/* ========================================================= */}
-        {/* TAB 4: INBOX (CLEAN COMPACT LIST) */}
+        {/* TAB 5: TESTIMONIALS */}
+        {/* ========================================================= */}
+        {activeTab === 'testimonials' && (
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: '#F1F5F9' }}>
+                Client Testimonials ({content.testimonials?.length || 0})
+              </span>
+
+              <button
+                type="button"
+                onClick={() => {
+                  const newTest = {
+                    id: 'test-' + Date.now(),
+                    name: 'Client Name',
+                    role: 'Managing Director, Brand',
+                    quote: 'Chamnab delivered outstanding results on our digital campaigns.',
+                    stars: 5,
+                    avatar: '/assets/images/testimonial/client-img-1.jpg',
+                  };
+                  setContent({ ...content, testimonials: [...(content.testimonials || []), newTest] });
+                  showToast('Added new testimonial');
+                }}
+                style={{
+                  padding: '4px 12px',
+                  borderRadius: '6px',
+                  backgroundColor: '#139BFD',
+                  color: '#FFF',
+                  border: 'none',
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                + Add Review
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {content.testimonials && content.testimonials.map((test, idx) => (
+                <div
+                  key={test.id || idx}
+                  style={{
+                    backgroundColor: '#0F172A',
+                    border: '1px solid #1E293B',
+                    borderRadius: '8px',
+                    padding: '10px 14px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
+                    <div style={{ width: '130px', flexShrink: 0 }}>
+                      <FileUploadButton
+                        currentValue={test.avatar}
+                        onUpload={(url) => {
+                          const updated = [...content.testimonials];
+                          updated[idx].avatar = url;
+                          setContent({ ...content, testimonials: updated });
+                        }}
+                        accept="image/*"
+                        fileType="image"
+                        buttonText="Avatar"
+                      />
+                    </div>
+
+                    <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr 60px', gap: '8px' }}>
+                      <input
+                        type="text"
+                        placeholder="Client Name"
+                        value={test.name}
+                        onChange={(e) => {
+                          const updated = [...content.testimonials];
+                          updated[idx].name = e.target.value;
+                          setContent({ ...content, testimonials: updated });
+                        }}
+                        style={{ padding: '5px 8px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '5px', color: '#FFF', fontSize: '12px', fontWeight: 600 }}
+                      />
+
+                      <input
+                        type="text"
+                        placeholder="Role / Company"
+                        value={test.role}
+                        onChange={(e) => {
+                          const updated = [...content.testimonials];
+                          updated[idx].role = e.target.value;
+                          setContent({ ...content, testimonials: updated });
+                        }}
+                        style={{ padding: '5px 8px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '5px', color: '#94A3B8', fontSize: '11px' }}
+                      />
+
+                      <input
+                        type="number"
+                        min="1"
+                        max="5"
+                        placeholder="Stars"
+                        value={test.stars}
+                        onChange={(e) => {
+                          const updated = [...content.testimonials];
+                          updated[idx].stars = parseInt(e.target.value) || 5;
+                          setContent({ ...content, testimonials: updated });
+                        }}
+                        style={{ padding: '5px 8px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '5px', color: '#F59E0B', fontSize: '11px', textAlign: 'center' }}
+                      />
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = content.testimonials.filter((_, i) => i !== idx);
+                        setContent({ ...content, testimonials: updated });
+                      }}
+                      title="Delete"
+                      style={{ background: 'transparent', border: 'none', color: '#EF4444', cursor: 'pointer', fontSize: '13px', padding: '4px' }}
+                    >
+                      🗑️
+                    </button>
+                  </div>
+
+                  <textarea
+                    rows={2}
+                    placeholder="Review quote..."
+                    value={test.quote}
+                    onChange={(e) => {
+                      const updated = [...content.testimonials];
+                      updated[idx].quote = e.target.value;
+                      setContent({ ...content, testimonials: updated });
+                    }}
+                    style={{ width: '100%', padding: '5px 8px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '5px', color: '#CBD5E1', fontSize: '11px', lineHeight: 1.4 }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '12px' }}>
+              <button
+                type="button"
+                onClick={handleSave}
+                disabled={saving}
+                style={{ padding: '6px 18px', borderRadius: '6px', backgroundColor: '#139BFD', color: '#FFF', border: 'none', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
+              >
+                {saving ? 'Saving...' : '💾 Save Reviews'}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================= */}
+        {/* TAB 6: INBOX (CLEAN COMPACT LIST) */}
         {/* ========================================================= */}
         {activeTab === 'inbox' && (
           <div>
@@ -800,8 +1148,9 @@ export default function AdminPage() {
                             alignItems: 'center',
                             gap: '4px',
                             padding: '3px 8px',
+                            backgroundColor: '#090D12',
+                            border: '1px solid #1E293B',
                             borderRadius: '4px',
-                            backgroundColor: 'rgba(19, 155, 253, 0.15)',
                             color: '#42AFFD',
                             fontSize: '11px',
                             textDecoration: 'none',
@@ -811,19 +1160,35 @@ export default function AdminPage() {
                         </a>
                       )}
 
-                      <a
-                        href={`mailto:${msg.email}?subject=Re: Inquiry`}
-                        style={{ padding: '3px 8px', borderRadius: '4px', backgroundColor: '#139BFD', color: '#FFF', fontSize: '11px', textDecoration: 'none', fontWeight: 600 }}
-                      >
-                        ✉️ Reply Email
-                      </a>
+                      {msg.email && (
+                        <a
+                          href={`mailto:${msg.email}`}
+                          style={{
+                            padding: '3px 8px',
+                            backgroundColor: '#1E293B',
+                            borderRadius: '4px',
+                            color: '#94A3B8',
+                            fontSize: '10px',
+                            textDecoration: 'none',
+                          }}
+                        >
+                          ✉️ Reply
+                        </a>
+                      )}
 
                       {msg.phone && (
                         <a
                           href={`https://wa.me/${msg.phone.replace(/[^0-9]/g, '')}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(37, 211, 102, 0.15)', border: '1px solid rgba(37, 211, 102, 0.3)', color: '#25D366', fontSize: '11px', textDecoration: 'none', fontWeight: 600 }}
+                          style={{
+                            padding: '3px 8px',
+                            backgroundColor: '#064E3B',
+                            borderRadius: '4px',
+                            color: '#34D399',
+                            fontSize: '10px',
+                            textDecoration: 'none',
+                          }}
                         >
                           💬 WhatsApp
                         </a>
