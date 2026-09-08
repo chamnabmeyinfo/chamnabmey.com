@@ -86,11 +86,11 @@ export default function HomePage() {
                 <div className="content-wrapper">
                     <div className="image-area-feature">
                         <a href="index.html">
-                            <img src="/assets/images/logo/man.png" alt="personal-logo" />
+                            <img src="/images/chamnab-mey.jpg" alt="Chamnab Mey" style={{ borderRadius: "16px", maxHeight: "180px", width: "100%", objectFit: "cover" }} />
                         </a>
                     </div>
-                    <h5 className="title mt--30">Freelancer delivering exceptional Webflow, and Next.js solutions.</h5>
-                    <p className="disc">I am a skilled freelancer specializing in Webflow development, Figma design, and Next.js projects. I deliver creative, dynamic, and user-centric web solutions.
+                    <h5 className="title mt--30">Solo Digital Marketer & Growth Strategist scaling brands with performance advertising.</h5>
+                    <p className="disc">I am a Solo Digital Marketer specializing in high-ROAS Meta & Google Ad campaigns, server-side Conversion API (CAPI) tracking, and full-funnel sales conversion systems.
                     </p>
                     <div className="short-contact-area">
                         {/* single contact information */}
@@ -98,7 +98,7 @@ export default function HomePage() {
                             <i className="fa-solid fa-phone"></i>
                             <div className="information tmp-link-animation">
                                 <span>Call Now</span>
-                                <a href="#" className="number">+92 (8800) - 98670</a>
+                                <a href="tel:+85515705703" className="number">+855 15 705 703</a>
                             </div>
                         </div>
                         {/* single contact information end */}
@@ -108,7 +108,7 @@ export default function HomePage() {
                             <i className="fa-solid fa-envelope"></i>
                             <div className="information tmp-link-animation">
                                 <span>Mail Us</span>
-                                <a href="#" className="number">example@info.com</a>
+                                <a href="mailto:admin@chamnabmey.com" className="number">admin@chamnabmey.com</a>
                             </div>
                         </div>
                         {/* single contact information end */}
@@ -118,7 +118,7 @@ export default function HomePage() {
                             <i className="fa-solid fa-location-crosshairs"></i>
                             <div className="information tmp-link-animation">
                                 <span>My Address</span>
-                                <span className="number">66 Broklyant, New York 3269</span>
+                                <span className="number">Phnom Penh, Cambodia</span>
                             </div>
                         </div>
                         {/* single contact information end */}
@@ -209,7 +209,7 @@ export default function HomePage() {
                         <div className="banner-right-content">
                             <div className="main-img">
                                 <img className="tmp-scroll-trigger tmp-zoom-in animation-order-1" src="/images/chamnab-mey.jpg" alt="Chamnab Mey" style={{ borderRadius: "24px", maxHeight: "560px", width: "100%", objectFit: "cover", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.2)" }} />
-                                <h2 className="banner-big-text-1 up-down-2">Digital Growth</h2>
+                                <h2 className="banner-big-text-1 up-down-2">Paid Media</h2>
                                 <h2 className="banner-big-text-2 up-down">Digital Growth</h2>
                                 <div className="benner-two-bg-red-img">
                                     <img src="/assets/images/banner/banner-user-image-two-red-bg.png" alt="red-img" />
@@ -238,7 +238,7 @@ export default function HomePage() {
                                             <b className="is-hidden theme-gradient">Growth Strategist</b>
                                             <b className="is-hidden theme-gradient">Meta Ads Specialist</b>
                                             <b className="is-hidden theme-gradient">Google Ads Buyer</b>
-                                            <b className="is-hidden theme-gradient">Web Developer</b>
+                                            <b className="is-hidden theme-gradient">CAPI & Tracking Pro</b>
                                         </span>
                                 </span>
                                 </span>
@@ -280,12 +280,8 @@ export default function HomePage() {
     <div className="about-content-area">
         <div className="container tmp-section-gap">
             <div className="text-para-doc-wrap">
-                <h2 className="text-para-documents tmp-scroll-trigger tmp-fade-in tmp-title-split-2 animation-order-1">A personal
-                    <span>portfolio</span> is a collection of your work, that is aa
-                    go achievements, and skills that highlights <span>web design</span> in your is abilities and
-                    professional growth. It serves as A personal to a portfolio in <span>since 2009</span> a collection
-                    of
-                    your work
+                <h2 className="text-para-documents tmp-scroll-trigger tmp-fade-in tmp-title-split-2 animation-order-1">A high-performance
+                    <span>marketing engine</span> engineered to drive profitable customer acquisition, infallible <span>server-side CAPI tracking</span>, and scalable <span>business revenue growth</span> across Southeast Asia.
                 </h2>
                 <div className="right-bg-text-para">
                     <img src="/assets/images/banner/right-bg-text-para-doc.png" alt="" />
@@ -316,8 +312,8 @@ export default function HomePage() {
                             </div>
                             <div className="tmp-light light-top-left"></div>
                             <div className="card-info">
-                                <h3 className="card-title">Ui/Ux Design</h3>
-                                <p className="card-para">241 Projects</p>
+                                <h3 className="card-title">Paid Media Campaigns</h3>
+                                <p className="card-para">$1M+ Ad Spend Managed</p>
                             </div>
                         </div>
                     </div>
@@ -340,10 +336,10 @@ export default function HomePage() {
                                         <div className="logo-img">
                                             <img src="/assets/images/about/logo-1.svg" alt="logo" />
                                         </div>
-                                        <h3 className="card-title">Business</h3>
+                                        <h3 className="card-title">Performance Media</h3>
                                     </div>
                                     <div className="tmp-light light-top-left"></div>
-                                    <p className="card-para">Each one showcases my approach
+                                    <p className="card-para">High-ROAS Meta & Google ad campaigns with server-side CAPI tracking.
                                     </p>
                                 </div>
                             </div>
@@ -354,10 +350,10 @@ export default function HomePage() {
                                         <div className="logo-img">
                                             <img src="/assets/images/about/logo-2.svg" alt="logo" />
                                         </div>
-                                        <h3 className="card-title">Partners</h3>
+                                        <h3 className="card-title">Full-Funnel CRO</h3>
                                     </div>
                                     <div className="tmp-light light-top-left"></div>
-                                    <p className="card-para">Business consulting consul us to a provide
+                                    <p className="card-para">High-converting landing pages and automated lead capture infrastructure.
                                     </p>
                                 </div>
                             </div>
@@ -482,12 +478,12 @@ export default function HomePage() {
                     <div className="progress-wrapper">
                         <div className="content">
                             <h2 className="custom-title mb--30 tmp-scroll-trigger tmp-fade-in animation-order-1">
-                                Design Skill
+                                Paid Ads & Media Buying
                             </h2>
                             {/* Start Single Progress Charts */}
                             <div className="progress-charts">
                                 <h6 className="heading heading-h6">
-                                    PHOTOSHOT</h6>
+                                    META ADS (FACEBOOK & INSTAGRAM)</h6>
                                 <div className="progress">
                                     <div className="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".3s" role="progressbar" style={{ width: "100%", visibility: "visible", animationDuration: "0.5s", animationDelay: "0.3s", animationName: "fadeInLeft" }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
                                         <span className="percent-label">100%</span>
@@ -499,7 +495,7 @@ export default function HomePage() {
                             {/* Start Single Progress Charts */}
                             <div className="progress-charts">
                                 <h6 className="heading heading-h6">
-                                    FIGMA</h6>
+                                    GOOGLE SEARCH & PERFORMANCE MAX</h6>
                                 <div className="progress">
                                     <div className="progress-bar wow fadeInLeft" data-wow-duration="0.6s" data-wow-delay=".4s" role="progressbar" style={{ width: "95%", visibility: "visible", animationDuration: "0.6s", animationDelay: "0.4s", animationName: "fadeInLeft" }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
                                         <span className="percent-label">95%</span>
@@ -511,10 +507,10 @@ export default function HomePage() {
                             {/* Start Single Progress Charts */}
                             <div className="progress-charts">
                                 <h6 className="heading heading-h6">
-                                    ADOBE XD</h6>
+                                    TIKTOK ADS & CREATIVE TESTING</h6>
                                 <div className="progress">
                                     <div className="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style={{ width: "60%", visibility: "visible", animationDuration: "0.7s", animationDelay: "0.5s", animationName: "fadeInLeft" }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">60%</span>
+                                        <span className="percent-label">92%</span>
                                     </div>
                                 </div>
                             </div>
@@ -523,10 +519,10 @@ export default function HomePage() {
                             {/* Start Single Progress Charts */}
                             <div className="progress-charts">
                                 <h6 className="heading heading-h6">
-                                    ADOBE ILLUSTRATOR</h6>
+                                    LEAD GENERATION & SALES FUNNELS</h6>
                                 <div className="progress">
                                     <div className="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style={{ width: "70%", visibility: "visible", animationDuration: "0.8s", animationDelay: "0.5s", animationName: "fadeInLeft" }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">70%</span>
+                                        <span className="percent-label">90%</span>
                                     </div>
                                 </div>
                             </div>
@@ -539,12 +535,12 @@ export default function HomePage() {
                     <div className="progress-wrapper">
                         <div className="content">
                             <h2 className="custom-title mb--30 tmp-scroll-trigger tmp-fade-in animation-order-1">
-                                Development Skill
+                                Tracking & Growth Infrastructure
                             </h2>
                             {/* Start Single Progress Charts */}
                             <div className="progress-charts">
                                 <h6 className="heading heading-h6">
-                                    HTML</h6>
+                                    META CONVERSION API (CAPI) & PIXEL</h6>
                                 <div className="progress">
                                     <div className="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".3s" role="progressbar" style={{ width: "100%", visibility: "visible", animationDuration: "0.5s", animationDelay: "0.3s", animationName: "fadeInLeft" }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
                                         <span className="percent-label">100%</span>
@@ -556,7 +552,7 @@ export default function HomePage() {
                             {/* Start Single Progress Charts */}
                             <div className="progress-charts">
                                 <h6 className="heading heading-h6">
-                                    CSS</h6>
+                                    GOOGLE TAG MANAGER & GA4 ATTRIBUTION</h6>
                                 <div className="progress">
                                     <div className="progress-bar wow fadeInLeft" data-wow-duration="0.6s" data-wow-delay=".4s" role="progressbar" style={{ width: "95%", visibility: "visible", animationDuration: "0.6s", animationDelay: "0.4s", animationName: "fadeInLeft" }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
                                         <span className="percent-label">95%</span>
@@ -568,10 +564,10 @@ export default function HomePage() {
                             {/* Start Single Progress Charts */}
                             <div className="progress-charts">
                                 <h6 className="heading heading-h6">
-                                    Javascript</h6>
+                                    CONVERSION RATE OPTIMIZATION (CRO)</h6>
                                 <div className="progress">
                                     <div className="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style={{ width: "60%", visibility: "visible", animationDuration: "0.7s", animationDelay: "0.5s", animationName: "fadeInLeft" }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">60%</span>
+                                        <span className="percent-label">92%</span>
                                     </div>
                                 </div>
                             </div>
@@ -580,10 +576,10 @@ export default function HomePage() {
                             {/* Start Single Progress Charts */}
                             <div className="progress-charts">
                                 <h6 className="heading heading-h6">
-                                    Wordpress</h6>
+                                    HIGH-CONVERTING LANDING PAGES</h6>
                                 <div className="progress">
                                     <div className="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style={{ width: "70%", visibility: "visible", animationDuration: "0.8s", animationDelay: "0.5s", animationName: "fadeInLeft" }} aria-valuenow={85} aria-valuemin={0} aria-valuemax={100}>
-                                        <span className="percent-label">70%</span>
+                                        <span className="percent-label">90%</span>
                                     </div>
                                 </div>
                             </div>
@@ -604,11 +600,8 @@ export default function HomePage() {
                 <div className="section-sub-title center-title tmp-scroll-trigger tmp-fade-in animation-order-1">
                     <span className="subtitle theme-gradient">Latest Portfolio</span>
                 </div>
-                <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2"> Transforming Ideas into
-                    Exceptional </h2>
-                <p className="description section-sm tmp-scroll-trigger tmp-fade-in animation-order-3">Business consulting
-                    consultants provide expert advice and guida
-                    businesses to help them improve their performance, efficiency, and organizational</p>
+                <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2"> Featured Performance <br /> Marketing Campaigns </h2>
+                <p className="description section-sm tmp-scroll-trigger tmp-fade-in animation-order-3">Real-world commercial growth: scaling revenue, lowering cost-per-acquisition (CAC), and engineering multi-channel lead funnels across Cambodia and Southeast Asia.</p>
             </div>
 
             <div className="latest-portfolio-tabs-area">
@@ -618,16 +611,16 @@ export default function HomePage() {
                             <button className="nav-link active" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all" aria-selected="true">All</button>
                         </li>
                         <li>
-                            <button className="nav-link" id="nav-branding-tab" data-bs-toggle="tab" data-bs-target="#nav-branding" type="button" role="tab" aria-controls="nav-branding" aria-selected="false">Branding</button>
+                            <button className="nav-link" id="nav-branding-tab" data-bs-toggle="tab" data-bs-target="#nav-branding" type="button" role="tab" aria-controls="nav-branding" aria-selected="false">Meta & Paid Ads</button>
                         </li>
                         <li>
-                            <button className="nav-link" id="nav-design-tab" data-bs-toggle="tab" data-bs-target="#nav-design" type="button" role="tab" aria-controls="nav-design" aria-selected="false">Design</button>
+                            <button className="nav-link" id="nav-design-tab" data-bs-toggle="tab" data-bs-target="#nav-design" type="button" role="tab" aria-controls="nav-design" aria-selected="false">Conversion API & Tracking</button>
                         </li>
                         <li>
-                            <button className="nav-link" id="nav-content-writing-tab" data-bs-toggle="tab" data-bs-target="#nav-content-writing" type="button" role="tab" aria-controls="nav-content-writing" aria-selected="false">Content writing</button>
+                            <button className="nav-link" id="nav-content-writing-tab" data-bs-toggle="tab" data-bs-target="#nav-content-writing" type="button" role="tab" aria-controls="nav-content-writing" aria-selected="false">Sales Funnels & CRO</button>
                         </li>
                         <li>
-                            <button className="nav-link" id="nav-marketing-tab" data-bs-toggle="tab" data-bs-target="#nav-marketing" type="button" role="tab" aria-controls="nav-marketing" aria-selected="false">Marketing</button>
+                            <button className="nav-link" id="nav-marketing-tab" data-bs-toggle="tab" data-bs-target="#nav-marketing" type="button" role="tab" aria-controls="nav-marketing" aria-selected="false">E-Commerce Growth</button>
                         </li>
                     </ul>
                 </nav>
@@ -645,15 +638,14 @@ export default function HomePage() {
                                     </div>
                                     <div className="portfolio-card-content-wrap">
                                         <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="#contacts">SAAS website
-                                                    design</a></h3>
+                                            <h3 className="portfolio-card-title"><a href="#contacts">Solis Cambodia — Agricultural Equipment Lead Funnel</a></h3>
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
+                                                        <a href="#" className="tag-item">Meta Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Figma</a>
+                                                        <a href="#" className="tag-item">Meta CAPI</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -683,18 +675,17 @@ export default function HomePage() {
                                     </div>
                                     <div className="portfolio-card-content-wrap">
                                         <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="#contacts">Workout App
-                                                    design</a></h3>
+                                            <h3 className="portfolio-card-title"><a href="#contacts">EPOS-GODIGITAL — E-Commerce Scaling & Retargeting Engine</a></h3>
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Ai</a>
+                                                        <a href="#" className="tag-item">Analytics</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -728,10 +719,10 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Figma</a>
+                                                        <a href="#" className="tag-item">Meta CAPI</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
+                                                        <a href="#" className="tag-item">Meta Ads</a>
                                                     </li>
                                                     <li>
                                                         <a href="#" className="tag-item">Wordpress</a>
@@ -769,10 +760,10 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -806,15 +797,14 @@ export default function HomePage() {
                                     </div>
                                     <div className="portfolio-card-content-wrap">
                                         <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="#contacts">SAAS website
-                                                    design</a></h3>
+                                            <h3 className="portfolio-card-title"><a href="#contacts">Solis Cambodia — Agricultural Equipment Lead Funnel</a></h3>
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
+                                                        <a href="#" className="tag-item">Meta Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Figma</a>
+                                                        <a href="#" className="tag-item">Meta CAPI</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -848,13 +838,13 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Ai</a>
+                                                        <a href="#" className="tag-item">Analytics</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -888,10 +878,10 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Figma</a>
+                                                        <a href="#" className="tag-item">Meta CAPI</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Framer</a>
+                                                        <a href="#" className="tag-item">E-Commerce</a>
                                                     </li>
                                                     <li>
                                                         <a href="#" className="tag-item">Wordpress</a>
@@ -929,10 +919,10 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -966,15 +956,14 @@ export default function HomePage() {
                                     </div>
                                     <div className="portfolio-card-content-wrap">
                                         <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="#contacts">SAAS website
-                                                    design</a></h3>
+                                            <h3 className="portfolio-card-title"><a href="#contacts">Solis Cambodia — Agricultural Equipment Lead Funnel</a></h3>
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Figma</a>
+                                                        <a href="#" className="tag-item">Meta CAPI</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
+                                                        <a href="#" className="tag-item">Meta Ads</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1008,13 +997,13 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Ai</a>
+                                                        <a href="#" className="tag-item">Analytics</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1048,10 +1037,10 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
+                                                        <a href="#" className="tag-item">Meta Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Framer</a>
+                                                        <a href="#" className="tag-item">E-Commerce</a>
                                                     </li>
                                                     <li>
                                                         <a href="#" className="tag-item">Wordpress</a>
@@ -1089,10 +1078,10 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1126,15 +1115,14 @@ export default function HomePage() {
                                     </div>
                                     <div className="portfolio-card-content-wrap">
                                         <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="#contacts">SAAS website
-                                                    design</a></h3>
+                                            <h3 className="portfolio-card-title"><a href="#contacts">Solis Cambodia — Agricultural Equipment Lead Funnel</a></h3>
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
+                                                        <a href="#" className="tag-item">Meta Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Figma</a>
+                                                        <a href="#" className="tag-item">Meta CAPI</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1168,13 +1156,13 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Ai</a>
+                                                        <a href="#" className="tag-item">Analytics</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1204,15 +1192,14 @@ export default function HomePage() {
                                     </div>
                                     <div className="portfolio-card-content-wrap">
                                         <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="#contacts">Workout App
-                                                    design</a></h3>
+                                            <h3 className="portfolio-card-title"><a href="#contacts">EPOS-GODIGITAL — E-Commerce Scaling & Retargeting Engine</a></h3>
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Figma</a>
+                                                        <a href="#" className="tag-item">Meta CAPI</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Framer</a>
+                                                        <a href="#" className="tag-item">E-Commerce</a>
                                                     </li>
                                                     <li>
                                                         <a href="#" className="tag-item">Wordpress</a>
@@ -1250,10 +1237,10 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1287,15 +1274,14 @@ export default function HomePage() {
                                     </div>
                                     <div className="portfolio-card-content-wrap">
                                         <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="#contacts">SAAS website
-                                                    design</a></h3>
+                                            <h3 className="portfolio-card-title"><a href="#contacts">Solis Cambodia — Agricultural Equipment Lead Funnel</a></h3>
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">JavaScript</a>
+                                                        <a href="#" className="tag-item">Meta Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Figma</a>
+                                                        <a href="#" className="tag-item">Meta CAPI</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1329,13 +1315,13 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Ai</a>
+                                                        <a href="#" className="tag-item">Analytics</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1365,15 +1351,14 @@ export default function HomePage() {
                                     </div>
                                     <div className="portfolio-card-content-wrap">
                                         <div className="content-left">
-                                            <h3 className="portfolio-card-title"><a href="#contacts">Workout App
-                                                    design</a></h3>
+                                            <h3 className="portfolio-card-title"><a href="#contacts">EPOS-GODIGITAL — E-Commerce Scaling & Retargeting Engine</a></h3>
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Figma</a>
+                                                        <a href="#" className="tag-item">Meta CAPI</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Framer</a>
+                                                        <a href="#" className="tag-item">E-Commerce</a>
                                                     </li>
                                                     <li>
                                                         <a href="#" className="tag-item">Wordpress</a>
@@ -1411,10 +1396,10 @@ export default function HomePage() {
                                             <div className="tag-items">
                                                 <ul>
                                                     <li>
-                                                        <a href="#" className="tag-item">Adobe</a>
+                                                        <a href="#" className="tag-item">Google Ads</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" className="tag-item">Webflow</a>
+                                                        <a href="#" className="tag-item">Funnel CRO</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1450,12 +1435,10 @@ export default function HomePage() {
                     <div className="section-sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">
                         <span className="subtitle theme-gradient">My Expertise</span>
                     </div>
-                    <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Elevated Designs
-                        Personalized <br /> the best Experiences</h2>
+                    <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">High-ROI Marketing Strategies <br /> Personalized for Rapid Growth</h2>
                 </div>
                 <div className="discription-area tmp-scroll-trigger tmp-fade-in animation-order-3">
-                    <p className="description color-primary-3rd"> Business consulting consultants provide expert advice and
-                        guida businesses to help them improve their performance, efficiency, and organizational
+                    <p className="description color-primary-3rd"> Data-driven media buying, infallible tracking infrastructure, and conversion rate optimization designed to convert clicks into high-margin revenue.
                     </p>
                 </div>
             </div>
@@ -1466,7 +1449,7 @@ export default function HomePage() {
                             <div className="expertise-card-logo">
                                 <img src="/assets/images/my-expertise/logo-4.svg" alt="logo" />
                             </div>
-                            <h3 className="title">Ui/visual Design</h3>
+                            <h3 className="title">Meta & Performance Ads</h3>
                         </div>
                         <div className="single-progress-circle sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="1000">
                             <svg className="radial-progress" data-countervalue="90" viewBox="0 0 80 80">
@@ -1475,8 +1458,7 @@ export default function HomePage() {
                                 <text className="countervalue" x="50%" y="55%" transform="matrix(0, 1, -1, 0, 80, 0)">90%</text>
                             </svg>
                         </div>
-                        <p className="para">A personal portfolio is a curated collection of an individual's professional
-                            work, showcasing their skills</p>
+                        <p className="para">Precision audience targeting, creative testing engines, and aggressive ROAS scaling across Facebook and Instagram.</p>
                     </div>
                     <button className="service-link modal-popup"></button>
                 </div>
@@ -1486,7 +1468,7 @@ export default function HomePage() {
                             <div className="expertise-card-logo">
                                 <img src="/assets/images/my-expertise/logo-5.svg" alt="logo" />
                             </div>
-                            <h3 className="title">Branding Design</h3>
+                            <h3 className="title">Conversion API & Tracking</h3>
                         </div>
                         <div className="single-progress-circle sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="1000">
                             <svg className="radial-progress" data-countervalue="40" viewBox="0 0 80 80">
@@ -1495,7 +1477,7 @@ export default function HomePage() {
                                 <text className="countervalue" x="50%" y="55%" transform="matrix(0, 1, -1, 0, 80, 0)">75%</text>
                             </svg>
                         </div>
-                        <p className="para">I specialize in creating solutions that are not only visually engaging but also align with business goals</p>
+                        <p className="para">Privacy-first server-side Meta CAPI, Google Tag Manager, and GA4 setups that eliminate iOS14 signal loss.</p>
                     </div>
                     <button className="service-link modal-popup"></button>
                 </div>
@@ -1505,7 +1487,7 @@ export default function HomePage() {
                             <div className="expertise-card-logo">
                                 <img src="/assets/images/my-expertise/logo-6.svg" alt="logo" />
                             </div>
-                            <h3 className="title">Motion Design</h3>
+                            <h3 className="title">Full-Funnel CRO & Growth</h3>
                         </div>
                         <div className="single-progress-circle sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="1000">
                             <svg className="radial-progress" data-countervalue="40" viewBox="0 0 80 80">
@@ -1514,7 +1496,7 @@ export default function HomePage() {
                                 <text className="countervalue" x="50%" y="55%" transform="matrix(0, 1, -1, 0, 80, 0)">80%</text>
                             </svg>
                         </div>
-                        <p className="para">Each one showcases my approach and dedication to detail, creativity, and results-driven outcomes.</p>
+                        <p className="para">High-converting landing pages, lead qualification systems, and automated nurturing that maximize average order value.</p>
                     </div>
                     <button className="service-link modal-popup"></button>
                 </div>
@@ -1530,11 +1512,8 @@ export default function HomePage() {
             <div className="section-sub-title center-title tmp-scroll-trigger tmp-fade-in animation-order-1">
                 <span className="subtitle theme-gradient">Clients Testimonial</span>
             </div>
-            <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Bringing Dreams to Life
-                through</h2>
-            <p className="description section-sm tmp-scroll-trigger tmp-fade-in animation-order-3">Business consulting
-                consultants provide expert advice and guida businesses
-                to <br /> help them improve their performance, efficiency, and organizational</p>
+            <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Proven Track Record <br /> Backed by Real Results</h2>
+            <p className="description section-sm tmp-scroll-trigger tmp-fade-in animation-order-3">Executive endorsements from agency leadership and commercial partners who have experienced measurable revenue and lead acceleration.</p>
         </div>
         <div className="client-testimonial-swiper position-relative">
             <div className="swiper testimonial-swiper-v2">
@@ -1799,12 +1778,8 @@ export default function HomePage() {
                                 <div className="section-sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">
                                     <span className="subtitle">My Skill</span>
                                 </div>
-                                <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">My Experts
-                                    Areas Where I <br /> Gained Skill</h2>
-                                <p className="description tmp-scroll-trigger tmp-fade-in animation-order-3">Business consulting
-                                    consultants provide expert advice and guida busi
-                                    nesses to help them improve their performance, efficiency, and organ izational Business
-                                    consulting consultants provide</p>
+                                <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Core Marketing Tech Stack <br /> Where I Drive Performance</h2>
+                                <p className="description tmp-scroll-trigger tmp-fade-in animation-order-3">Leveraging industry-standard advertising, analytics, and funnel tools to deliver transparent, data-driven outcomes for every marketing dollar spent.</p>
                             </div>
                         </div>
                     </div>
@@ -1815,9 +1790,8 @@ export default function HomePage() {
                                     <div className="card-icon">
                                         <img src="/assets/images/icons/icon-01.png" alt="my-skill-icon" />
                                     </div>
-                                    <h3 className="card-title">Framer</h3>
-                                    <p className="card-para">The personal portfol category includes websites or physic Your
-                                        Journey Your Story</p>
+                                    <h3 className="card-title">Meta Ads Manager</h3>
+                                    <p className="card-para">Comprehensive audience targeting, Advantage+ campaigns, creative iterations, and conversion optimization.</p>
                                 </div>
                             </div>
 
@@ -1826,9 +1800,8 @@ export default function HomePage() {
                                     <div className="card-icon">
                                         <img src="/assets/images/icons/icon-02.png" alt="my-skill-icon" />
                                     </div>
-                                    <h3 className="card-title">Webflow</h3>
-                                    <p className="card-para">The personal portfol category includes websites or physic Your
-                                        Journey Your Story</p>
+                                    <h3 className="card-title">Google Ads & P-Max</h3>
+                                    <p className="card-para">High-intent search keyword bidding, Performance Max multi-channel scaling, and Google Merchant Center integration.</p>
                                 </div>
                             </div>
 
@@ -1837,9 +1810,8 @@ export default function HomePage() {
                                     <div className="card-icon">
                                         <img src="/assets/images/icons/icon-03.png" alt="my-skill-icon" />
                                     </div>
-                                    <h3 className="card-title">Figma</h3>
-                                    <p className="card-para">The personal portfol category includes websites or physic Your
-                                        Journey Your Story</p>
+                                    <h3 className="card-title">Meta CAPI & GTM</h3>
+                                    <p className="card-para">Privacy-first server-side event tracking, deduplication, and advanced data attribution modeling.</p>
                                 </div>
                             </div>
 
@@ -1848,9 +1820,8 @@ export default function HomePage() {
                                     <div className="card-icon">
                                         <img src="/assets/images/icons/icon-04.png" alt="my-skill-icon" />
                                     </div>
-                                    <h3 className="card-title">Wordpress</h3>
-                                    <p className="card-para">The personal portfol category includes websites or physic Your
-                                        Journey Your Story</p>
+                                    <h3 className="card-title">Conversion Web Pages</h3>
+                                    <p className="card-para">High-performance landing pages, Next.js, and WordPress platforms engineered for maximum sales conversion.</p>
                                 </div>
                             </div>
                         </div>
@@ -2126,8 +2097,7 @@ export default function HomePage() {
                                         <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: "800", fontSize: "24px", letterSpacing: "-0.5px", textDecoration: "none" }}><span className="theme-gradient">CHAMNAB</span> <span style={{ color: "inherit" }}>MEY</span></span>
                                     </a>
                                 </div>
-                                <p className="description">The personal portfolio category includes websites or physical
-                                    displays</p>
+                                <p className="description">Senior Solo Digital Marketer & Performance Strategist based in Phnom Penh, Cambodia. Scaling revenue with high-ROAS Meta & Google ads, server-side CAPI tracking, and full-funnel conversion systems.</p>
                                 <div className="social-link footer">
                                     <a href="#"><i className="fa-brands fa-instagram"></i></a>
                                     <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
@@ -2171,7 +2141,7 @@ export default function HomePage() {
                         <div className="col-lg-4 col-md-6 col-sm-6">
                             <div className="newslatter tmp-scroll-trigger animation-order-1">
                                 <h3 className="title">Newslatter</h3>
-                                <p className="para">The personal portfolio categor includes the a websites or representation</p>
+                                <p className="para">Subscribe for exclusive performance marketing insights, Meta CAPI tutorials, and conversion strategies.</p>
                                 <form action="#" className="newsletter-form-1">
                                     <input type="email" placeholder="Your e-mail" />
                                     <span>
@@ -2232,16 +2202,12 @@ export default function HomePage() {
                     <div className="news-details">
                         <span className="date">10 March, 2025</span>
                         <h2>Maximizing Meta Ads ROAS in Southeast Asia: 2026 Strategy Guide</h2>
-                        <p>We are excited to announce the grand opening of our new headquarters, a space designed to foster innovation and collaboration.
-                            This move marks a significant milestone in our journey toward growth and excellence.</p>
-                        <h4>Enhancing Workspaces for Productivity.</h4>
-                        <p>Our new office is equipped with state-of-the-art facilities, promoting creativity and teamwork.
-                            The modern design, coupled with advanced technology, aims to improve efficiency and employee well-being.</p>
-                        <p>We believe this new environment will enable us to serve our clients better and drive success.
-                            Our team is enthusiastic about the future, and we can't wait to achieve new heights together.</p>
-                        <h4>Future Prospects and Innovations.</h4>
-                        <p>With this expansion, we are set to introduce new services and solutions tailored to meet evolving market needs.
-                            Our commitment to quality and innovation remains steadfast as we continue to grow.</p>
+                        <p>In modern performance marketing, success is no longer about secret audience hacks. With Meta's machine learning algorithms, winners are determined by creative testing velocity, high first-party data quality, and conversion funnel friction reduction.</p>
+                        <h4>Why Server-Side CAPI is Mandatory in 2026.</h4>
+                        <p>Browser tracking loses up to 40% of conversion signals due to ad blockers and iOS privacy restrictions. Implementing Meta Conversion API directly restores conversion visibility, lowers cost-per-acquisition (CPA), and feeds accurate purchase value back to the ad algorithm.</p>
+                        <p>Aligning paid traffic directly with high-speed, conversion-focused landing pages ensures every marketing dollar delivers measurable revenue growth.</p>
+                        <h4>Actionable Scaling Framework.</h4>
+                        <p>Start with a structured 3:2:2 creative sandbox test, graduate winning angles into an Advantage+ scaling campaign, and continuously optimize landing page conversion rates.</p>
                     </div>
 
 
@@ -2319,10 +2285,10 @@ export default function HomePage() {
                         <div className="col-lg-6">
                             <div className="text-content">
                                 <h3>
-                                    <span>Featured - Design</span> App Design Development.
+                                    <span>Featured Case Study</span> Solis Cambodia Omnichannel Growth Funnel
                                 </h3>
-                                <p className="mb--30">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.</p>
-                                <p>Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!</p>
+                                <p className="mb--30">Engineered an end-to-end performance marketing ecosystem for Solis Cambodia (leading tractor brand). Built high-converting landing pages, deployed Meta Conversion API tracking with 9.8/10 event match quality, and ran hyper-targeted Facebook Ad campaigns.</p>
+                                <p>Result: Over 25,000 qualified buyer inquiries, a 140% surge in dealership sales inquiries, and an average 3.8x verified return on ad spend (ROAS).</p>
                                 <div className="button-group button-group-pd mt--20">
                                     <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon" href="#">
                                         <div className="icon-reverse-wrapper">
