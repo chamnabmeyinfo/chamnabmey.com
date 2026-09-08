@@ -1,57 +1,125 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap");
 @import "tailwindcss";
 
 /* ----------------------------------------------------
-   ELITE MODERN DESIGN SYSTEM (DARK OBSIDIAN & TITANIUM)
+   DESIGN SYSTEM: INVERSWEB.COM SPECIFICATION
 ---------------------------------------------------- */
 
 :root {
-  --canvas-bg: #08090C;
-  --canvas-surface: #0E1015;
-  --canvas-card: #12151C;
-  --text-main: #F3F4F6;
-  --text-muted: #9CA3AF;
-  --text-faint: #6B7280;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.18);
-  --accent-cyan: #00F0FF;
-  --accent-emerald: #10B981;
-  --accent-indigo: #6366F1;
-  --font-heading: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'Space Grotesk', monospace;
-}
-
-/* Light Theme Overrides (Optional Toggle) */
-html[data-theme="light"] {
-  --canvas-bg: #F8FAFC;
-  --canvas-surface: #FFFFFF;
-  --canvas-card: #FFFFFF;
-  --text-main: #0F172A;
-  --text-muted: #475569;
-  --text-faint: #94A3B8;
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-hover: rgba(0, 0, 0, 0.16);
-  --accent-cyan: #0284C7;
-  --accent-emerald: #059669;
-  --accent-indigo: #4F46E5;
+  --color-primary: #139BFD;
+  --color-accent: #42AFFD;
+  --color-surface: #141414;
+  --color-card: #06131B;
+  --color-card-border: #0C1F2E;
+  --color-elevated: #272727;
+  --color-text-main: #FFFFFF;
+  --color-text-muted: #BEBEBE;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Poppins', sans-serif;
 }
 
 /* Base Body Application */
 body {
-  background-color: var(--canvas-bg);
-  color: var(--text-main);
-  font-family: var(--font-heading);
+  background-color: #141414;
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.75;
   overflow-x: hidden;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  selection-background-color: #00F0FF;
-  selection-color: #000000;
 }
 
-/* ----------------------------------------------------
-   SIGNATURE HARDWARE-ACCELERATED ANIMATIONS
----------------------------------------------------- */
+::selection {
+  background-color: #139BFD;
+  color: #FFFFFF;
+}
+
+/* Typography Classes */
+.font-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+/* Inversweb Specific Component Tokens */
+
+/* Button Spec: #139BFD bg, #FFFFFF text, 6px radius, 500 weight, flat */
+.btn-primary-invers {
+  background-color: #139BFD;
+  color: #FFFFFF;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-primary-invers:hover {
+  background-color: #42AFFD;
+}
+
+.btn-secondary-invers {
+  background-color: #06131B;
+  color: #BEBEBE;
+  border: 1.8px solid #0C1F2E;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary-invers:hover {
+  color: #FFFFFF;
+  border-color: #139BFD;
+  background-color: #0A1C2A;
+}
+
+/* Card Spec: #06131B bg, 1.8px solid #0C1F2E, 20px radius, 20px padding, flat */
+.card-invers {
+  background-color: #06131B;
+  border: 1.8px solid #0C1F2E;
+  border-radius: 20px;
+}
+
+/* Input Spec: 1.8px solid #0C1F2E, 5px radius, 15px 20px padding, #06131B bg */
+.input-invers {
+  background-color: #06131B;
+  border: 1.8px solid #0C1F2E;
+  border-radius: 5px;
+  padding: 15px 20px;
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.2s ease;
+}
+
+.input-invers:focus {
+  border-color: #139BFD;
+  outline: none;
+}
+
+/* Chip / Badge Spec: 10px radius, 1.8px solid #0C1F2E */
+.chip-invers {
+  border-radius: 10px;
+  border: 1.8px solid #0C1F2E;
+  background-color: rgba(6, 19, 27, 0.8);
+}
+
+/* Gradient Spec: #13FDFD, #139BFD */
+.text-gradient-invers {
+  background: linear-gradient(135deg, #13FDFD 0%, #139BFD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 /* Continuous Marquee Loop */
 @keyframes marquee {
@@ -74,81 +142,20 @@ body {
   animation-play-state: paused;
 }
 
-/* Slow Ambient Aurora Light Bloom */
-@keyframes ambient-pulse {
-  0%, 100% {
-    transform: scale(1) translate(0, 0);
-    opacity: 0.25;
-  }
-  50% {
-    transform: scale(1.1) translate(20px, -15px);
-    opacity: 0.35;
-  }
-}
-
-.animate-ambient-pulse {
-  animation: ambient-pulse 16s ease-in-out infinite;
-}
-
-/* Subtle Floating Bob */
-@keyframes float-gentle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-.animate-float-gentle {
-  animation: float-gentle 4s ease-in-out infinite;
-}
-
-/* Specular Border Beam Sweep */
-@keyframes border-beam {
-  0% {
-    offset-distance: 0%;
-  }
-  100% {
-    offset-distance: 100%;
-  }
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #08090C;
+  background: #141414;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 9999px;
+  background: #0C1F2E;
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* Modern Gradient Text Classes */
-.text-gradient-cyan {
-  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #38BDF8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-gold {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FDE047 70%, #F59E0B 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Modern Glass Card */
-.glass-panel {
-  background: rgba(14, 16, 21, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #139BFD;
 }

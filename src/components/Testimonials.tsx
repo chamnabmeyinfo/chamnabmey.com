@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { Quote, Sparkles, CheckCircle2, Building2 } from 'lucide-react';
+import { Quote, Sparkles, Building2 } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 
 export default function Testimonials() {
@@ -34,7 +34,7 @@ export default function Testimonials() {
   ];
 
   return (
-    <section id="testimonials" className="py-24 sm:py-32 relative border-b border-white/[0.06] bg-[#08090C] overflow-hidden">
+    <section id="testimonials" className="py-24 sm:py-32 relative border-b-[1.8px] border-[#0C1F2E] bg-[#141414] overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         
         {/* Section Header */}
@@ -45,19 +45,19 @@ export default function Testimonials() {
           transition={{ duration: 0.5 }}
           className="max-w-xl mb-16 space-y-3"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.03] text-neutral-400 text-xs font-mono uppercase tracking-wider">
-            <Sparkles className="w-3 h-3 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] border-[1.8px] border-[#0C1F2E] bg-[#06131B] text-[#42AFFD] text-xs font-heading uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-[#139BFD]" />
             <span>06 / Endorsements & Trust</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-[44px] text-white leading-tight">
             Executive Endorsements
           </h2>
-          <p className="text-sm sm:text-base text-neutral-400 font-light">
+          <p className="font-body text-base text-[#BEBEBE] leading-[1.75]">
             Verified feedback from company founders, CEOs, and commercial leaders who have partnered with Chamnab Mey.
           </p>
         </motion.div>
 
-        {/* Dynamic Quotes Grid */}
+        {/* Dynamic Quotes Grid: 20px radius cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {references.map((item, idx) => (
             <motion.div
@@ -67,32 +67,29 @@ export default function Testimonials() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
-              <SpotlightCard
-                spotlightColor="rgba(56, 189, 248, 0.12)"
-                className="p-8 sm:p-9 h-full flex flex-col justify-between space-y-8 border-white/[0.08] bg-[#0C0E14]/90"
-              >
+              <SpotlightCard className="p-8 sm:p-9 h-full flex flex-col justify-between space-y-8">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <Quote className="w-8 h-8 text-cyan-400/40" />
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">
+                    <Quote className="w-8 h-8 text-[#139BFD]/50" />
+                    <span className="text-[10px] font-heading font-bold px-2.5 py-1 rounded-[10px] bg-[#0C1F2E] border-[1.8px] border-[#0C1F2E] text-[#42AFFD]">
                       {item.verified}
                     </span>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed italic font-light">
+                  <p className="font-body text-xs sm:text-sm text-[#BEBEBE] leading-[1.75] italic">
                     &ldquo;{item.quote}&rdquo;
                   </p>
                 </div>
 
-                <div className="pt-5 border-t border-white/[0.06]">
-                  <h4 className="text-sm font-bold text-white font-mono">
+                <div className="pt-5 border-t border-[#0C1F2E]">
+                  <h4 className="font-heading text-sm font-bold text-white">
                     {item.name}
                   </h4>
-                  <p className="text-xs text-neutral-400 font-medium mt-0.5">
+                  <p className="font-body text-xs text-[#BEBEBE] font-medium mt-0.5">
                     {item.role}
                   </p>
-                  <p className="text-xs text-neutral-400 font-light flex items-center gap-1.5 mt-1">
-                    <Building2 className="w-3 h-3 text-cyan-400" />
+                  <p className="font-body text-xs text-[#BEBEBE]/70 flex items-center gap-1.5 mt-1">
+                    <Building2 className="w-3.5 h-3.5 text-[#139BFD]" />
                     <span>{item.company}</span>
                   </p>
                 </div>

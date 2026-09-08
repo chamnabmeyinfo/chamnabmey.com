@@ -11,7 +11,7 @@ interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function SpotlightCard({
   children,
   className = '',
-  spotlightColor = 'rgba(56, 189, 248, 0.12)', // Subtle Cyan/Sky glow
+  spotlightColor = 'rgba(19, 155, 253, 0.15)', // Inversweb Primary Blue glow
   ...props
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
@@ -36,15 +36,15 @@ export default function SpotlightCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0E1015]/90 backdrop-blur-xl transition-all duration-300 hover:border-white/[0.18] hover:shadow-2xl hover:shadow-cyan-500/[0.04] ${className}`}
+      className={`relative overflow-hidden rounded-[20px] border-[1.8px] border-[#0C1F2E] bg-[#06131B] transition-all duration-300 hover:border-[#139BFD]/60 ${className}`}
       {...props}
     >
       {/* Radial Mouse Spotlight Overlay */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-2xl transition-opacity duration-300"
+        className="pointer-events-none absolute -inset-px rounded-[20px] transition-opacity duration-300"
         style={{
           opacity,
-          background: `radial-gradient(500px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 70%)`,
+          background: `radial-gradient(450px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 70%)`,
         }}
         aria-hidden="true"
       />

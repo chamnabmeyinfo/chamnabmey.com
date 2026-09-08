@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Menu, X, Download, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Menu, X, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Navbar() {
@@ -27,31 +27,29 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none">
+    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         
-        {/* Floating Glass Pill Dock */}
+        {/* Floating Inversweb Navigation Container: 20px radius, 1.8px #0C1F2E border */}
         <nav
-          className={`pointer-events-auto w-full flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border transition-all duration-300 ${
+          className={`pointer-events-auto w-full flex items-center justify-between px-5 sm:px-6 py-3 rounded-[20px] border-[1.8px] transition-all duration-300 ${
             scrolled
-              ? 'bg-[#0A0C10]/85 border-white/[0.12] backdrop-blur-xl shadow-2xl shadow-black/80'
-              : 'bg-[#0E1117]/60 border-white/[0.08] backdrop-blur-lg'
+              ? 'bg-[#06131B]/95 border-[#139BFD]/40 backdrop-blur-xl shadow-lg'
+              : 'bg-[#06131B]/90 border-[#0C1F2E] backdrop-blur-md'
           }`}
         >
-          {/* Logo & Status Indicator */}
+          {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-600 p-[1px] shadow-sm">
-              <div className="w-full h-full rounded-full bg-[#0A0C10] flex items-center justify-center text-white font-bold text-xs tracking-wider font-mono">
-                CM
-              </div>
+            <div className="w-8 h-8 rounded-[6px] bg-[#139BFD] flex items-center justify-center text-white font-bold text-xs tracking-wider font-heading">
+              CM
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-sm tracking-tight text-white group-hover:text-cyan-400 transition-colors">
+              <span className="font-heading text-sm text-white group-hover:text-[#139BFD] transition-colors">
                 CHAMNAB MEY
               </span>
               <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[10px] text-neutral-400 font-mono tracking-wide">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#42AFFD] animate-pulse" />
+                <span className="text-[10px] text-[#BEBEBE] font-medium tracking-wide">
                   Available Q3/Q4
                 </span>
               </div>
@@ -59,33 +57,33 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-1 border border-white/[0.06] rounded-full px-3 py-1 bg-white/[0.02]">
+          <div className="hidden lg:flex items-center space-x-1 border-[1.8px] border-[#0C1F2E] rounded-[10px] px-2 py-1 bg-[#141414]/60">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="px-3 py-1.5 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.06] rounded-full transition-all"
+                className="px-3 py-1.5 text-xs font-medium text-[#BEBEBE] hover:text-[#139BFD] rounded-[6px] transition-colors"
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          {/* Right Action Controls */}
+          {/* Right Action Controls: 6px button radius, #139BFD */}
           <div className="hidden sm:flex items-center space-x-3">
             <a
               href="/Resume-CHAMNAB-MEY.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3.5 py-1.5 text-xs font-medium text-neutral-300 hover:text-white transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 text-xs font-medium text-[#BEBEBE] hover:text-white border-[1.8px] border-[#0C1F2E] hover:border-[#139BFD] bg-[#06131B] rounded-[6px] transition-all flex items-center gap-1.5"
             >
-              <Download className="w-3.5 h-3.5 text-cyan-400" />
+              <Download className="w-3.5 h-3.5 text-[#139BFD]" />
               <span>CV (PDF)</span>
             </a>
 
             <a
               href="#contact"
-              className="relative inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 text-xs font-semibold text-black bg-gradient-to-r from-cyan-300 via-cyan-400 to-teal-300 hover:from-cyan-200 hover:to-teal-200 rounded-full shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="px-5 py-2 text-xs font-medium text-white bg-[#139BFD] hover:bg-[#42AFFD] rounded-[6px] transition-all flex items-center gap-1.5"
             >
               <span>Schedule Audit</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -96,31 +94,31 @@ export default function Navbar() {
           <div className="flex lg:hidden items-center gap-2">
             <a
               href="#contact"
-              className="px-3 py-1.5 text-xs font-semibold text-black bg-cyan-400 rounded-full shadow-sm"
+              className="px-3 py-1.5 text-xs font-medium text-white bg-[#139BFD] rounded-[6px]"
             >
               Contact
             </a>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-full text-neutral-300 hover:text-white hover:bg-white/[0.08] transition-colors focus:outline-none"
+              className="p-2 rounded-[6px] border-[1.8px] border-[#0C1F2E] bg-[#06131B] text-[#BEBEBE] hover:text-white transition-colors focus:outline-none"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </nav>
 
       </div>
 
-      {/* Mobile Menu Modal / Sheet */}
+      {/* Mobile Menu Sheet */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="pointer-events-auto lg:hidden fixed top-20 left-4 right-4 rounded-2xl border border-white/[0.12] bg-[#0A0C10]/95 backdrop-blur-2xl p-6 shadow-2xl shadow-black z-50 space-y-4"
+            className="pointer-events-auto lg:hidden fixed top-20 left-4 right-4 rounded-[20px] border-[1.8px] border-[#0C1F2E] bg-[#06131B]/95 backdrop-blur-2xl p-6 shadow-xl z-50 space-y-4"
           >
             <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
@@ -128,28 +126,28 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 text-sm font-medium text-neutral-300 hover:text-cyan-400 hover:bg-white/[0.04] rounded-lg transition-colors"
+                  className="px-3 py-2 text-sm font-medium text-[#BEBEBE] hover:text-[#139BFD] transition-colors rounded-[6px]"
                 >
                   {link.label}
                 </a>
               ))}
             </div>
 
-            <div className="pt-4 border-t border-white/[0.08] flex flex-col gap-3">
+            <div className="pt-4 border-t border-[#0C1F2E] flex flex-col gap-3">
               <a
                 href="/Resume-CHAMNAB-MEY.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 text-xs font-medium text-center text-neutral-300 border border-white/[0.1] rounded-xl hover:bg-white/[0.04] transition-colors flex items-center justify-center gap-2"
+                className="w-full py-2.5 text-xs font-medium text-center text-[#BEBEBE] border-[1.8px] border-[#0C1F2E] bg-[#141414] rounded-[6px] hover:text-white transition-colors flex items-center justify-center gap-2"
               >
-                <Download className="w-3.5 h-3.5 text-cyan-400" />
+                <Download className="w-3.5 h-3.5 text-[#139BFD]" />
                 <span>Download Resume (PDF)</span>
               </a>
 
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 text-xs font-bold text-center text-black bg-cyan-400 rounded-xl shadow-lg shadow-cyan-500/25"
+                className="w-full py-3 text-xs font-medium text-center text-white bg-[#139BFD] hover:bg-[#42AFFD] rounded-[6px]"
               >
                 Schedule Free Strategy Call
               </a>

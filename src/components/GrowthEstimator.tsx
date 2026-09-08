@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Calculator, TrendingUp, DollarSign, Users, Target, Sparkles } from 'lucide-react';
+import { ArrowRight, Calculator, Sparkles } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 
 export default function GrowthEstimator() {
@@ -45,10 +45,7 @@ export default function GrowthEstimator() {
   const estimatedPipeline = (estimatedConversions * current.avgValue).toLocaleString();
 
   return (
-    <section id="calculator" className="py-24 sm:py-32 relative border-b border-white/[0.06] bg-[#08090C] overflow-hidden">
-      {/* Ambient background glow */}
-      <div className="pointer-events-none absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-cyan-500/10 blur-[140px]" />
-
+    <section id="calculator" className="py-24 sm:py-32 relative border-b-[1.8px] border-[#0C1F2E] bg-[#141414] overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         
         {/* Section Header */}
@@ -59,14 +56,14 @@ export default function GrowthEstimator() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl mb-14 space-y-3"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.03] text-neutral-400 text-xs font-mono uppercase tracking-wider">
-            <Calculator className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] border-[1.8px] border-[#0C1F2E] bg-[#06131B] text-[#42AFFD] text-xs font-heading uppercase tracking-wider">
+            <Calculator className="w-3.5 h-3.5 text-[#139BFD]" />
             <span>03 / ROI Simulation Model</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-[44px] text-white leading-tight">
             Simulate Revenue Pipeline & Ad Returns
           </h2>
-          <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-light">
+          <p className="font-body text-base text-[#BEBEBE] leading-[1.75]">
             Adjust your estimated monthly advertising budget and objective to project targeted inbound traffic, conversions, and pipeline value based on verified Cambodian & regional benchmarks.
           </p>
         </motion.div>
@@ -76,24 +73,22 @@ export default function GrowthEstimator() {
           
           {/* Left Column: Interactive Inputs */}
           <div className="lg:col-span-7">
-            <SpotlightCard
-              spotlightColor="rgba(56, 189, 248, 0.12)"
-              className="p-8 sm:p-10 h-full flex flex-col justify-between border-white/[0.1] bg-[#0D1017]/90"
-            >
+            <SpotlightCard className="p-8 sm:p-10 h-full flex flex-col justify-between">
               <div className="space-y-8">
                 
                 {/* Objective Selector Tabs */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-white tracking-wide font-mono uppercase">
+                    <span className="font-heading text-xs font-bold text-white uppercase tracking-wider">
                       Select Campaign Objective:
                     </span>
-                    <span className="text-[11px] font-mono text-cyan-400">
+                    <span className="text-[11px] font-heading text-[#42AFFD]">
                       {current.channel}
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {/* Buttons: 6px radius */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                     {(['leads', 'ecommerce', 'local'] as const).map((key) => {
                       const active = goal === key;
                       return (
@@ -101,14 +96,14 @@ export default function GrowthEstimator() {
                           key={key}
                           type="button"
                           onClick={() => setGoal(key)}
-                          className={`px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-tight text-left transition-all border ${
+                          className={`px-3.5 py-2.5 rounded-[6px] text-xs font-medium text-left transition-all border-[1.8px] ${
                             active
-                              ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-300 shadow-sm'
-                              : 'bg-white/[0.02] border-white/[0.06] text-neutral-400 hover:text-white hover:bg-white/[0.05]'
+                              ? 'bg-[#139BFD] border-[#139BFD] text-white shadow-sm'
+                              : 'bg-[#141414] border-[#0C1F2E] text-[#BEBEBE] hover:text-white hover:border-[#139BFD]/60'
                           }`}
                         >
-                          <div className="font-bold">{key === 'leads' ? 'B2B Leads' : key === 'ecommerce' ? 'E-Commerce' : 'Local Store'}</div>
-                          <div className="text-[10px] text-neutral-400 font-light font-mono mt-0.5">
+                          <div className="font-heading font-bold">{key === 'leads' ? 'B2B Leads' : key === 'ecommerce' ? 'E-Commerce' : 'Local Store'}</div>
+                          <div className="text-[10px] text-[#BEBEBE] font-body mt-0.5 opacity-80">
                             {key === 'leads' ? 'High-ticket funnels' : key === 'ecommerce' ? 'Catalog sales' : 'Direct WhatsApp'}
                           </div>
                         </button>
@@ -120,15 +115,15 @@ export default function GrowthEstimator() {
                 {/* Budget Slider */}
                 <div className="space-y-4 pt-2">
                   <div className="flex justify-between items-baseline">
-                    <span className="text-xs font-semibold text-white tracking-wide font-mono uppercase">
+                    <span className="font-heading text-xs font-bold text-white uppercase tracking-wider">
                       Monthly Advertising Budget:
                     </span>
-                    <div className="text-3xl font-black text-cyan-300 font-mono">
+                    <div className="font-heading text-3xl font-bold text-[#139BFD]">
                       ${budget.toLocaleString()}
                     </div>
                   </div>
 
-                  {/* Range Track */}
+                  {/* Range Track with Inversweb Blue Accent */}
                   <input
                     type="range"
                     min="300"
@@ -136,11 +131,11 @@ export default function GrowthEstimator() {
                     step="100"
                     value={budget}
                     onChange={(e) => setBudget(Number(e.target.value))}
-                    className="w-full h-2 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                    className="w-full h-2 bg-[#0C1F2E] rounded-[6px] appearance-none cursor-pointer accent-[#139BFD]"
                   />
 
                   {/* Range Milestones */}
-                  <div className="flex justify-between text-[11px] font-mono text-neutral-400">
+                  <div className="flex justify-between text-[11px] font-body text-[#BEBEBE]">
                     <span>$300 (Starter)</span>
                     <span>$2,500 (Scaling)</span>
                     <span>$5,000 (Growth)</span>
@@ -148,22 +143,22 @@ export default function GrowthEstimator() {
                   </div>
                 </div>
 
-                {/* Estimated Unit Metrics Bar */}
-                <div className="pt-4 border-t border-white/[0.06] grid grid-cols-2 gap-4 text-xs font-mono">
-                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <span className="text-neutral-400 block text-[10px] uppercase">Est. Avg Cost Per Click (CPC)</span>
-                    <span className="text-white font-bold">${current.cpc.toFixed(2)} USD</span>
+                {/* Unit Metrics: 10px radius chips */}
+                <div className="pt-4 border-t border-[#0C1F2E] grid grid-cols-2 gap-3.5 text-xs font-body">
+                  <div className="p-3.5 rounded-[10px] bg-[#141414] border-[1.8px] border-[#0C1F2E]">
+                    <span className="text-[#BEBEBE] block text-[10px] font-heading uppercase">Est. Avg Cost Per Click (CPC)</span>
+                    <span className="text-white font-heading font-bold text-sm">${current.cpc.toFixed(2)} USD</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                    <span className="text-neutral-400 block text-[10px] uppercase">Benchmark Conversion Rate</span>
-                    <span className="text-white font-bold">{(current.convRate * 100).toFixed(1)}% CVR</span>
+                  <div className="p-3.5 rounded-[10px] bg-[#141414] border-[1.8px] border-[#0C1F2E]">
+                    <span className="text-[#BEBEBE] block text-[10px] font-heading uppercase">Benchmark Conversion Rate</span>
+                    <span className="text-white font-heading font-bold text-sm">{(current.convRate * 100).toFixed(1)}% CVR</span>
                   </div>
                 </div>
 
               </div>
 
-              <div className="pt-6 text-[11px] text-neutral-400 font-light flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              <div className="pt-6 text-[11px] text-[#BEBEBE] font-body flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#139BFD]" />
                 <span>Calculations reflect real 2024–2026 Meta & Google Ads performance benchmarks in Cambodia.</span>
               </div>
             </SpotlightCard>
@@ -171,73 +166,70 @@ export default function GrowthEstimator() {
 
           {/* Right Column: Projected Outcomes Panel */}
           <div className="lg:col-span-5">
-            <SpotlightCard
-              spotlightColor="rgba(34, 211, 238, 0.18)"
-              className="p-8 sm:p-10 h-full flex flex-col justify-between border-cyan-500/25 bg-gradient-to-b from-[#0F141C] to-[#0A0D12]"
-            >
+            <SpotlightCard className="p-8 sm:p-10 h-full flex flex-col justify-between border-[#139BFD]/40 bg-[#06131B]">
               <div className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">
+                <div className="flex items-center justify-between pb-4 border-b border-[#0C1F2E]">
+                  <span className="text-xs font-heading font-bold uppercase tracking-wider text-[#42AFFD]">
                     Projected Commercial Yield
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                  <span className="text-[10px] font-heading px-2 py-0.5 rounded-[6px] bg-[#0C1F2E] text-[#139BFD] border border-[#139BFD]/30 font-bold">
                     Active Model
                   </span>
                 </div>
 
                 {/* Big Metric 1: Clicks */}
                 <div className="space-y-1">
-                  <span className="text-xs text-neutral-400 font-mono block">
+                  <span className="text-xs text-[#BEBEBE] font-heading uppercase block">
                     High-Intent Traffic Volume:
                   </span>
-                  <div className="text-3xl sm:text-4xl font-black text-white font-mono tracking-tight">
+                  <div className="font-heading text-3xl sm:text-4xl font-bold text-white tracking-tight">
                     ~{estimatedClicks.toLocaleString()}{' '}
-                    <span className="text-xs text-neutral-400 font-normal font-sans">
+                    <span className="text-xs text-[#BEBEBE] font-normal font-body">
                       targeted clicks / mo
                     </span>
                   </div>
                 </div>
 
                 {/* Big Metric 2: Conversions */}
-                <div className="space-y-1 pt-2 border-t border-white/[0.06]">
-                  <span className="text-xs text-neutral-400 font-mono block">
+                <div className="space-y-1 pt-2 border-t border-[#0C1F2E]">
+                  <span className="text-xs text-[#BEBEBE] font-heading uppercase block">
                     Estimated {current.type}:
                   </span>
-                  <div className="text-4xl sm:text-5xl font-black text-cyan-300 font-mono tracking-tight">
+                  <div className="font-heading text-4xl sm:text-5xl font-bold text-[#139BFD] tracking-tight">
                     {estimatedConversions.toLocaleString()}{' '}
-                    <span className="text-xs text-neutral-400 font-normal font-sans">
+                    <span className="text-xs text-[#BEBEBE] font-normal font-body">
                       conversions / mo
                     </span>
                   </div>
                 </div>
 
-                {/* 2-Column Mini Cards */}
-                <div className="grid grid-cols-2 gap-3 pt-3">
-                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08]">
-                    <span className="text-[10px] font-mono uppercase text-neutral-400 block">
+                {/* 2-Column Mini Cards: 10px radius */}
+                <div className="grid grid-cols-2 gap-3.5 pt-2">
+                  <div className="p-3.5 rounded-[10px] bg-[#141414] border-[1.8px] border-[#0C1F2E]">
+                    <span className="text-[10px] font-heading uppercase text-[#BEBEBE] block">
                       Target ROAS Range
                     </span>
-                    <span className="text-base font-bold text-emerald-400 font-mono">
+                    <span className="text-base font-heading font-bold text-[#42AFFD]">
                       {current.roas}
                     </span>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08]">
-                    <span className="text-[10px] font-mono uppercase text-neutral-400 block">
+                  <div className="p-3.5 rounded-[10px] bg-[#141414] border-[1.8px] border-[#0C1F2E]">
+                    <span className="text-[10px] font-heading uppercase text-[#BEBEBE] block">
                       Est. Pipeline Value
                     </span>
-                    <span className="text-base font-bold text-white font-mono">
+                    <span className="text-base font-heading font-bold text-white">
                       ${estimatedPipeline}
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Action Button */}
+              {/* Action Button: 6px radius, #139BFD, 500 weight */}
               <div className="pt-8">
                 <a
                   href="#contact"
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 text-xs font-bold text-black bg-cyan-400 hover:bg-cyan-300 rounded-xl shadow-lg shadow-cyan-500/20 transition-all group"
+                  className="btn-primary-invers w-full py-3.5 text-xs font-medium gap-2 group"
                 >
                   <span>Inquire Custom Growth Plan</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
