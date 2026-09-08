@@ -1,7 +1,13 @@
 import React from 'react';
 import ThemeToggle from '@/components/ThemeToggle';
+import { getContent } from '@/lib/contentStore';
 
-export default function HomePage() {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export default async function HomePage() {
+  const content = await getContent();
+  const { profile, hero, about, skills, projects, services, testimonials, blog, footer } = content;
   return (
     <>
       <ThemeToggle />
@@ -89,8 +95,8 @@ export default function HomePage() {
                             <img src="/images/chamnab-mey.jpg" alt="Chamnab Mey" style={{ borderRadius: "16px", maxHeight: "180px", width: "100%", objectFit: "cover" }} />
                         </a>
                     </div>
-                    <h5 className="title mt--30">Solo Digital Marketer & Growth Strategist scaling brands with performance advertising.</h5>
-                    <p className="disc">I am a Solo Digital Marketer specializing in high-ROAS Meta & Google Ad campaigns, server-side Conversion API (CAPI) tracking, and full-funnel sales conversion systems.
+                    <h5 className="title mt--30">{profile.tagline}</h5>
+                    <p className="disc">{profile.sidebarBio}
                     </p>
                     <div className="short-contact-area">
                         {/* single contact information */}
@@ -98,7 +104,7 @@ export default function HomePage() {
                             <i className="fa-solid fa-phone"></i>
                             <div className="information tmp-link-animation">
                                 <span>Call Now</span>
-                                <a href="tel:+85515705703" className="number">+855 15 705 703</a>
+                                <a href={`tel:${profile.phone.replace(/\s+/g, "")}`} className="number">{profile.phone}</a>
                             </div>
                         </div>
                         {/* single contact information end */}
@@ -108,7 +114,7 @@ export default function HomePage() {
                             <i className="fa-solid fa-envelope"></i>
                             <div className="information tmp-link-animation">
                                 <span>Mail Us</span>
-                                <a href="mailto:admin@chamnabmey.com" className="number">admin@chamnabmey.com</a>
+                                <a href={`mailto:${profile.email}`} className="number">{profile.email}</a>
                             </div>
                         </div>
                         {/* single contact information end */}
@@ -118,7 +124,7 @@ export default function HomePage() {
                             <i className="fa-solid fa-location-crosshairs"></i>
                             <div className="information tmp-link-animation">
                                 <span>My Address</span>
-                                <span className="number">Phnom Penh, Cambodia</span>
+                                <span className="number">{profile.location}</span>
                             </div>
                         </div>
                         {/* single contact information end */}
@@ -209,8 +215,8 @@ export default function HomePage() {
                         <div className="banner-right-content">
                             <div className="main-img">
                                 <img className="tmp-scroll-trigger tmp-zoom-in animation-order-1" src="/images/chamnab-mey.jpg" alt="Chamnab Mey" style={{ borderRadius: "24px", maxHeight: "560px", width: "100%", objectFit: "cover", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.2)" }} />
-                                <h2 className="banner-big-text-1 up-down-2">Paid Media</h2>
-                                <h2 className="banner-big-text-2 up-down">Digital Growth</h2>
+                                <h2 className="banner-big-text-1 up-down-2">{hero.badgeLeft || "Paid Media"}</h2>
+                                <h2 className="banner-big-text-2 up-down">{hero.badgeRight || "Digital Growth"}</h2>
                                 <div className="benner-two-bg-red-img">
                                     <img src="/assets/images/banner/banner-user-image-two-red-bg.png" alt="red-img" />
                                 </div>
@@ -228,22 +234,20 @@ export default function HomePage() {
                     </div>
                     <div className="col-lg-6 order-lg-1 mt--100">
                         <div className="inner">
-                            <span className="sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">I am</span>
+                            <span className="sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">{hero.greeting || "I am"}</span>
                             <h1 className="title tmp-scroll-trigger tmp-fade-in animation-order-2">
-                                Chamnab Mey, a Senior <br />
+                                {profile.name}, {hero.titlePrefix || 'a Senior'} <br />
                                 <span className="header-caption">
                                     <span className="cd-headline clip is-full-width">
                                         <span className="cd-words-wrapper">
-                                            <b className="is-visible theme-gradient">Digital Marketer</b>
-                                            <b className="is-hidden theme-gradient">Growth Strategist</b>
-                                            <b className="is-hidden theme-gradient">Meta Ads Specialist</b>
-                                            <b className="is-hidden theme-gradient">Google Ads Buyer</b>
-                                            <b className="is-hidden theme-gradient">CAPI & Tracking Pro</b>
+                                            {(hero.rotatingRoles && hero.rotatingRoles.length > 0 ? hero.rotatingRoles : ['Digital Marketer', 'Growth Strategist', 'Meta Ads Specialist', 'Google Ads Buyer', 'CAPI & Tracking Pro']).map((role, idx) => (
+                                                <b key={role + idx} className={`${idx === 0 ? 'is-visible' : 'is-hidden'} theme-gradient`}>{role}</b>
+                                            ))}
                                         </span>
                                 </span>
                                 </span>
                             </h1>
-                            <p className="disc tmp-scroll-trigger tmp-fade-in animation-order-3"> Senior Digital Marketing Strategist & Performance Marketer with 10+ years scaling e-commerce, real estate, and retail brands through full-funnel Meta & Google campaigns and conversion web architecture.
+                            <p className="disc tmp-scroll-trigger tmp-fade-in animation-order-3">{hero.description || profile.sidebarBio}
                             </p>
                             <div className="button-area-banner-two tmp-scroll-trigger tmp-fade-in animation-order-4">
 
@@ -280,8 +284,8 @@ export default function HomePage() {
     <div className="about-content-area">
         <div className="container tmp-section-gap">
             <div className="text-para-doc-wrap">
-                <h2 className="text-para-documents tmp-scroll-trigger tmp-fade-in tmp-title-split-2 animation-order-1">A high-performance
-                    <span>marketing engine</span> engineered to drive profitable customer acquisition, infallible <span>server-side CAPI tracking</span>, and scalable <span>business revenue growth</span> across Southeast Asia.
+                <h2 className="text-para-documents tmp-scroll-trigger tmp-fade-in tmp-title-split-2 animation-order-1">
+                    {content.statement}
                 </h2>
                 <div className="right-bg-text-para">
                     <img src="/assets/images/banner/right-bg-text-para-doc.png" alt="" />
@@ -301,7 +305,7 @@ export default function HomePage() {
                 <div className="col-lg-6">
                     <div className="about-us-left-content-wrap">
                         <div className="years-of-experience-card tmponhover active tmp-scroll-trigger tmp-fade-in animation-order-1">
-                            <h3 className="counter card-title"><span className="odometer" data-count="10">00</span>+
+                            <h3 className="counter card-title"><span className="odometer" data-count={about.yearsExperience || 10}>00</span>+
                             </h3>
                             <div className="tmp-light light-top-left"></div>
                             <p className="card-para">years of experience</p>
@@ -312,8 +316,8 @@ export default function HomePage() {
                             </div>
                             <div className="tmp-light light-top-left"></div>
                             <div className="card-info">
-                                <h3 className="card-title">Paid Media Campaigns</h3>
-                                <p className="card-para">$1M+ Ad Spend Managed</p>
+                                <h3 className="card-title">{about.card1Title}</h3>
+                                <p className="card-para">{about.card1Desc}</p>
                             </div>
                         </div>
                     </div>
@@ -325,8 +329,8 @@ export default function HomePage() {
                             <div className="section-sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">
                                 <span className="subtitle theme-gradient">About Me</span>
                             </div>
-                            <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Driving Measurable Growth <br /> Through Data & Performance</h2>
-                            <p className="description tmp-scroll-trigger tmp-fade-in animation-order-3">With over 10 years of leadership in digital marketing and web development, I bridge the gap between creative acquisition and technical architecture, helping businesses scale predictably.</p>
+                            <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">{about.title}</h2>
+                            <p className="description tmp-scroll-trigger tmp-fade-in animation-order-3">{about.description}</p>
                         </div>
                         <div className="about-us-section-card row g-5 animation-action-2">
 
@@ -1848,21 +1852,21 @@ export default function HomePage() {
                                     <span className="ft-icon"><i className="fa-solid fa-envelope"></i></span>
                                     <div className="ft-link-wrap">
                                         <h4 className="link-title">E-mail:</h4>
-                                        <a href="#">admin@chamnabmey.com</a>
+                                        <a href={`mailto:${profile.email}`}>{profile.email}</a>
                                     </div>
                                 </li>
                                 <li className="tmp-scroll-trigger tmp-fade-in animation-order-2">
                                     <span className="ft-icon"><i className="fa-solid fa-location-dot"></i></span>
                                     <div className="ft-link-wrap">
                                         <h4 className="link-title">Location:</h4>
-                                        <div>Phnom Penh, Cambodia</div>
+                                        <div>{profile.location}</div>
                                     </div>
                                 </li>
                                 <li className="tmp-scroll-trigger tmp-fade-in animation-order-3 tmp-link-animation">
                                     <span className="ft-icon"><i className="fa-solid fa-location-dot"></i></span>
                                     <div className="ft-link-wrap">
                                         <h4 className="link-title">Contact:</h4>
-                                        <a href="#">+855 15 705 703</a>
+                                        <a href={`tel:${profile.phone.replace(/\s+/g, "")}`}>{profile.phone}</a>
                                     </div>
                                 </li>
                             </ul>
@@ -2097,7 +2101,7 @@ export default function HomePage() {
                                         <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: "800", fontSize: "24px", letterSpacing: "-0.5px", textDecoration: "none" }}><span className="theme-gradient">CHAMNAB</span> <span style={{ color: "inherit" }}>MEY</span></span>
                                     </a>
                                 </div>
-                                <p className="description">Senior Solo Digital Marketer & Performance Strategist based in Phnom Penh, Cambodia. Scaling revenue with high-ROAS Meta & Google ads, server-side CAPI tracking, and full-funnel conversion systems.</p>
+                                <p className="description">{footer.bio}</p>
                                 <div className="social-link footer">
                                     <a href="#"><i className="fa-brands fa-instagram"></i></a>
                                     <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
@@ -2132,9 +2136,9 @@ export default function HomePage() {
                             <div className="single-footer-wrapper contact-wrap">
                                 <h5 className="ft-title">Contact </h5>
                                 <ul className="ft-link tmp-scroll-trigger animation-order-1 tmp-link-animation">
-                                    <li><span className="ft-icon"><i className="fa-solid fa-phone"></i></span><a href="#">+855 15 705 703</a></li>
-                                    <li><span className="ft-icon"><i className="fa-solid fa-location-dot"></i></span>Phnom Penh, Cambodia</li>
-                                    <li><span className="ft-icon"><i className="fa-solid fa-envelope"></i></span><a href="#">admin@chamnabmey.com</a></li>
+                                    <li><span className="ft-icon"><i className="fa-solid fa-phone"></i></span><a href={`tel:${profile.phone.replace(/\s+/g, "")}`}>{profile.phone}</a></li>
+                                    <li><span className="ft-icon"><i className="fa-solid fa-location-dot"></i></span>{profile.location}</li>
+                                    <li><span className="ft-icon"><i className="fa-solid fa-envelope"></i></span><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -2164,7 +2168,8 @@ export default function HomePage() {
                             <ul className="tmp-link-animation">
                                 <li><a href="#">Trams & Condition</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#contacts">Contact Us</a></li>
+                                <li><a href="/admin" title="Admin Dashboard" style={{ opacity: 0.7 }}><i className="fa-solid fa-lock" style={{ marginRight: "4px", fontSize: "11px" }}></i>Admin</a></li>
                             </ul>
                         </div>
                     </div>
