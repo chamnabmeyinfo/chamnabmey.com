@@ -147,7 +147,7 @@ export default async function HomePage() {
                 </div>
             </div>
         </div>
-        <a className="overlay_close_side_menu close_side_menu_active" href="javascript:void(0);"></a>
+        <a className="overlay_close_side_menu close_side_menu_active" href="#" role="button" aria-label="Close menu"></a>
     </div>
 
     <div className="d-block d-xl-none">
@@ -595,7 +595,7 @@ export default async function HomePage() {
                                             <div className="latest-portfolio-card-style-two image-box-hover tmp-scroll-trigger single-animation active tmponhover tmp-fade-in animation-order-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                                                 <div className="portfoli-card-img">
                                                     <div className="img-box v2" style={{ maxHeight: '280px', overflow: 'hidden' }}>
-                                                        <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="javascript:void(0);">
+                                                        <a className="tmp-scroll-trigger tmp-zoom-in animation-order-1" href="#portfolio">
                                                             <img className="w-100" src={proj.image || "/assets/images/latest-portfolio/portfoli-img-1.jpg"} alt={proj.title} style={{ objectFit: 'cover', height: '280px' }} />
                                                         </a>
                                                     </div>
@@ -603,13 +603,13 @@ export default async function HomePage() {
                                                 <div className="portfolio-card-content-wrap">
                                                     <div className="content-left">
                                                         <h3 className="portfolio-card-title">
-                                                            <a href="javascript:void(0);">{proj.title}</a>
+                                                            <a href="#portfolio">{proj.title}</a>
                                                         </h3>
                                                         <div className="tag-items">
                                                             <ul>
                                                                 {proj.tags && proj.tags.map((tag: string, tgIdx: number) => (
                                                                     <li key={tgIdx}>
-                                                                        <a href="javascript:void(0);" className="tag-item">{tag}</a>
+                                                                        <span className="tag-item">{tag}</span>
                                                                     </li>
                                                                 ))}
                                                             </ul>
@@ -620,7 +620,7 @@ export default async function HomePage() {
                                                             </div>
                                                         )}
                                                     </div>
-                                                    <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="javascript:void(0);">
+                                                    <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon btn-md" href="#portfolio">
                                                         <div className="icon-reverse-wrapper">
                                                             <span className="btn-text">View Details</span>
                                                             <div className="btn-hack"></div>
@@ -943,142 +943,48 @@ export default async function HomePage() {
                     Branding the <br /> through Powerful Portfolios</h2>
             </div>
             <div className="row animation-action-5">
-                {/*  Start Blog Card   */}
-                <div className="col-xl-4 col-lg-6 col-md-6 col-12 paralax-image">
-                    <div className="blog-card-style-two tmp-scroll-trigger tmponhover tmp-fade-in animation-order-1 single-animation" data-bs-toggle="modal" data-bs-target="#exampleModalCenters">
+                {blog && blog.map((post, bIdx) => (
+                    <div className="col-xl-4 col-lg-6 col-md-6 col-12 paralax-image" key={post.id || bIdx}>
+                        <div className="blog-card-style-two tmp-scroll-trigger tmponhover tmp-fade-in animation-order-1 single-animation" data-bs-toggle="modal" data-bs-target="#exampleModalCenters">
 
-                        <div className="blog-card-img">
-                            <div className="img-box">
-                                <a href="javascript:void(0)">
-                                    <img src="/assets/images/blog/blog-img-6.jpg" alt="Blog Thumbnail" />
-                                </a>
+                            <div className="blog-card-img">
+                                <div className="img-box">
+                                    <a href="#blog">
+                                        <img src={post.image || '/assets/images/blog/blog-img-6.jpg'} alt={post.title} />
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div className="blog-content-wrap">
-                            <div className="blog-tags">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i
-                                className="fa-regular fa-user"></i>James Carter</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i
-                                className="fa-regular fa-comments"></i>Comments
-                                            (05)</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 className="blog-title"><a href="javascript:void(0)">
-                                    Building the Future with Software Engineering
+                            <div className="blog-content-wrap">
+                                <div className="blog-tags">
+                                    <ul>
+                                        <li>
+                                            <a href="#blog"><i className="fa-regular fa-user"></i>{post.author || profile.name}</a>
+                                        </li>
+                                        <li>
+                                            <a href="#blog"><i className="fa-regular fa-comments"></i>Comments ({post.comments || '05'})</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 className="blog-title"><a href="#blog">
+                                    {post.title}
                                 </a></h3>
-                            <div className="tmp-button-here">
-                                <a className="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon" href="javascript:void(0)">
-                                    <div className="icon-reverse-wrapper">
-                                        <span className="btn-text">Read More</span>
-                                        <div className="btn-hack"></div>
-                                        <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                        <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                        <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
-                                        <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
-                                    </div>
-                                </a>
+                                <div className="tmp-button-here">
+                                    <a className="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon" href="#blog">
+                                        <div className="icon-reverse-wrapper">
+                                            <span className="btn-text">Read More</span>
+                                            <div className="btn-hack"></div>
+                                            <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
+                                            <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
+                                            <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
+                                            <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
+                            <div className={`tmp-light ${bIdx % 2 === 0 ? 'light-left' : 'light-center'}`}></div>
                         </div>
-                        <div className="tmp-light light-left"></div>
                     </div>
-                </div>
-                {/*  End Blog Card   */}
-
-                {/*  Start Blog Card   */}
-                <div className="col-xl-4 col-lg-6 col-md-6 col-12 paralax-image">
-                    <div className="blog-card-style-two tmp-scroll-trigger tmponhover tmp-fade-in animation-order-1 single-animation" data-bs-toggle="modal" data-bs-target="#exampleModalCenters">
-
-                        <div className="blog-card-img">
-                            <div className="img-box">
-                                <a href="javascript:void(0)">
-                                    <img src="/assets/images/blog/blog-img-7.jpg" alt="Blog Thumbnail" />
-                                </a>
-                            </div>
-                        </div>
-                        <div className="blog-content-wrap">
-                            <div className="blog-tags">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i
-                                className="fa-regular fa-user"></i>David Walker</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i
-                                className="fa-regular fa-comments"></i>Comments
-                                            (03)</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 className="blog-title"><a href="javascript:void(0)">
-                                    Latest Insights in Software Development
-                                </a></h3>
-                            <div className="tmp-button-here">
-                                <a className="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon" href="javascript:void(0)">
-                                    <div className="icon-reverse-wrapper">
-                                        <span className="btn-text">Read More</span>
-                                        <div className="btn-hack"></div>
-                                        <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                        <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                        <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
-                                        <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="tmp-light light-center"></div>
-                    </div>
-                </div>
-                {/*  End Blog Card   */}
-
-                {/*  Start Blog Card   */}
-                <div className="col-xl-4 col-lg-6 col-md-6 col-12 paralax-image">
-                    <div className="blog-card-style-two tmp-scroll-trigger tmponhover tmp-fade-in animation-order-1 single-animation" data-bs-toggle="modal" data-bs-target="#exampleModalCenters">
-
-                        <div className="blog-card-img">
-                            <div className="img-box">
-                                <a href="javascript:void(0)">
-                                    <img src="/assets/images/blog/blog-img-8.jpg" alt="Blog Thumbnail" />
-                                </a>
-                            </div>
-                        </div>
-                        <div className="blog-content-wrap">
-                            <div className="blog-tags">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i
-                                className="fa-regular fa-user"></i>Mesbah</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i
-                                className="fa-regular fa-comments"></i>Comments
-                                            (05)</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 className="blog-title"><a href="javascript:void(0)">Inspiring
-                                    the World, One Project at a Time for the man</a></h3>
-                            <div className="tmp-button-here">
-                                <a className="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon" href="javascript:void(0)">
-                                    <div className="icon-reverse-wrapper">
-                                        <span className="btn-text">Read More</span>
-                                        <div className="btn-hack"></div>
-                                        <img src="/assets/images/button/btg-bg.svg" alt="" className="btn-bg" />
-                                        <img src="/assets/images/button/btg-bg-2.svg" alt="" className="btn-bg-hover" />
-                                        <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
-                                        <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="tmp-light light-left"></div>
-                    </div>
-                </div>
-                {/*  End Blog Card   */}
+                ))}
             </div>
         </div>
     </section>
@@ -1199,20 +1105,13 @@ export default async function HomePage() {
                 {/*  End of .modal-header  */}
 
                 <div className="modal-body">
-                    <img className="img-fluid mb--30" src="/assets/images/blog/blog-img-7.jpg" alt="Blog Thumbnail" />
+                    <img className="img-fluid mb--30" src={blog?.[0]?.image || '/assets/images/blog/blog-img-7.jpg'} alt="Blog Thumbnail" />
                     <div className="news-details">
-                        <span className="date">10 March, 2025</span>
-                        <h2>Digital Marketo Expands to a New Headquarters.</h2>
-                        <p>We are excited to announce the grand opening of our new headquarters, a space designed to foster innovation and collaboration.
-                            This move marks a significant milestone in our journey toward growth and excellence.</p>
-                        <h4>Enhancing Workspaces for Productivity.</h4>
-                        <p>Our new office is equipped with state-of-the-art facilities, promoting creativity and teamwork.
-                            The modern design, coupled with advanced technology, aims to improve efficiency and employee well-being.</p>
-                        <p>We believe this new environment will enable us to serve our clients better and drive success.
-                            Our team is enthusiastic about the future, and we can&apos;t wait to achieve new heights together.</p>
-                        <h4>Future Prospects and Innovations.</h4>
-                        <p>With this expansion, we are set to introduce new services and solutions tailored to meet evolving market needs.
-                            Our commitment to quality and innovation remains steadfast as we continue to grow.</p>
+                        <span className="date">{blog?.[0]?.date || 'March 2026'}</span>
+                        <h2>{blog?.[0]?.title || 'Maximizing Meta Ads ROAS in Southeast Asia: 2026 Strategy Guide'}</h2>
+                        <p>{blog?.[0]?.summary || ''}</p>
+                        <h4>Methodology & Strategic Execution</h4>
+                        <p>{blog?.[0]?.content || ''}</p>
                     </div>
 
 
@@ -1244,7 +1143,7 @@ export default async function HomePage() {
                                 </div>
                                 <div className="form-group">
                                     <div className="tmp-button-here">
-                                        <a className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon" href="javascript:void(0)">
+                                        <button type="button" className="tmp-btn hover-icon-reverse btn-border tmp-modern-button radius-round download-icon">
                                             <div className="icon-reverse-wrapper">
                                                 <span className="btn-text">Submit Now</span>
                                                 <div className="btn-hack"></div>
@@ -1253,7 +1152,7 @@ export default async function HomePage() {
                                                 <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
                                                 <span className="btn-icon"><i className="ffa-sharp fa-regular fa-arrow-right"></i></span>
                                             </div>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </form>

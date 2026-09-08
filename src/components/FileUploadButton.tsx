@@ -62,9 +62,9 @@ export default function FileUploadButton({
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       {label && (
-        <span style={{ fontSize: '11px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
+        <span style={{ fontSize: '11px', fontWeight: 700, color: '#BEBEBE', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           {label}
         </span>
       )}
@@ -85,11 +85,12 @@ export default function FileUploadButton({
               src={currentValue}
               alt="Preview"
               style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '6px',
+                width: '38px',
+                height: '38px',
+                borderRadius: '8px',
                 objectFit: 'cover',
-                border: '1px solid #1E293B',
+                border: '1px solid rgba(19, 155, 253, 0.4)',
+                boxShadow: '0 0 10px rgba(19, 155, 253, 0.2)',
                 flexShrink: 0,
               }}
               onError={(e) => {
@@ -99,15 +100,16 @@ export default function FileUploadButton({
           ) : (
             <div
               style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '6px',
+                width: '38px',
+                height: '38px',
+                borderRadius: '8px',
                 backgroundColor: 'rgba(19, 155, 253, 0.15)',
+                border: '1px solid rgba(19, 155, 253, 0.3)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#42AFFD',
-                fontSize: '14px',
+                color: '#13FDFD',
+                fontSize: '16px',
                 flexShrink: 0,
               }}
             >
@@ -117,16 +119,16 @@ export default function FileUploadButton({
         ) : (
           <div
             style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '6px',
-              backgroundColor: '#0F172A',
-              border: '1px dashed #334155',
+              width: '38px',
+              height: '38px',
+              borderRadius: '8px',
+              backgroundColor: '#081722',
+              border: '1px dashed #0C1F2E',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#64748B',
-              fontSize: '12px',
+              color: '#65676B',
+              fontSize: '13px',
               flexShrink: 0,
             }}
           >
@@ -143,15 +145,28 @@ export default function FileUploadButton({
             display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
-            padding: '5px 12px',
+            padding: '7px 14px',
             borderRadius: '6px',
-            backgroundColor: '#1E293B',
-            color: '#F1F5F9',
-            border: '1px solid #334155',
-            fontSize: '11px',
+            backgroundColor: 'rgba(19, 155, 253, 0.12)',
+            color: '#FFFFFF',
+            border: '1px solid rgba(19, 155, 253, 0.35)',
+            fontSize: '12px',
             fontWeight: 600,
             cursor: isUploading ? 'not-allowed' : 'pointer',
             whiteSpace: 'nowrap',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            if (!isUploading) {
+              e.currentTarget.style.backgroundColor = 'rgba(19, 155, 253, 0.25)';
+              e.currentTarget.style.borderColor = '#13FDFD';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!isUploading) {
+              e.currentTarget.style.backgroundColor = 'rgba(19, 155, 253, 0.12)';
+              e.currentTarget.style.borderColor = 'rgba(19, 155, 253, 0.35)';
+            }
           }}
         >
           {isUploading ? (
@@ -167,14 +182,17 @@ export default function FileUploadButton({
           onClick={() => setShowUrlInput(!showUrlInput)}
           title="Paste direct URL"
           style={{
-            background: 'transparent',
-            border: '1px solid #334155',
-            color: '#94A3B8',
-            padding: '5px 8px',
+            background: '#081722',
+            border: '1px solid #0C1F2E',
+            color: '#BEBEBE',
+            padding: '7px 10px',
             borderRadius: '6px',
-            fontSize: '11px',
+            fontSize: '12px',
             cursor: 'pointer',
+            transition: 'all 0.2s ease',
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#139BFD')}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#0C1F2E')}
         >
           🔗
         </button>
@@ -188,10 +206,10 @@ export default function FileUploadButton({
             style={{
               background: 'transparent',
               border: 'none',
-              color: '#EF4444',
+              color: '#FF494A',
               cursor: 'pointer',
-              fontSize: '12px',
-              padding: '4px',
+              fontSize: '13px',
+              padding: '6px',
             }}
           >
             ✕
@@ -207,14 +225,17 @@ export default function FileUploadButton({
           onChange={(e) => onUpload(e.target.value)}
           style={{
             width: '100%',
-            padding: '5px 10px',
-            backgroundColor: '#0F172A',
-            border: '1px solid #1E293B',
+            padding: '8px 12px',
+            backgroundColor: '#081722',
+            border: '1px solid #0C1F2E',
             borderRadius: '6px',
-            color: '#F1F5F9',
-            fontSize: '11px',
+            color: '#FFFFFF',
+            fontSize: '12px',
             marginTop: '4px',
+            outline: 'none',
           }}
+          onFocus={(e) => (e.currentTarget.style.borderColor = '#139BFD')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#0C1F2E')}
         />
       )}
     </div>
