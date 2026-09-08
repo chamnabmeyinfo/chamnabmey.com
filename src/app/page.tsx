@@ -241,7 +241,7 @@ export default async function HomePage() {
                                 {hero.titlePrefix || "Chamnab Mey, a Senior"} <br />
                                 <span className="header-caption">
                                     <span className="cd-headline clip is-full-width">
-                                        <span className="cd-words-wrapper">
+                                        <span className="cd-words-wrapper" suppressHydrationWarning>
                                             {hero.rotatingRoles && hero.rotatingRoles.length > 0 ? (
                                                 hero.rotatingRoles.map((role, rIdx) => (
                                                     <b key={rIdx} className={rIdx === 0 ? "is-visible theme-gradient" : "is-hidden theme-gradient"}>{role}</b>
@@ -302,7 +302,7 @@ export default async function HomePage() {
     <div className="about-content-area">
         <div className="container tmp-section-gap">
             <div className="text-para-doc-wrap">
-                <h2 className="text-para-documents tmp-scroll-trigger tmp-fade-in tmp-title-split-2 animation-order-1">{statement}</h2>
+                <h2 className="text-para-documents tmp-scroll-trigger tmp-fade-in tmp-title-split-2 animation-order-1" suppressHydrationWarning>{statement}</h2>
                 <div className="right-bg-text-para">
                     <img src="/assets/images/banner/right-bg-text-para-doc.png" alt="" />
                 </div>
@@ -705,41 +705,34 @@ export default async function HomePage() {
         <div className="client-testimonial-swiper position-relative">
             <div className="swiper testimonial-swiper-v2">
                 <div className="swiper-wrapper">
-                    {(() => {
-                        const rawTestimonials = testimonials && testimonials.length > 0 ? testimonials : [];
-                        const displayTestimonials = rawTestimonials.length > 0 && rawTestimonials.length < 5
-                            ? [...rawTestimonials, ...rawTestimonials]
-                            : rawTestimonials;
-
-                        return displayTestimonials.map((test, tIdx) => (
-                            <div className={`swiper-slide tmp-scroll-trigger animation-order-${(tIdx % (rawTestimonials.length || 1)) + 1}`} key={`${test.id || 'test'}-${tIdx}`}>
-                                <div className="client-testimonial-card-wrap">
-                                    <div className="client-card-head">
-                                        <div className="client-info">
-                                            <div className="client-img">
-                                                <img src={test.avatar || "/assets/images/testimonial/client-img-1.jpg"} alt={test.name} />
-                                            </div>
-                                            <div className="client-details">
-                                                <h3 className="client-title">{test.name}</h3>
-                                                <p className="client-para">{test.role}</p>
-                                            </div>
+                    {testimonials && testimonials.map((test, tIdx) => (
+                        <div className={`swiper-slide tmp-scroll-trigger animation-order-${tIdx + 1}`} key={test.id || tIdx}>
+                            <div className="client-testimonial-card-wrap">
+                                <div className="client-card-head">
+                                    <div className="client-info">
+                                        <div className="client-img">
+                                            <img src={test.avatar || "/assets/images/testimonial/client-img-1.jpg"} alt={test.name} />
                                         </div>
-                                        <div className="tmp-star">
-                                            <ul>
-                                                {[...Array(test.stars || 5)].map((_, stIdx) => (
-                                                    <li key={stIdx}><i className="fa-solid fa-star"></i></li>
-                                                ))}
-                                            </ul>
+                                        <div className="client-details">
+                                            <h3 className="client-title">{test.name}</h3>
+                                            <p className="client-para">{test.role}</p>
                                         </div>
                                     </div>
-                                    <p className="client-para">{test.quote}</p>
-                                    <div className="quat-logo">
-                                        <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
+                                    <div className="tmp-star">
+                                        <ul>
+                                            {[...Array(test.stars || 5)].map((_, stIdx) => (
+                                                <li key={stIdx}><i className="fa-solid fa-star"></i></li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </div>
+                                <p className="client-para">{test.quote}</p>
+                                <div className="quat-logo">
+                                    <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
+                                </div>
                             </div>
-                        ));
-                    })()}
+                        </div>
+                    ))}
                 </div>
                 <div className="testimonial-arrow-v2">
                     <div className="swiper-button-next"><i className="fa-sharp fa-regular fa-arrow-right"></i></div>

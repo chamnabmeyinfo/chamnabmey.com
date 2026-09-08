@@ -971,7 +971,19 @@
 
   };
 
-  tmPk.m();
+  if (typeof window !== "undefined") {
+    if (document.readyState === "complete") {
+      setTimeout(function () {
+        tmPk.m();
+      }, 50);
+    } else {
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          tmPk.m();
+        }, 50);
+      });
+    }
+  }
 })(jQuery, window);
 
 
