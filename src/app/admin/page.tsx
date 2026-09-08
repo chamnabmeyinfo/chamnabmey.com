@@ -23,23 +23,22 @@ export default function AdminPage() {
   const [loginError, setLoginError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Content state
+  // Content
   const [content, setContent] = useState<PortfolioContent>(defaultPortfolioContent);
   const [activeTab, setActiveTab] = useState<'profile' | 'projects' | 'services' | 'inbox'>('profile');
   const [saving, setSaving] = useState(false);
-  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
 
   // Inbox
   const [inbox, setInbox] = useState<InboxMessage[]>([]);
-  const [loadingInbox, setLoadingInbox] = useState(false);
 
   useEffect(() => {
     checkAuth();
   }, []);
 
-  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
-    setToast({ message, type });
-    setTimeout(() => setToast(null), 3000);
+  const showToast = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 2500);
   };
 
   const checkAuth = async () => {
@@ -47,9 +46,7 @@ export default function AdminPage() {
       const res = await fetch('/api/admin/check');
       const data = await res.json();
       setIsAuthenticated(data.authenticated);
-      if (data.authenticated) {
-        loadData();
-      }
+      if (data.authenticated) loadData();
     } catch {
       setIsAuthenticated(false);
     }
@@ -57,29 +54,27 @@ export default function AdminPage() {
 
   const loadData = async () => {
     try {
-      const [resContent, resInbox] = await Promise.all([
+      const [resC, resI] = await Promise.all([
         fetch('/api/admin/content'),
         fetch('/api/admin/inbox'),
       ]);
-
-      if (resContent.ok) {
-        const cData = await resContent.json();
-        setContent({ ...defaultPortfolioContent, ...cData });
+      if (resC.ok) {
+        const d = await resC.json();
+        setContent({ ...defaultPortfolioContent, ...d });
       }
-
-      if (resInbox.ok) {
-        const iData = await resInbox.json();
-        setInbox(iData.messages || []);
+      if (resI.ok) {
+        const d = await resI.json();
+        setInbox(d.messages || []);
       }
     } catch (e) {
-      console.error('Failed to load admin data:', e);
+      console.error(e);
     }
   };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoginError('');
     setLoading(true);
+    setLoginError('');
     try {
       const res = await fetch('/api/admin/login', {
         method: 'POST',
@@ -91,22 +86,12 @@ export default function AdminPage() {
         setIsAuthenticated(true);
         loadData();
       } else {
-        setLoginError(data.error || 'Incorrect password. Try again.');
+        setLoginError(data.error || 'Wrong password');
       }
     } catch {
-      setLoginError('Connection error. Please try again.');
+      setLoginError('Error logging in');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/admin/logout', { method: 'POST' });
-      setIsAuthenticated(false);
-      setPassword('');
-    } catch (e) {
-      console.error(e);
     }
   };
 
@@ -119,51 +104,39 @@ export default function AdminPage() {
         body: JSON.stringify(content),
       });
       if (res.ok) {
-        showToast('All changes saved! Updated live on website.');
+        showToast('Saved successfully!');
       } else {
-        showToast('Failed to save changes.', 'error');
+        showToast('Failed to save');
       }
     } catch {
-      showToast('Network error while saving.', 'error');
+      showToast('Error saving');
     } finally {
       setSaving(false);
     }
   };
 
   // -------------------------------------------------------------
-  // Loading State
+  // Loading
   // -------------------------------------------------------------
   if (isAuthenticated === null) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#06131B', color: '#FFF', fontFamily: "'Montserrat', sans-serif" }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '28px', marginBottom: '12px' }}>⚡</div>
-          <div style={{ fontSize: '18px', fontWeight: 600, color: '#42AFFD' }}>Opening Dashboard...</div>
-        </div>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#090D12', color: '#94A3B8', fontSize: '13px' }}>
+        Loading...
       </div>
     );
   }
 
   // -------------------------------------------------------------
-  // Simple Login Screen
+  // Minimal Login
   // -------------------------------------------------------------
   if (!isAuthenticated) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#06131B', padding: '20px', fontFamily: "'Montserrat', sans-serif" }}>
-        <div style={{ maxWidth: '400px', width: '100%', backgroundColor: '#0B1D28', border: '1px solid #16324A', borderRadius: '24px', padding: '40px 32px', boxShadow: '0 25px 60px rgba(0,0,0,0.5)', textAlign: 'center' }}>
-          
-          <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'rgba(19, 155, 253, 0.15)', border: '1px solid rgba(19, 155, 253, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto', fontSize: '24px', color: '#139BFD' }}>
-            🔒
-          </div>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#090D12', padding: '20px' }}>
+        <div style={{ width: '320px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '14px', padding: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+          <div style={{ fontSize: '15px', fontWeight: 700, color: '#F1F5F9', marginBottom: '2px' }}>Chamnab Mey</div>
+          <div style={{ fontSize: '12px', color: '#64748B', marginBottom: '18px' }}>Admin Login</div>
 
-          <h1 style={{ fontSize: '22px', fontWeight: 800, color: '#FFFFFF', marginBottom: '6px' }}>
-            Chamnab Mey
-          </h1>
-          <p style={{ fontSize: '13px', color: '#94A3B8', marginBottom: '28px' }}>
-            Admin Control Center
-          </p>
-
-          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <input
               type="password"
               placeholder="Enter password..."
@@ -172,45 +145,35 @@ export default function AdminPage() {
               required
               autoFocus
               style={{
-                width: '100%',
-                padding: '14px 18px',
-                borderRadius: '12px',
-                backgroundColor: '#06131B',
-                border: '1.5px solid #16324A',
-                color: '#FFFFFF',
-                fontSize: '15px',
+                padding: '9px 12px',
+                borderRadius: '8px',
+                backgroundColor: '#090D12',
+                border: '1px solid #1E293B',
+                color: '#FFF',
+                fontSize: '13px',
                 outline: 'none',
               }}
             />
-
-            {loginError && (
-              <div style={{ color: '#F87171', fontSize: '13px', textAlign: 'left' }}>
-                {loginError}
-              </div>
-            )}
-
+            {loginError && <div style={{ color: '#EF4444', fontSize: '11px' }}>{loginError}</div>}
             <button
               type="submit"
               disabled={loading}
               style={{
-                padding: '14px',
-                borderRadius: '12px',
+                padding: '9px',
+                borderRadius: '8px',
                 backgroundColor: '#139BFD',
-                color: '#FFFFFF',
+                color: '#FFF',
                 border: 'none',
-                fontWeight: 700,
-                fontSize: '15px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                opacity: loading ? 0.7 : 1,
-                boxShadow: '0 6px 20px rgba(19, 155, 253, 0.35)',
+                fontWeight: 600,
+                fontSize: '13px',
+                cursor: 'pointer',
               }}
             >
-              {loading ? 'Verifying...' : 'Unlock Dashboard →'}
+              {loading ? '...' : 'Sign In'}
             </button>
           </form>
-
-          <div style={{ marginTop: '24px', fontSize: '12px', color: '#64748B' }}>
-            Default key: <code style={{ color: '#42AFFD' }}>chamnab2026!</code>
+          <div style={{ fontSize: '11px', color: '#475569', marginTop: '14px', textAlign: 'center' }}>
+            Key: <code>chamnab2026!</code>
           </div>
         </div>
       </div>
@@ -218,367 +181,316 @@ export default function AdminPage() {
   }
 
   // -------------------------------------------------------------
-  // Clean, Simple Main Dashboard
+  // Compact Minimalist Admin Dashboard
   // -------------------------------------------------------------
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#06131B', color: '#FFFFFF', fontFamily: "'Montserrat', sans-serif" }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#090D12', color: '#E2E8F0', fontSize: '12px' }}>
       
-      {/* Sticky Clean Top Header */}
+      {/* Ultra-Slim Header (Height 46px) */}
       <header
         style={{
           position: 'sticky',
           top: 0,
           zIndex: 100,
-          backgroundColor: 'rgba(6, 19, 27, 0.92)',
-          backdropFilter: 'blur(16px)',
-          borderBottom: '1px solid #16324A',
-          padding: '16px 28px',
+          height: '46px',
+          backgroundColor: '#0F172A',
+          borderBottom: '1px solid #1E293B',
+          padding: '0 16px',
           display: 'flex',
-          justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '16px',
+          justifyContent: 'space-between',
         }}
       >
-        {/* Left: Branding & Status */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div style={{ fontSize: '18px', fontWeight: 800, letterSpacing: '-0.5px' }}>
+        {/* Left: Branding & Minimal Tabs */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <span style={{ fontWeight: 800, color: '#F1F5F9', fontSize: '13px' }}>
             <span style={{ color: '#139BFD' }}>CHAMNAB</span> MEY
-          </div>
-          <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '500px', backgroundColor: 'rgba(0, 230, 118, 0.15)', color: '#00E676', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#00E676' }}></span>
-            Live
           </span>
-        </div>
 
-        {/* Center: Simple Navigation Tabs */}
-        <div style={{ display: 'flex', gap: '8px', backgroundColor: '#0B1D28', padding: '4px', borderRadius: '12px', border: '1px solid #16324A' }}>
-          {[
-            { id: 'profile', label: '👤 Profile & Links' },
-            { id: 'projects', label: `💼 Projects (${content.projects.length})` },
-            { id: 'services', label: '⚡ Services & Skills' },
-            { id: 'inbox', label: `📬 Inbox ${inbox.length > 0 ? `(${inbox.length})` : ''}` },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              type="button"
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                backgroundColor: activeTab === tab.id ? '#139BFD' : 'transparent',
-                color: activeTab === tab.id ? '#FFFFFF' : '#94A3B8',
-                border: 'none',
-                fontWeight: 700,
-                fontSize: '13px',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-            >
-              {tab.label}
-            </button>
-          ))}
+          <div style={{ display: 'flex', gap: '2px', backgroundColor: '#090D12', padding: '2px', borderRadius: '6px', border: '1px solid #1E293B' }}>
+            {[
+              { id: 'profile', label: '👤 Profile' },
+              { id: 'projects', label: `💼 Projects (${content.projects.length})` },
+              { id: 'services', label: '⚡ Services & Skills' },
+              { id: 'inbox', label: `📬 Inbox ${inbox.length > 0 ? `(${inbox.length})` : ''}` },
+            ].map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setActiveTab(t.id as any)}
+                style={{
+                  padding: '4px 10px',
+                  borderRadius: '4px',
+                  backgroundColor: activeTab === t.id ? '#139BFD' : 'transparent',
+                  color: activeTab === t.id ? '#FFFFFF' : '#94A3B8',
+                  border: 'none',
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Right: Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {toast && (
+            <span style={{ fontSize: '11px', color: '#10B981', fontWeight: 600, paddingRight: '8px' }}>
+              ✓ {toast}
+            </span>
+          )}
+
           <a
             href="/"
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              padding: '8px 16px',
-              borderRadius: '10px',
-              backgroundColor: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid #16324A',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              backgroundColor: 'transparent',
+              border: '1px solid #334155',
               color: '#94A3B8',
-              fontSize: '13px',
-              fontWeight: 600,
+              fontSize: '11px',
               textDecoration: 'none',
             }}
           >
-            View Website ↗
+            Live Site ↗
           </a>
 
           <button
+            type="button"
             onClick={handleSave}
             disabled={saving}
-            type="button"
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '9px 20px',
-              borderRadius: '10px',
+              padding: '5px 14px',
+              borderRadius: '6px',
               backgroundColor: '#139BFD',
               color: '#FFFFFF',
               border: 'none',
+              fontSize: '11px',
               fontWeight: 700,
-              fontSize: '13px',
               cursor: saving ? 'not-allowed' : 'pointer',
-              boxShadow: '0 4px 15px rgba(19, 155, 253, 0.35)',
             }}
           >
-            {saving ? 'Saving...' : '💾 Save Changes'}
+            {saving ? 'Saving...' : '💾 Save'}
           </button>
 
           <button
-            onClick={handleLogout}
-            title="Logout"
             type="button"
+            onClick={async () => {
+              await fetch('/api/admin/logout', { method: 'POST' });
+              setIsAuthenticated(false);
+            }}
             style={{
               background: 'transparent',
-              border: '1px solid #16324A',
-              color: '#F87171',
-              padding: '8px 12px',
-              borderRadius: '10px',
+              border: 'none',
+              color: '#64748B',
               cursor: 'pointer',
-              fontSize: '13px',
+              fontSize: '12px',
+              padding: '4px',
             }}
+            title="Logout"
           >
-            Logout
+            ✕
           </button>
         </div>
       </header>
 
-      {/* Floating Toast Notice */}
-      {toast && (
-        <div
-          style={{
-            position: 'fixed',
-            top: '80px',
-            right: '28px',
-            zIndex: 99999,
-            padding: '14px 22px',
-            borderRadius: '12px',
-            backgroundColor: toast.type === 'success' ? '#00C853' : '#E53935',
-            color: '#FFFFFF',
-            fontWeight: 700,
-            fontSize: '14px',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-            animation: 'fadeInUp 0.25s ease',
-          }}
-        >
-          {toast.message}
-        </div>
-      )}
+      {/* Main Content Area: Compact & Space Saving */}
+      <main style={{ maxWidth: '1040px', margin: '0 auto', padding: '16px 16px 40px 16px' }}>
 
-      {/* Main Container */}
-      <main style={{ maxWidth: '1040px', margin: '0 auto', padding: '36px 20px 80px 20px' }}>
-        
-        {/* ============================================================ */}
+        {/* ========================================================= */}
         {/* TAB 1: PROFILE & CONTACT */}
-        {/* ============================================================ */}
+        {/* ========================================================= */}
         {activeTab === 'profile' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             
-            {/* Card 1: Visual Assets (Photo & CV) */}
-            <div style={{ backgroundColor: '#0B1D28', border: '1px solid #16324A', borderRadius: '20px', padding: '28px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '6px', color: '#42AFFD' }}>
-                1. Photos & Resume Document
-              </h2>
-              <p style={{ fontSize: '13px', color: '#94A3B8', marginBottom: '22px' }}>
-                Upload your portrait photo and CV file. Click the button to choose a file from your computer.
-              </p>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+            {/* Box 1: Visual Identity (Photo, CV, Name, Tagline) */}
+            <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', alignItems: 'flex-start' }}>
                 <FileUploadButton
-                  label="Profile Portrait Photo"
+                  label="Profile Photo"
                   currentValue={content.profile.photo}
                   onUpload={(url) => setContent({ ...content, profile: { ...content.profile, photo: url } })}
                   accept="image/*"
                   fileType="image"
-                  buttonText="📷 Upload Photo"
-                  helperText="Shown on sidebar and hero section."
+                  buttonText="Upload Photo"
                 />
 
                 <FileUploadButton
-                  label="Resume / CV File (PDF)"
+                  label="Resume / CV File"
                   currentValue={content.profile.resumeUrl}
                   onUpload={(url) => setContent({ ...content, profile: { ...content.profile, resumeUrl: url } })}
                   accept=".pdf,.doc,.docx"
                   fileType="file"
-                  buttonText="📄 Upload Resume (PDF)"
-                  helperText="Downloaded when visitors click 'Download CV'."
+                  buttonText="Upload PDF"
                 />
-              </div>
-            </div>
 
-            {/* Card 2: Personal & Headline */}
-            <div style={{ backgroundColor: '#0B1D28', border: '1px solid #16324A', borderRadius: '20px', padding: '28px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '6px', color: '#42AFFD' }}>
-                2. Headline & Bio Information
-              </h2>
-              <p style={{ fontSize: '13px', color: '#94A3B8', marginBottom: '22px' }}>
-                The main titles and summary copy displayed across the website.
-              </p>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '18px', marginBottom: '18px' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>Full Name</label>
+                  <span style={{ fontSize: '11px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>Full Name</span>
                   <input
                     type="text"
                     value={content.profile.name}
                     onChange={(e) => setContent({ ...content, profile: { ...content.profile, name: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px' }}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>Tagline</label>
+                  <span style={{ fontSize: '11px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>Tagline</span>
                   <input
                     type="text"
                     value={content.profile.tagline}
                     onChange={(e) => setContent({ ...content, profile: { ...content.profile, tagline: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px' }}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Box 2: Contact Channels (4 fields in 1 compact row) */}
+            <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '8px' }}>
+                Contact & Location
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Phone / WhatsApp</span>
+                  <input
+                    type="text"
+                    value={content.profile.phone}
+                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, phone: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Email Address</span>
+                  <input
+                    type="email"
+                    value={content.profile.email}
+                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, email: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Telegram User</span>
+                  <input
+                    type="text"
+                    placeholder="@chamnabmey"
+                    value={content.profile.telegramUser}
+                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, telegramUser: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Location</span>
+                  <input
+                    type="text"
+                    value={content.profile.location}
+                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, location: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Box 3: Social Links & Rotating Roles */}
+            <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '8px' }}>
+                Links & Headlines
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '10px', marginBottom: '10px' }}>
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Telegram URL</span>
+                  <input
+                    type="text"
+                    value={content.profile.telegram}
+                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, telegram: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>LinkedIn URL</span>
+                  <input
+                    type="text"
+                    value={content.profile.linkedin}
+                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, linkedin: e.target.value } })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
+                  />
+                </div>
+
+                <div>
+                  <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Headline Roles (comma-separated)</span>
+                  <input
+                    type="text"
+                    value={content.hero.rotatingRoles.join(', ')}
+                    onChange={(e) => setContent({
+                      ...content,
+                      hero: {
+                        ...content.hero,
+                        rotatingRoles: e.target.value.split(',').map(s => s.trim()).filter(Boolean),
+                      }
+                    })}
+                    style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px' }}
                   />
                 </div>
               </div>
 
-              <div style={{ marginBottom: '18px' }}>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>
-                  Rotating Headline Roles (separated by commas)
-                </label>
-                <input
-                  type="text"
-                  value={content.hero.rotatingRoles.join(', ')}
-                  onChange={(e) => setContent({
-                    ...content,
-                    hero: {
-                      ...content.hero,
-                      rotatingRoles: e.target.value.split(',').map(s => s.trim()).filter(Boolean),
-                    }
-                  })}
-                  style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px' }}
-                />
-                <span style={{ fontSize: '11px', color: '#64748B', marginTop: '4px', display: 'block' }}>
-                  These words cycle smoothly in the Hero header (e.g. Digital Marketer, Growth Strategist, Meta Ads Specialist)
-                </span>
-              </div>
-
               <div>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>Summary Bio</label>
+                <span style={{ fontSize: '11px', color: '#94A3B8', display: 'block', marginBottom: '3px' }}>Bio Summary</span>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={content.profile.sidebarBio}
                   onChange={(e) => setContent({
                     ...content,
                     profile: { ...content.profile, sidebarBio: e.target.value },
                     hero: { ...content.hero, description: e.target.value },
                   })}
-                  style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px', lineHeight: 1.5 }}
+                  style={{ width: '100%', padding: '6px 10px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', color: '#FFF', fontSize: '12px', lineHeight: 1.4 }}
                 />
               </div>
             </div>
 
-            {/* Card 3: Contact & Social Channels */}
-            <div style={{ backgroundColor: '#0B1D28', border: '1px solid #16324A', borderRadius: '20px', padding: '28px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '6px', color: '#42AFFD' }}>
-                3. Contact Details & Social Links
-              </h2>
-              <p style={{ fontSize: '13px', color: '#94A3B8', marginBottom: '22px' }}>
-                Where clients can contact you directly.
-              </p>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '18px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>Phone / WhatsApp</label>
-                  <input
-                    type="text"
-                    value={content.profile.phone}
-                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, phone: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px' }}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>Email Address</label>
-                  <input
-                    type="email"
-                    value={content.profile.email}
-                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, email: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px' }}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>Telegram Username</label>
-                  <input
-                    type="text"
-                    placeholder="@chamnabmey"
-                    value={content.profile.telegramUser}
-                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, telegramUser: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px' }}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>Telegram Link</label>
-                  <input
-                    type="text"
-                    placeholder="https://t.me/chamnabmey"
-                    value={content.profile.telegram}
-                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, telegram: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px' }}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>Location</label>
-                  <input
-                    type="text"
-                    value={content.profile.location}
-                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, location: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px' }}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '6px' }}>LinkedIn Link</label>
-                  <input
-                    type="text"
-                    value={content.profile.linkedin}
-                    onChange={(e) => setContent({ ...content, profile: { ...content.profile, linkedin: e.target.value } })}
-                    style={{ width: '100%', padding: '12px 16px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '10px', color: '#FFF', fontSize: '14px' }}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Save Action */}
-            <div style={{ textAlign: 'right', marginTop: '10px' }}>
+            {/* Quick Save */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <button
                 type="button"
                 onClick={handleSave}
                 disabled={saving}
                 style={{
-                  padding: '14px 32px',
-                  borderRadius: '12px',
+                  padding: '7px 20px',
+                  borderRadius: '6px',
                   backgroundColor: '#139BFD',
                   color: '#FFFFFF',
                   border: 'none',
+                  fontSize: '12px',
                   fontWeight: 700,
-                  fontSize: '15px',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 20px rgba(19, 155, 253, 0.4)',
                 }}
               >
-                {saving ? 'Saving...' : '💾 Save Profile Information'}
+                {saving ? 'Saving...' : '💾 Save Profile'}
               </button>
             </div>
+
           </div>
         )}
 
-        {/* ============================================================ */}
-        {/* TAB 2: PROJECTS & CASE STUDIES */}
-        {/* ============================================================ */}
+        {/* ========================================================= */}
+        {/* TAB 2: PROJECTS (COMPACT ROWS) */}
+        {/* ========================================================= */}
         {activeTab === 'projects' && (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
-              <div>
-                <h2 style={{ fontSize: '22px', fontWeight: 800 }}>Portfolio Projects ({content.projects.length})</h2>
-                <p style={{ fontSize: '13px', color: '#94A3B8' }}>These case studies are showcased in your interactive portfolio section.</p>
-              </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: '#F1F5F9' }}>
+                Portfolio Projects ({content.projects.length})
+              </span>
 
               <button
                 type="button"
@@ -587,75 +499,49 @@ export default function AdminPage() {
                     id: 'proj-' + Date.now(),
                     title: 'New Client Growth Campaign',
                     category: 'meta' as const,
-                    tags: ['Meta Ads', 'Performance'],
-                    description: 'Full-funnel campaign strategy and verified commercial results.',
-                    metrics: '+120% Sales | 4.0x ROAS',
+                    tags: ['Meta Ads'],
+                    description: 'Full-funnel campaign strategy and commercial ROI.',
+                    metrics: '+100% Leads | 3.5x ROAS',
                     image: '/assets/images/latest-portfolio/portfoli-img-1.jpg',
                     link: '#contacts',
                   };
                   setContent({ ...content, projects: [newProj, ...content.projects] });
-                  showToast('New project added at the top! Fill details and save.');
+                  showToast('Added new project');
                 }}
                 style={{
-                  padding: '12px 24px',
-                  borderRadius: '12px',
+                  padding: '4px 12px',
+                  borderRadius: '6px',
                   backgroundColor: '#139BFD',
-                  color: '#FFFFFF',
+                  color: '#FFF',
                   border: 'none',
-                  fontWeight: 700,
-                  fontSize: '14px',
+                  fontSize: '11px',
+                  fontWeight: 600,
                   cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
                 }}
               >
-                <span>+ Add New Project</span>
+                + Add Project
               </button>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {content.projects.map((proj, idx) => (
                 <div
                   key={proj.id}
                   style={{
-                    backgroundColor: '#0B1D28',
-                    border: '1px solid #16324A',
-                    borderRadius: '20px',
-                    padding: '24px',
+                    backgroundColor: '#0F172A',
+                    border: '1px solid #1E293B',
+                    borderRadius: '8px',
+                    padding: '10px 14px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', borderBottom: '1px solid #16324A', paddingBottom: '14px' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 700, color: '#42AFFD' }}>
-                      Project #{idx + 1}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const updated = content.projects.filter(p => p.id !== proj.id);
-                        setContent({ ...content, projects: updated });
-                        showToast('Project removed. Click Save Changes to commit.');
-                      }}
-                      style={{
-                        background: 'rgba(239, 68, 68, 0.15)',
-                        border: '1px solid rgba(239, 68, 68, 0.3)',
-                        color: '#F87171',
-                        padding: '6px 14px',
-                        borderRadius: '8px',
-                        fontSize: '12px',
-                        cursor: 'pointer',
-                        fontWeight: 600,
-                      }}
-                    >
-                      Delete Project
-                    </button>
-                  </div>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '18px' }}>
-                    {/* Image Upload */}
-                    <div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
+                    
+                    {/* Left: Thumbnail & Upload */}
+                    <div style={{ width: '140px', flexShrink: 0 }}>
                       <FileUploadButton
-                        label="Project Cover Image"
                         currentValue={proj.image}
                         onUpload={(url) => {
                           const updated = [...content.projects];
@@ -664,186 +550,161 @@ export default function AdminPage() {
                         }}
                         accept="image/*"
                         fileType="image"
-                        buttonText="Upload Cover Photo"
+                        buttonText="Image"
                       />
                     </div>
 
-                    {/* Details */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                      <div>
-                        <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '4px' }}>Project Title</label>
-                        <input
-                          type="text"
-                          value={proj.title}
-                          onChange={(e) => {
-                            const updated = [...content.projects];
-                            updated[idx].title = e.target.value;
-                            setContent({ ...content, projects: updated });
-                          }}
-                          style={{ width: '100%', padding: '10px 14px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '8px', color: '#FFF', fontSize: '14px', fontWeight: 600 }}
-                        />
-                      </div>
+                    {/* Middle: Title, Category, Metric */}
+                    <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '8px' }}>
+                      <input
+                        type="text"
+                        placeholder="Project Title"
+                        value={proj.title}
+                        onChange={(e) => {
+                          const updated = [...content.projects];
+                          updated[idx].title = e.target.value;
+                          setContent({ ...content, projects: updated });
+                        }}
+                        style={{ padding: '5px 8px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '5px', color: '#FFF', fontSize: '12px', fontWeight: 600 }}
+                      />
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                        <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '4px' }}>Category Tab</label>
-                          <select
-                            value={proj.category}
-                            onChange={(e) => {
-                              const updated = [...content.projects];
-                              updated[idx].category = e.target.value as any;
-                              setContent({ ...content, projects: updated });
-                            }}
-                            style={{ width: '100%', padding: '10px 14px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '8px', color: '#FFF', fontSize: '13px' }}
-                          >
-                            <option value="meta">Meta & Paid Ads</option>
-                            <option value="tracking">Conversion API & Tracking</option>
-                            <option value="cro">Sales Funnels & CRO</option>
-                            <option value="ecommerce">E-Commerce Growth</option>
-                          </select>
-                        </div>
+                      <select
+                        value={proj.category}
+                        onChange={(e) => {
+                          const updated = [...content.projects];
+                          updated[idx].category = e.target.value as any;
+                          setContent({ ...content, projects: updated });
+                        }}
+                        style={{ padding: '5px 8px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '5px', color: '#FFF', fontSize: '11px' }}
+                      >
+                        <option value="meta">Meta Ads</option>
+                        <option value="tracking">Tracking / CAPI</option>
+                        <option value="cro">Sales Funnels / CRO</option>
+                        <option value="ecommerce">E-Commerce</option>
+                      </select>
 
-                        <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '4px' }}>ROI / Highlight Badge</label>
-                          <input
-                            type="text"
-                            placeholder="+140% Leads | 3.8x ROAS"
-                            value={proj.metrics}
-                            onChange={(e) => {
-                              const updated = [...content.projects];
-                              updated[idx].metrics = e.target.value;
-                              setContent({ ...content, projects: updated });
-                            }}
-                            style={{ width: '100%', padding: '10px 14px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '8px', color: '#FFF', fontSize: '13px' }}
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '4px' }}>Case Summary</label>
-                        <textarea
-                          rows={2}
-                          value={proj.description}
-                          onChange={(e) => {
-                            const updated = [...content.projects];
-                            updated[idx].description = e.target.value;
-                            setContent({ ...content, projects: updated });
-                          }}
-                          style={{ width: '100%', padding: '10px 14px', backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '8px', color: '#FFF', fontSize: '13px', lineHeight: 1.5 }}
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        placeholder="Metric (+140% ROAS)"
+                        value={proj.metrics}
+                        onChange={(e) => {
+                          const updated = [...content.projects];
+                          updated[idx].metrics = e.target.value;
+                          setContent({ ...content, projects: updated });
+                        }}
+                        style={{ padding: '5px 8px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '5px', color: '#42AFFD', fontSize: '11px' }}
+                      />
                     </div>
+
+                    {/* Delete Icon */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = content.projects.filter(p => p.id !== proj.id);
+                        setContent({ ...content, projects: updated });
+                      }}
+                      title="Delete"
+                      style={{ background: 'transparent', border: 'none', color: '#EF4444', cursor: 'pointer', fontSize: '13px', padding: '4px' }}
+                    >
+                      🗑️
+                    </button>
                   </div>
+
+                  {/* Summary row */}
+                  <input
+                    type="text"
+                    placeholder="Short description of challenge, strategy, and results..."
+                    value={proj.description}
+                    onChange={(e) => {
+                      const updated = [...content.projects];
+                      updated[idx].description = e.target.value;
+                      setContent({ ...content, projects: updated });
+                    }}
+                    style={{ width: '100%', padding: '5px 8px', backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '5px', color: '#94A3B8', fontSize: '11px' }}
+                  />
                 </div>
               ))}
             </div>
 
-            {/* Bottom Save Action */}
-            <div style={{ textAlign: 'right', marginTop: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '12px' }}>
               <button
                 type="button"
                 onClick={handleSave}
                 disabled={saving}
-                style={{
-                  padding: '14px 32px',
-                  borderRadius: '12px',
-                  backgroundColor: '#139BFD',
-                  color: '#FFFFFF',
-                  border: 'none',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 20px rgba(19, 155, 253, 0.4)',
-                }}
+                style={{ padding: '6px 18px', borderRadius: '6px', backgroundColor: '#139BFD', color: '#FFF', border: 'none', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
               >
-                {saving ? 'Saving...' : '💾 Save All Projects'}
+                {saving ? 'Saving...' : '💾 Save Projects'}
               </button>
             </div>
           </div>
         )}
 
-        {/* ============================================================ */}
-        {/* TAB 3: SERVICES & SKILLS */}
-        {/* ============================================================ */}
+        {/* ========================================================= */}
+        {/* TAB 3: SERVICES & SKILLS (SIDE-BY-SIDE) */}
+        {/* ========================================================= */}
         {activeTab === 'services' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            {/* Services */}
-            <div style={{ backgroundColor: '#0B1D28', border: '1px solid #16324A', borderRadius: '20px', padding: '28px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '6px', color: '#42AFFD' }}>
-                Core Service Offerings
-              </h2>
-              <p style={{ fontSize: '13px', color: '#94A3B8', marginBottom: '22px' }}>
-                The 3 primary pillars displayed in your Expertise section.
-              </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            
+            {/* 3 Services in 1 row */}
+            <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '10px' }}>
+                Core Services (3 Pillars)
+              </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '10px' }}>
                 {content.services.map((serv, idx) => (
-                  <div key={serv.id} style={{ backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '14px', padding: '18px' }}>
-                    <div style={{ display: 'flex', gap: '16px', marginBottom: '10px' }}>
-                      <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '4px' }}>Service Title</label>
-                        <input
-                          type="text"
-                          value={serv.title}
-                          onChange={(e) => {
-                            const updated = [...content.services];
-                            updated[idx].title = e.target.value;
-                            setContent({ ...content, services: updated });
-                          }}
-                          style={{ width: '100%', padding: '10px 14px', backgroundColor: '#0B1D28', border: '1px solid #16324A', borderRadius: '8px', color: '#FFF', fontSize: '14px', fontWeight: 600 }}
-                        />
-                      </div>
-
-                      <div style={{ width: '120px' }}>
-                        <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '4px' }}>Score (%)</label>
-                        <input
-                          type="number"
-                          min={50}
-                          max={100}
-                          value={serv.score}
-                          onChange={(e) => {
-                            const updated = [...content.services];
-                            updated[idx].score = parseInt(e.target.value) || 0;
-                            setContent({ ...content, services: updated });
-                          }}
-                          style={{ width: '100%', padding: '10px 14px', backgroundColor: '#0B1D28', border: '1px solid #16324A', borderRadius: '8px', color: '#FFF', fontSize: '14px' }}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#94A3B8', marginBottom: '4px' }}>Description</label>
-                      <textarea
-                        rows={2}
-                        value={serv.description}
+                  <div key={serv.id} style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '8px', padding: '10px' }}>
+                    <div style={{ display: 'flex', gap: '6px', marginBottom: '6px' }}>
+                      <input
+                        type="text"
+                        value={serv.title}
                         onChange={(e) => {
                           const updated = [...content.services];
-                          updated[idx].description = e.target.value;
+                          updated[idx].title = e.target.value;
                           setContent({ ...content, services: updated });
                         }}
-                        style={{ width: '100%', padding: '10px 14px', backgroundColor: '#0B1D28', border: '1px solid #16324A', borderRadius: '8px', color: '#FFF', fontSize: '13px', lineHeight: 1.5 }}
+                        style={{ flex: 1, padding: '4px 8px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '4px', color: '#FFF', fontSize: '12px', fontWeight: 600 }}
+                      />
+                      <input
+                        type="number"
+                        min="50"
+                        max="100"
+                        value={serv.score}
+                        onChange={(e) => {
+                          const updated = [...content.services];
+                          updated[idx].score = parseInt(e.target.value) || 0;
+                          setContent({ ...content, services: updated });
+                        }}
+                        style={{ width: '50px', padding: '4px 6px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '4px', color: '#42AFFD', fontSize: '11px', textAlign: 'center' }}
                       />
                     </div>
+                    <textarea
+                      rows={2}
+                      value={serv.description}
+                      onChange={(e) => {
+                        const updated = [...content.services];
+                        updated[idx].description = e.target.value;
+                        setContent({ ...content, services: updated });
+                      }}
+                      style={{ width: '100%', padding: '4px 8px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '4px', color: '#94A3B8', fontSize: '11px', lineHeight: 1.3 }}
+                    />
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Key Skills */}
-            <div style={{ backgroundColor: '#0B1D28', border: '1px solid #16324A', borderRadius: '20px', padding: '28px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '6px', color: '#42AFFD' }}>
-                Skills & Proficiency Progress
-              </h2>
-              <p style={{ fontSize: '13px', color: '#94A3B8', marginBottom: '22px' }}>
-                Percentages shown in the skill progress bars.
-              </p>
+            {/* Skills Progress */}
+            <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '10px' }}>
+                Key Skills Proficiency
+              </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '8px' }}>
                 {content.skills.paidMedia.map((skill, idx) => (
-                  <div key={skill.name + idx} style={{ backgroundColor: '#06131B', border: '1px solid #16324A', borderRadius: '12px', padding: '14px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 700, color: '#FFF' }}>{skill.name}</span>
-                      <span style={{ fontSize: '13px', fontWeight: 800, color: '#139BFD' }}>{skill.percentage}%</span>
+                  <div key={skill.name + idx} style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', padding: '8px 10px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '4px' }}>
+                      <span style={{ color: '#E2E8F0', fontWeight: 600 }}>{skill.name}</span>
+                      <span style={{ color: '#139BFD', fontWeight: 700 }}>{skill.percentage}%</span>
                     </div>
                     <input
                       type="range"
@@ -855,30 +716,19 @@ export default function AdminPage() {
                         updated[idx].percentage = parseInt(e.target.value);
                         setContent({ ...content, skills: { ...content.skills, paidMedia: updated } });
                       }}
-                      style={{ width: '100%', accentColor: '#139BFD', cursor: 'pointer' }}
+                      style={{ width: '100%', accentColor: '#139BFD', cursor: 'pointer', height: '4px' }}
                     />
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Save */}
-            <div style={{ textAlign: 'right' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <button
                 type="button"
                 onClick={handleSave}
                 disabled={saving}
-                style={{
-                  padding: '14px 32px',
-                  borderRadius: '12px',
-                  backgroundColor: '#139BFD',
-                  color: '#FFFFFF',
-                  border: 'none',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 20px rgba(19, 155, 253, 0.4)',
-                }}
+                style={{ padding: '6px 18px', borderRadius: '6px', backgroundColor: '#139BFD', color: '#FFF', border: 'none', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
               >
                 {saving ? 'Saving...' : '💾 Save Services & Skills'}
               </button>
@@ -886,82 +736,60 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* ============================================================ */}
-        {/* TAB 4: CLIENT INBOX */}
-        {/* ============================================================ */}
+        {/* ========================================================= */}
+        {/* TAB 4: INBOX (CLEAN COMPACT LIST) */}
+        {/* ========================================================= */}
         {activeTab === 'inbox' && (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
-              <div>
-                <h2 style={{ fontSize: '22px', fontWeight: 800 }}>Client Inquiries Inbox</h2>
-                <p style={{ fontSize: '13px', color: '#94A3B8' }}>Every message submitted through your website contact form appears here.</p>
-              </div>
-
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: '#F1F5F9' }}>
+                Client Messages ({inbox.length})
+              </span>
               <button
                 type="button"
                 onClick={loadData}
-                disabled={loadingInbox}
-                style={{
-                  padding: '10px 18px',
-                  borderRadius: '10px',
-                  backgroundColor: '#0B1D28',
-                  border: '1px solid #16324A',
-                  color: '#42AFFD',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                }}
+                style={{ padding: '4px 10px', borderRadius: '6px', backgroundColor: '#0F172A', border: '1px solid #1E293B', color: '#94A3B8', fontSize: '11px', cursor: 'pointer' }}
               >
-                🔄 Refresh Messages
+                🔄 Refresh
               </button>
             </div>
 
             {inbox.length === 0 ? (
-              <div style={{ padding: '60px 20px', textAlign: 'center', backgroundColor: '#0B1D28', borderRadius: '20px', border: '1px dashed #16324A' }}>
-                <div style={{ fontSize: '36px', marginBottom: '12px' }}>📬</div>
-                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#FFFFFF', marginBottom: '6px' }}>No messages yet</h3>
-                <p style={{ fontSize: '13px', color: '#94A3B8', maxWidth: '380px', margin: '0 auto' }}>
-                  When visitors or prospective clients fill out the contact form, their inquiry and files will appear right here.
-                </p>
+              <div style={{ padding: '40px', textAlign: 'center', backgroundColor: '#0F172A', borderRadius: '8px', border: '1px dashed #1E293B', color: '#64748B' }}>
+                No messages yet.
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {inbox.map((msg) => (
                   <div
                     key={msg.id}
                     style={{
-                      backgroundColor: '#0B1D28',
-                      border: '1px solid #16324A',
-                      borderRadius: '18px',
-                      padding: '24px',
+                      backgroundColor: '#0F172A',
+                      border: '1px solid #1E293B',
+                      borderRadius: '8px',
+                      padding: '12px 14px',
                     }}
                   >
-                    {/* Header */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                       <div>
-                        <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', marginBottom: '4px' }}>
-                          {msg.name || 'Website Visitor'}
-                        </h4>
-                        <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', fontSize: '12px', color: '#94A3B8' }}>
-                          <span>📧 {msg.email}</span>
-                          {msg.phone && <span>📞 {msg.phone}</span>}
-                          {msg.subject && <span style={{ color: '#42AFFD' }}>🎯 {msg.subject}</span>}
-                        </div>
+                        <span style={{ fontSize: '13px', fontWeight: 700, color: '#FFF', marginRight: '10px' }}>
+                          {msg.name || 'Visitor'}
+                        </span>
+                        <span style={{ fontSize: '11px', color: '#64748B' }}>
+                          {msg.email} {msg.phone ? `• ${msg.phone}` : ''}
+                        </span>
                       </div>
-
-                      <span style={{ fontSize: '11px', color: '#64748B', backgroundColor: 'rgba(255, 255, 255, 0.05)', padding: '4px 10px', borderRadius: '500px' }}>
-                        {new Date(msg.createdAt).toLocaleDateString()} at {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      <span style={{ fontSize: '10px', color: '#64748B' }}>
+                        {new Date(msg.createdAt).toLocaleDateString()}
                       </span>
                     </div>
 
-                    {/* Message Body */}
-                    <div style={{ backgroundColor: '#06131B', borderRadius: '12px', padding: '16px', fontSize: '14px', lineHeight: 1.6, color: '#E2E8F0', marginBottom: '16px', border: '1px solid #16324A' }}>
+                    <div style={{ fontSize: '12px', color: '#CBD5E1', lineHeight: 1.4, marginBottom: '8px' }}>
                       {msg.message}
                     </div>
 
-                    {/* Attachment if present */}
-                    {msg.attachmentName && (
-                      <div style={{ marginBottom: '16px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      {msg.attachmentName && (
                         <a
                           href={msg.attachmentUrl}
                           download={msg.attachmentName}
@@ -970,40 +798,24 @@ export default function AdminPage() {
                           style={{
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '8px',
-                            padding: '8px 16px',
-                            borderRadius: '8px',
+                            gap: '4px',
+                            padding: '3px 8px',
+                            borderRadius: '4px',
                             backgroundColor: 'rgba(19, 155, 253, 0.15)',
-                            border: '1px solid rgba(19, 155, 253, 0.35)',
                             color: '#42AFFD',
-                            fontSize: '13px',
-                            fontWeight: 600,
+                            fontSize: '11px',
                             textDecoration: 'none',
                           }}
                         >
-                          📎 Download Attached File: {msg.attachmentName}
+                          📎 {msg.attachmentName}
                         </a>
-                      </div>
-                    )}
+                      )}
 
-                    {/* Quick Reply Actions */}
-                    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                       <a
-                        href={`mailto:${msg.email}?subject=Re: ${encodeURIComponent(msg.subject || 'Inquiry')}`}
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          padding: '8px 16px',
-                          borderRadius: '8px',
-                          backgroundColor: '#139BFD',
-                          color: '#FFFFFF',
-                          fontSize: '12px',
-                          fontWeight: 700,
-                          textDecoration: 'none',
-                        }}
+                        href={`mailto:${msg.email}?subject=Re: Inquiry`}
+                        style={{ padding: '3px 8px', borderRadius: '4px', backgroundColor: '#139BFD', color: '#FFF', fontSize: '11px', textDecoration: 'none', fontWeight: 600 }}
                       >
-                        ✉️ Reply via Email
+                        ✉️ Reply Email
                       </a>
 
                       {msg.phone && (
@@ -1011,21 +823,9 @@ export default function AdminPage() {
                           href={`https://wa.me/${msg.phone.replace(/[^0-9]/g, '')}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '6px',
-                            padding: '8px 16px',
-                            borderRadius: '8px',
-                            backgroundColor: 'rgba(37, 211, 102, 0.15)',
-                            border: '1px solid rgba(37, 211, 102, 0.3)',
-                            color: '#25D366',
-                            fontSize: '12px',
-                            fontWeight: 700,
-                            textDecoration: 'none',
-                          }}
+                          style={{ padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(37, 211, 102, 0.15)', border: '1px solid rgba(37, 211, 102, 0.3)', color: '#25D366', fontSize: '11px', textDecoration: 'none', fontWeight: 600 }}
                         >
-                          💬 Chat on WhatsApp
+                          💬 WhatsApp
                         </a>
                       )}
                     </div>
