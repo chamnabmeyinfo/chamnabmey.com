@@ -115,6 +115,23 @@ export default function AdminPage() {
     }
   };
 
+  const handleDeleteMessage = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this message?')) return;
+    try {
+      const res = await fetch(`/api/admin/inbox?id=${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        setInbox(prev => prev.filter(m => m.id !== id));
+        showToast('Message deleted');
+      } else {
+        showToast('Failed to delete message');
+      }
+    } catch {
+      showToast('Error deleting message');
+    }
+  };
+
   // -------------------------------------------------------------
   // Loading
   // -------------------------------------------------------------
@@ -814,16 +831,35 @@ export default function AdminPage() {
         {activeTab === 'services' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             
-            {/* 3 Services in 1 row */}
+            {/* Core Services */}
             <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
-              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '10px' }}>
-                Core Services (3 Pillars)
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase' }}>
+                  Core Services ({content.services.length})
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newServ = {
+                      id: 'serv-' + Date.now(),
+                      title: 'New Strategy Service',
+                      description: 'Comprehensive execution delivering predictable business revenue.',
+                      score: 95,
+                      icon: 'flaticon-consulting',
+                    };
+                    setContent({ ...content, services: [...content.services, newServ] });
+                    showToast('Added service');
+                  }}
+                  style={{ padding: '3px 8px', borderRadius: '4px', backgroundColor: '#139BFD', color: '#FFF', border: 'none', fontSize: '10px', fontWeight: 600, cursor: 'pointer' }}
+                >
+                  + Add Service
+                </button>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '10px' }}>
                 {content.services.map((serv, idx) => (
-                  <div key={serv.id} style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '8px', padding: '10px' }}>
-                    <div style={{ display: 'flex', gap: '6px', marginBottom: '6px' }}>
+                  <div key={serv.id || idx} style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '8px', padding: '10px' }}>
+                    <div style={{ display: 'flex', gap: '6px', alignItems: 'center', marginBottom: '6px' }}>
                       <input
                         type="text"
                         value={serv.title}
@@ -844,8 +880,19 @@ export default function AdminPage() {
                           updated[idx].score = parseInt(e.target.value) || 0;
                           setContent({ ...content, services: updated });
                         }}
-                        style={{ width: '50px', padding: '4px 6px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '4px', color: '#42AFFD', fontSize: '11px', textAlign: 'center' }}
+                        style={{ width: '45px', padding: '4px 6px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '4px', color: '#42AFFD', fontSize: '11px', textAlign: 'center' }}
                       />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = content.services.filter((_, i) => i !== idx);
+                          setContent({ ...content, services: updated });
+                        }}
+                        style={{ background: 'transparent', border: 'none', color: '#EF4444', cursor: 'pointer', fontSize: '12px', padding: '2px' }}
+                        title="Delete Service"
+                      >
+                        🗑️
+                      </button>
                     </div>
                     <textarea
                       rows={2}
@@ -864,16 +911,49 @@ export default function AdminPage() {
 
             {/* Paid Media Skills */}
             <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
-              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '10px' }}>
-                Paid Media & Performance Skills
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase' }}>
+                  Paid Media & Performance Skills
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newSkill = { name: 'NEW CAMPAIGN SKILL', percentage: 90 };
+                    setContent({ ...content, skills: { ...content.skills, paidMedia: [...content.skills.paidMedia, newSkill] } });
+                    showToast('Added skill');
+                  }}
+                  style={{ padding: '3px 8px', borderRadius: '4px', backgroundColor: '#139BFD', color: '#FFF', border: 'none', fontSize: '10px', fontWeight: 600, cursor: 'pointer' }}
+                >
+                  + Add Skill
+                </button>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '8px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '8px' }}>
                 {content.skills.paidMedia.map((skill, idx) => (
-                  <div key={skill.name + idx} style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', padding: '8px 10px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '4px' }}>
-                      <span style={{ color: '#E2E8F0', fontWeight: 600 }}>{skill.name}</span>
-                      <span style={{ color: '#139BFD', fontWeight: 700 }}>{skill.percentage}%</span>
+                  <div key={idx} style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', padding: '8px 10px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                      <input
+                        type="text"
+                        value={skill.name}
+                        onChange={(e) => {
+                          const updated = [...content.skills.paidMedia];
+                          updated[idx].name = e.target.value;
+                          setContent({ ...content, skills: { ...content.skills, paidMedia: updated } });
+                        }}
+                        style={{ flex: 1, padding: '2px 4px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '3px', color: '#FFF', fontSize: '11px', fontWeight: 600 }}
+                      />
+                      <span style={{ color: '#139BFD', fontWeight: 700, fontSize: '11px' }}>{skill.percentage}%</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = content.skills.paidMedia.filter((_, i) => i !== idx);
+                          setContent({ ...content, skills: { ...content.skills, paidMedia: updated } });
+                        }}
+                        style={{ background: 'transparent', border: 'none', color: '#EF4444', cursor: 'pointer', fontSize: '11px', padding: '0 2px' }}
+                        title="Delete Skill"
+                      >
+                        🗑️
+                      </button>
                     </div>
                     <input
                       type="range"
@@ -894,16 +974,49 @@ export default function AdminPage() {
 
             {/* Tracking & CRO Skills */}
             <div style={{ backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '10px', padding: '14px' }}>
-              <div style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase', marginBottom: '10px' }}>
-                Tracking, CRO & Tech Skills
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#42AFFD', textTransform: 'uppercase' }}>
+                  Tracking, CRO & Tech Skills
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newSkill = { name: 'NEW TECH / TRACKING SKILL', percentage: 90 };
+                    setContent({ ...content, skills: { ...content.skills, tracking: [...(content.skills.tracking || []), newSkill] } });
+                    showToast('Added skill');
+                  }}
+                  style={{ padding: '3px 8px', borderRadius: '4px', backgroundColor: '#139BFD', color: '#FFF', border: 'none', fontSize: '10px', fontWeight: 600, cursor: 'pointer' }}
+                >
+                  + Add Skill
+                </button>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '8px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '8px' }}>
                 {content.skills.tracking && content.skills.tracking.map((skill, idx) => (
-                  <div key={skill.name + idx} style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', padding: '8px 10px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '4px' }}>
-                      <span style={{ color: '#E2E8F0', fontWeight: 600 }}>{skill.name}</span>
-                      <span style={{ color: '#139BFD', fontWeight: 700 }}>{skill.percentage}%</span>
+                  <div key={idx} style={{ backgroundColor: '#090D12', border: '1px solid #1E293B', borderRadius: '6px', padding: '8px 10px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                      <input
+                        type="text"
+                        value={skill.name}
+                        onChange={(e) => {
+                          const updated = [...content.skills.tracking];
+                          updated[idx].name = e.target.value;
+                          setContent({ ...content, skills: { ...content.skills, tracking: updated } });
+                        }}
+                        style={{ flex: 1, padding: '2px 4px', backgroundColor: '#0F172A', border: '1px solid #1E293B', borderRadius: '3px', color: '#FFF', fontSize: '11px', fontWeight: 600 }}
+                      />
+                      <span style={{ color: '#139BFD', fontWeight: 700, fontSize: '11px' }}>{skill.percentage}%</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = content.skills.tracking.filter((_, i) => i !== idx);
+                          setContent({ ...content, skills: { ...content.skills, tracking: updated } });
+                        }}
+                        style={{ background: 'transparent', border: 'none', color: '#EF4444', cursor: 'pointer', fontSize: '11px', padding: '0 2px' }}
+                        title="Delete Skill"
+                      >
+                        🗑️
+                      </button>
                     </div>
                     <input
                       type="range"
@@ -1193,6 +1306,23 @@ export default function AdminPage() {
                           💬 WhatsApp
                         </a>
                       )}
+
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteMessage(msg.id)}
+                        style={{
+                          marginLeft: 'auto',
+                          padding: '3px 8px',
+                          backgroundColor: '#3B1219',
+                          color: '#F87171',
+                          border: '1px solid #7F1D1D',
+                          borderRadius: '4px',
+                          fontSize: '10px',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        🗑️ Delete
+                      </button>
                     </div>
                   </div>
                 ))}
