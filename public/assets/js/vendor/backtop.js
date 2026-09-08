@@ -6,8 +6,7 @@ $(document).ready(function () {
 
     // Check if the path element is found
     if ($progressPath.length === 0) {
-      console.warn("No progress path found.");
-      return; // Exit the function if the path element does not exist
+      return; // Exit cleanly if the path element does not exist on this page
     }
 
     // Access the raw DOM element
@@ -15,8 +14,7 @@ $(document).ready(function () {
 
     // Check if the element is actually available
     if (!progressPath) {
-      console.error("Progress path element is null.");
-      return; // Exit the function if the element is null
+      return;
     }
 
     // Get the length of the path
@@ -24,8 +22,7 @@ $(document).ready(function () {
     try {
       pathLength = progressPath.getTotalLength();
     } catch (e) {
-      console.error("Error getting path length:", e);
-      return; // Exit the function if there is an error getting the length
+      return;
     }
 
     // Initialize progress path styles
