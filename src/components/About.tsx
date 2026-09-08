@@ -1,165 +1,129 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'motion/react';
-import { ArrowUpRight, Download, GraduationCap, Building2, Code2, LineChart, Sparkles } from 'lucide-react';
-import SpotlightCard from './SpotlightCard';
+import React from "react";
+import Image from "next/image";
+import { ShieldCheck, Award, Layers, Target } from "lucide-react";
+import VirtuoButton from "./VirtuoButton";
 
 export default function About() {
-  const pillars = [
-    {
-      num: '01',
-      title: 'Performance Paid Media & CPA Optimization',
-      text: 'Managing ad spend across Meta and Google Ads with disciplined creative testing, custom audience modeling, and systematic CPA reduction.',
-      icon: LineChart,
-      highlight: 'Meta & Google Ads Specialist',
-    },
-    {
-      num: '02',
-      title: 'Technical Tracking & Meta CAPI Attribution',
-      text: 'Eliminating data loss through server-side Meta Conversion API (CAPI), Google Tag Manager, GA4 event modeling, and high-speed web infrastructure.',
-      icon: Code2,
-      highlight: 'Zero Signal Loss',
-    },
-    {
-      num: '03',
-      title: 'Executive Leadership & Commercial Delivery',
-      text: 'Track record directing 5 agency divisions as General Manager at KHB Media PLC, synchronizing creative video, design, and ad buying for corporate brands.',
-      icon: Building2,
-      highlight: '10+ Years Operational Leadership',
-    },
-  ];
-
   return (
-    <section id="about" className="py-24 sm:py-32 relative border-b-[1.8px] border-[#0C1F2E] bg-[#141414] overflow-hidden">
+    <section id="about" className="py-24 sm:py-32 relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute -top-40 right-0 w-[500px] h-[500px] bg-[#139BFD]/8 blur-[140px] -z-10" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#139BFD]/10 blur-[130px] rounded-full pointer-events-none -z-10" />
 
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        
-        {/* Section Header: Montserrat 700 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl mb-16 space-y-3"
-        >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] border-[1.8px] border-[#0C1F2E] bg-[#06131B] text-[#42AFFD] text-xs font-heading uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-[#139BFD]" />
-            <span>01 / Background & Strategic Edge</span>
-          </div>
-          <h2 className="font-heading text-3xl sm:text-4xl lg:text-[44px] text-white leading-tight">
-            Where Technical Precision Meets Commercial Growth
-          </h2>
-        </motion.div>
-
-        {/* Split Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           
-          {/* Left: Executive Philosophy & Foundation */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-6 space-y-6"
-          >
-            <blockquote className="font-heading text-xl sm:text-2xl font-bold text-white leading-snug border-l-[3px] border-[#139BFD] pl-5">
-              &ldquo;Traffic without attribution is wasted capital. Creative campaigns without conversion architecture fail to scale.&rdquo;
-            </blockquote>
-
-            <div className="space-y-4 font-body text-sm sm:text-base text-[#BEBEBE] leading-[1.75]">
-              <p>
-                Most digital marketing campaigns underperform because the underlying technical infrastructure is fragmented: slow landing pages, untracked pixels, and disconnected ad creatives bleed ROI.
-              </p>
-              <p>
-                With an IT background from <strong className="text-white font-semibold">Setec Institute</strong> and over a decade leading operations at <strong className="text-white font-semibold">KHB Media PLC</strong> and <strong className="text-white font-semibold">Riich Me</strong>, I unify media buying with clean code, sub-second page speeds, and server-side tracking.
-              </p>
-            </div>
-
-            {/* Quick Credential Badges: 20px radius cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-              <div className="p-4 rounded-[20px] border-[1.8px] border-[#0C1F2E] bg-[#06131B] flex items-center gap-3">
-                <GraduationCap className="w-5 h-5 text-[#139BFD] shrink-0" />
-                <div className="text-xs">
-                  <div className="font-heading font-bold text-white">Setec Institute</div>
-                  <div className="font-body text-[11px] text-[#BEBEBE]">IT & Software Engineering</div>
+          {/* Left Column: 2 Virtuo Spotlight Metrics Cards */}
+          <div className="lg:col-span-6 space-y-6">
+            
+            {/* 10+ Years of Experience Card */}
+            <div className="card-invers p-8 sm:p-10 relative overflow-hidden group hover:border-[#139BFD] transition-all duration-300">
+              <div className="tmp-light light-top-left" />
+              <div className="relative z-10">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-heading text-6xl sm:text-7xl font-extrabold text-white tracking-tight">
+                    10
+                  </span>
+                  <span className="text-gradient-invers text-5xl sm:text-6xl font-black">
+                    +
+                  </span>
                 </div>
-              </div>
-
-              <div className="p-4 rounded-[20px] border-[1.8px] border-[#0C1F2E] bg-[#06131B] flex items-center gap-3">
-                <Building2 className="w-5 h-5 text-[#42AFFD] shrink-0" />
-                <div className="text-xs">
-                  <div className="font-heading font-bold text-white">Ex-GM @ KHB Media</div>
-                  <div className="font-body text-[11px] text-[#BEBEBE]">Directed 5 Agency Divisions</div>
-                </div>
+                <h3 className="font-heading text-xl sm:text-2xl font-bold text-white mt-3">
+                  Years of Commercial Experience
+                </h3>
+                <p className="font-body text-[#BEBEBE] text-sm sm:text-base mt-2 leading-relaxed">
+                  Leading full-funnel digital growth, managing cross-functional agency teams, and engineering paid advertising platforms across Cambodia &amp; Southeast Asia.
+                </p>
               </div>
             </div>
 
-            {/* Inversweb Action Buttons: 6px radius */}
-            <div className="pt-4 flex flex-wrap items-center gap-4">
-              <a
-                href="/Resume-CHAMNAB-MEY.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary-invers px-5 py-2.5 text-xs gap-2"
-              >
-                <Download className="w-3.5 h-3.5 text-[#139BFD]" />
-                <span>Download Resume (PDF)</span>
-              </a>
-
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#139BFD] hover:text-[#42AFFD] transition-colors group"
-              >
-                <span>Inquire engagement</span>
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Right: The 3 Core Pillars with Inversweb Cards */}
-          <div className="lg:col-span-6 space-y-4">
-            {pillars.map((p, i) => {
-              const Icon = p.icon;
-              return (
-                <motion.div
-                  key={p.num}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <SpotlightCard className="p-6 space-y-2.5">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-[6px] bg-[#0C1F2E] flex items-center justify-center text-[#139BFD]">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <span className="text-xs font-heading font-bold text-[#139BFD]">
-                          {p.num}
-                        </span>
-                      </div>
-                      <span className="text-[10px] font-heading font-bold px-2.5 py-1 rounded-[10px] bg-[#0C1F2E]/60 border-[1.8px] border-[#0C1F2E] text-[#42AFFD]">
-                        {p.highlight}
-                      </span>
-                    </div>
-
-                    <h3 className="font-heading text-base font-bold text-white tracking-tight pt-1">
-                      {p.title}
+            {/* Specialty Card with Icon */}
+            <div className="card-invers p-8 sm:p-10 relative overflow-hidden group hover:border-[#139BFD] transition-all duration-300">
+              <div className="tmp-light light-top-left" />
+              <div className="relative z-10 flex items-start gap-6">
+                <div className="w-16 h-16 rounded-[14px] bg-[#0A1A26] border-[1.8px] border-[#0C1F2E] flex items-center justify-center text-[#139BFD] shrink-0 group-hover:border-[#139BFD] group-hover:bg-[#139BFD]/10 transition-colors">
+                  <ShieldCheck className="w-8 h-8" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-heading text-xl sm:text-2xl font-bold text-white">
+                      $1M+ Ad Spend Managed
                     </h3>
-                    <p className="font-body text-xs sm:text-sm text-[#BEBEBE] leading-[1.7]">
-                      {p.text}
-                    </p>
-                  </SpotlightCard>
-                </motion.div>
-              );
-            })}
+                  </div>
+                  <p className="font-heading text-sm text-[#42AFFD] font-semibold mt-1">
+                    50+ Platforms &amp; Funnels Engineered
+                  </p>
+                  <p className="font-body text-[#BEBEBE] text-sm mt-2 leading-relaxed">
+                    Zero guesswork. Every dollar allocated is backed by server-side Meta CAPI attribution, high-intent creative testing, and ruthless ROI optimization.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: About Details + 2 Small Cards + CTA */}
+          <div className="lg:col-span-6 flex flex-col items-start">
+            <span className="subtitle theme-gradient font-heading text-xs uppercase tracking-widest font-bold mb-3">
+              About Me
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+              Boost Business Strategic <br />
+              <span className="text-gradient-invers">Solutions with Us</span>
+            </h2>
+            <p className="font-body text-[#BEBEBE] text-base mt-5 leading-relaxed">
+              I am a rare hybrid in Southeast Asia: an IT Software Engineering graduate from <strong className="text-white">Setec Institute</strong> who spent over a decade running commercial agency operations as <strong className="text-white">General Manager at KHB Media PLC</strong> (directing 5 divisions).
+            </p>
+            <p className="font-body text-[#BEBEBE] text-base mt-3 leading-relaxed">
+              When you work with me, you skip the agency account-manager telephone game. You work directly with a senior strategist who understands tracking servers, media algorithms, and commercial P&amp;L.
+            </p>
+
+            {/* 2 Feature Cards Side-by-Side */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mt-8">
+              <div className="card-invers p-5 relative overflow-hidden group hover:border-[#139BFD] transition-colors">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-lg bg-[#0A1A26] border border-[#0C1F2E] flex items-center justify-center text-[#139BFD]">
+                    <Layers className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-heading text-base font-bold text-white">
+                    Data Architecture
+                  </h4>
+                </div>
+                <p className="font-body text-xs text-[#BEBEBE] leading-relaxed">
+                  First-party server tracking, clean event schemas, and deep funnel analytics.
+                </p>
+              </div>
+
+              <div className="card-invers p-5 relative overflow-hidden group hover:border-[#139BFD] transition-colors">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-lg bg-[#0A1A26] border border-[#0C1F2E] flex items-center justify-center text-[#42AFFD]">
+                    <Target className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-heading text-base font-bold text-white">
+                    Commercial ROI
+                  </h4>
+                </div>
+                <p className="font-body text-xs text-[#BEBEBE] leading-relaxed">
+                  Aggressive customer acquisition focused strictly on net revenue and margins.
+                </p>
+              </div>
+            </div>
+
+            {/* Read More Button */}
+            <div className="mt-8">
+              <VirtuoButton
+                href="/Resume-CHAMNAB-MEY.pdf"
+                text="Read More About Me (Full CV)"
+                iconType="download"
+                download="Resume-CHAMNAB-MEY.pdf"
+                variant="primary"
+                className="!py-3.5 !px-8 text-sm"
+              />
+            </div>
           </div>
 
         </div>
-
       </div>
     </section>
   );

@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------
-   DESIGN SYSTEM: INVERSWEB.COM SPECIFICATION
+   DESIGN SYSTEM: INVERSWEB.COM VIRTUO SPECIFICATION
 ---------------------------------------------------- */
 
 :root {
@@ -119,6 +119,177 @@ body {
   background: linear-gradient(135deg, #13FDFD 0%, #139BFD 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.theme-gradient {
+  background: linear-gradient(135deg, #13FDFD 0%, #139BFD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Virtuo Signature Hover-Icon-Reverse Button */
+.tmp-btn.hover-icon-reverse {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 13px 28px;
+  border-radius: 500px;
+  border: 1.8px solid #0C1F2E;
+  background: #06131B;
+  color: #FFFFFF;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.tmp-btn.hover-icon-reverse .icon-reverse-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.tmp-btn.hover-icon-reverse .btn-text {
+  display: inline-block;
+  transition: transform 0.5s cubic-bezier(0.1, 0.75, 0.25, 1);
+  margin-left: -18px;
+}
+
+.tmp-btn.hover-icon-reverse .btn-icon-right {
+  display: inline-block;
+  margin-left: 8px;
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.1, 0.75, 0.25, 1);
+}
+
+.tmp-btn.hover-icon-reverse .btn-icon-left {
+  display: inline-block;
+  margin-right: 8px;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.1, 0.75, 0.25, 1);
+}
+
+.tmp-btn.hover-icon-reverse:hover {
+  border-color: #139BFD;
+  background: #0A1E2C;
+  color: #FFFFFF;
+}
+
+.tmp-btn.hover-icon-reverse:hover .btn-text {
+  transform: translateX(18px);
+}
+
+.tmp-btn.hover-icon-reverse:hover .btn-icon-right {
+  opacity: 0;
+  transform: translateX(12px);
+}
+
+.tmp-btn.hover-icon-reverse:hover .btn-icon-left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Primary Filled Modern Button */
+.tmp-btn-primary {
+  background: #139BFD !important;
+  border-color: #139BFD !important;
+  color: #FFFFFF !important;
+}
+
+.tmp-btn-primary:hover {
+  background: #42AFFD !important;
+  border-color: #42AFFD !important;
+}
+
+/* Kinetic Floating Text */
+.up-down {
+  animation: up-down 2.4s ease-in-out infinite alternate;
+}
+
+.up-down-2 {
+  animation: up-down-2 3.1s ease-in-out infinite alternate;
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-16px);
+  }
+}
+
+@keyframes up-down-2 {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-22px);
+  }
+}
+
+/* Radial Progress Circles */
+svg.radial-progress {
+  height: auto;
+  max-width: 90px;
+  border-radius: 50%;
+  border: 1px solid rgba(19, 155, 253, 0.15);
+  transform: rotate(-90deg);
+  width: 100%;
+  background: #06131B;
+}
+
+svg.radial-progress circle {
+  fill: transparent;
+}
+
+svg.radial-progress circle.bar-static {
+  stroke: #0C1F2E !important;
+  stroke-width: 3px;
+}
+
+svg.radial-progress circle.bar--animated {
+  stroke: #139BFD;
+  stroke-width: 4px;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+svg.radial-progress text {
+  fill: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  text-anchor: middle;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Ambient Lighting Glows */
+.tmp-light {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.light-top-left {
+  top: -40px;
+  left: -40px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(19, 155, 253, 0.18) 0%, transparent 70%);
+}
+
+.light-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(19, 253, 253, 0.14) 0%, transparent 70%);
 }
 
 /* Continuous Marquee Loop */

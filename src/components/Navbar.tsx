@@ -1,160 +1,179 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Menu, X, Download } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState, useEffect } from "react";
+import { Menu, X, Send } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import OffCanvasSidebar from "./OffCanvasSidebar";
+import VirtuoButton from "./VirtuoButton";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 30);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Services', href: '#services' },
-    { label: 'Why Solo', href: '#why-solo' },
-    { label: 'Case Studies', href: '#case-studies' },
-    { label: 'ROI Simulator', href: '#calculator' },
-    { label: 'Capabilities', href: '#skills' },
-    { label: 'Reviews', href: '#testimonials' },
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "Experience", href: "#experience" },
+    { label: "Skills", href: "#skills" },
+    { label: "Portfolio", href: "#portfolio" },
+    { label: "Expertise", href: "#expertise" },
+    { label: "Reviews", href: "#testimonials" },
+    { label: "Contact", href: "#contact" },
   ];
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none">
-      <div className="max-w-6xl mx-auto flex items-center justify-between">
-        
-        {/* Floating Inversweb Navigation Container: 20px radius, 1.8px #0C1F2E border */}
-        <nav
-          className={`pointer-events-auto w-full flex items-center justify-between px-5 sm:px-6 py-3 rounded-[20px] border-[1.8px] transition-all duration-300 ${
-            scrolled
-              ? 'bg-[#06131B]/95 border-[#139BFD]/40 backdrop-blur-xl shadow-lg'
-              : 'bg-[#06131B]/90 border-[#0C1F2E] backdrop-blur-md'
-          }`}
-        >
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          scrolled
+            ? "py-3 bg-[#141414]/90 backdrop-blur-xl border-b-[1.8px] border-[#0C1F2E] shadow-2xl"
+            : "py-5 bg-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 rounded-[6px] bg-[#139BFD] flex items-center justify-center text-white font-bold text-xs tracking-wider font-heading">
+          <a href="#home" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-[10px] bg-gradient-to-br from-[#13FDFD] to-[#139BFD] flex items-center justify-center text-black font-black text-sm tracking-wider font-heading shadow-md shadow-[#139BFD]/20">
               CM
             </div>
             <div className="flex flex-col">
-              <span className="font-heading text-sm text-white group-hover:text-[#139BFD] transition-colors">
-                CHAMNAB MEY
+              <span className="font-heading text-base font-bold text-white group-hover:text-[#139BFD] transition-colors tracking-tight">
+                CHAMNAB<span className="text-[#139BFD]">.MEY</span>
               </span>
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#42AFFD] animate-pulse" />
                 <span className="text-[10px] text-[#BEBEBE] font-medium tracking-wide">
-                  Available Q3/Q4
+                  Solo Growth Strategist
                 </span>
               </div>
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-1 border-[1.8px] border-[#0C1F2E] rounded-[10px] px-2 py-1 bg-[#141414]/60">
+          {/* Desktop Nav Links */}
+          <nav className="hidden xl:flex items-center space-x-1 border-[1.8px] border-[#0C1F2E] rounded-full px-4 py-1.5 bg-[#06131B]/80 backdrop-blur-md">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="px-3 py-1.5 text-xs font-medium text-[#BEBEBE] hover:text-[#139BFD] rounded-[6px] transition-colors"
+                className="px-3.5 py-1.5 text-xs font-heading font-medium text-[#BEBEBE] hover:text-[#139BFD] rounded-full transition-colors"
               >
                 {link.label}
               </a>
             ))}
-          </div>
+          </nav>
 
-          {/* Right Action Controls: 6px button radius, #139BFD */}
-          <div className="hidden sm:flex items-center space-x-3">
-            <a
-              href="/Resume-CHAMNAB-MEY.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-medium text-[#BEBEBE] hover:text-white border-[1.8px] border-[#0C1F2E] hover:border-[#139BFD] bg-[#06131B] rounded-[6px] transition-all flex items-center gap-1.5"
-            >
-              <Download className="w-3.5 h-3.5 text-[#139BFD]" />
-              <span>CV (PDF)</span>
-            </a>
-
-            <a
-              href="#contact"
-              className="px-5 py-2 text-xs font-medium text-white bg-[#139BFD] hover:bg-[#42AFFD] rounded-[6px] transition-all flex items-center gap-1.5"
-            >
-              <span>Schedule Audit</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
-
-          {/* Mobile Menu Trigger */}
-          <div className="flex lg:hidden items-center gap-2">
-            <a
-              href="#contact"
-              className="px-3 py-1.5 text-xs font-medium text-white bg-[#139BFD] rounded-[6px]"
-            >
-              Contact
-            </a>
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-[6px] border-[1.8px] border-[#0C1F2E] bg-[#06131B] text-[#BEBEBE] hover:text-white transition-colors focus:outline-none"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </button>
-          </div>
-        </nav>
-
-      </div>
-
-      {/* Mobile Menu Sheet */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="pointer-events-auto lg:hidden fixed top-20 left-4 right-4 rounded-[20px] border-[1.8px] border-[#0C1F2E] bg-[#06131B]/95 backdrop-blur-2xl p-6 shadow-xl z-50 space-y-4"
-          >
-            <div className="flex flex-col space-y-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 text-sm font-medium text-[#BEBEBE] hover:text-[#139BFD] transition-colors rounded-[6px]"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
-            <div className="pt-4 border-t border-[#0C1F2E] flex flex-col gap-3">
+          {/* Right Area: Socials + CTA + Sidebar Drawer Trigger */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Social Share icons in desktop navbar */}
+            <div className="hidden md:flex items-center gap-2 pr-2 border-r border-[#0C1F2E]">
               <a
-                href="/Resume-CHAMNAB-MEY.pdf"
+                href="https://t.me/chamnabmey"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 text-xs font-medium text-center text-[#BEBEBE] border-[1.8px] border-[#0C1F2E] bg-[#141414] rounded-[6px] hover:text-white transition-colors flex items-center justify-center gap-2"
+                className="w-8 h-8 rounded-full border border-[#0C1F2E] flex items-center justify-center text-[#BEBEBE] hover:text-[#139BFD] hover:border-[#139BFD] transition-all"
+                title="Telegram"
               >
-                <Download className="w-3.5 h-3.5 text-[#139BFD]" />
-                <span>Download Resume (PDF)</span>
+                <Send className="w-3.5 h-3.5" />
               </a>
-
               <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 text-xs font-medium text-center text-white bg-[#139BFD] hover:bg-[#42AFFD] rounded-[6px]"
+                href="https://www.linkedin.com/in/chamnab-mey/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full border border-[#0C1F2E] flex items-center justify-center text-[#BEBEBE] hover:text-[#139BFD] hover:border-[#139BFD] transition-all font-heading font-bold text-xs"
+                title="LinkedIn"
               >
-                Schedule Free Strategy Call
+                in
+              </a>
+              <a
+                href="https://facebook.com/chamnabmey"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full border border-[#0C1F2E] flex items-center justify-center text-[#BEBEBE] hover:text-[#139BFD] hover:border-[#139BFD] transition-all font-heading font-bold text-xs"
+                title="Facebook"
+              >
+                fb
               </a>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+
+            {/* Virtuo Schedule Audit CTA Button */}
+            <div className="hidden sm:block">
+              <VirtuoButton
+                href="#contact"
+                text="Free Audit"
+                variant="primary"
+                className="!py-2.5 !px-5 text-xs"
+              />
+            </div>
+
+            {/* Virtuo Hamburger / Off-Canvas Sidebar Trigger */}
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="w-10 h-10 rounded-full border-[1.8px] border-[#0C1F2E] bg-[#06131B] flex flex-col items-center justify-center gap-1 text-white hover:border-[#139BFD] hover:text-[#139BFD] transition-all"
+              aria-label="Open sidebar menu"
+              title="Open profile menu"
+            >
+              <span className="w-4 h-[2px] bg-current rounded-full" />
+              <span className="w-2.5 h-[2px] bg-current rounded-full self-end mr-3" />
+              <span className="w-4 h-[2px] bg-current rounded-full" />
+            </button>
+
+            {/* Mobile menu toggle button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="xl:hidden w-10 h-10 rounded-full border-[1.8px] border-[#0C1F2E] bg-[#06131B] flex items-center justify-center text-white"
+              aria-label="Toggle navigation"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Slide-Down Navigation Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="xl:hidden bg-[#06131B] border-b-[1.8px] border-[#0C1F2E] px-6 py-5 mt-3 shadow-2xl"
+            >
+              <div className="flex flex-col space-y-3">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="font-heading text-sm text-[#BEBEBE] hover:text-[#139BFD] py-2 border-b border-[#0C1F2E]/60 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <div className="pt-3">
+                  <VirtuoButton
+                    href="#contact"
+                    text="Schedule Free Audit"
+                    variant="primary"
+                    className="w-full justify-center"
+                    onClick={() => setMobileMenuOpen(false)}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+
+      {/* Off-Canvas Slideout Drawer */}
+      <OffCanvasSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+    </>
   );
 }

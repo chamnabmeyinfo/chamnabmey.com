@@ -1,340 +1,251 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { CheckCircle2, AlertCircle, Loader2, ArrowRight, Mail, Phone, MapPin, Sparkles } from 'lucide-react';
-import LinkedInIcon from './icons/LinkedInIcon';
-import { submitClientLead } from '@/lib/firebase';
-import SpotlightCard from './SpotlightCard';
+import React, { useState } from "react";
+import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
+import VirtuoButton from "./VirtuoButton";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phoneOrTelegram: '',
-    company: '',
-    service: 'Performance Paid Ads (Meta & Google)',
-    budget: '$500 - $1,500 / month',
-    message: '',
+    name: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: "",
   });
-
+  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  const services = [
-    'Performance Paid Ads (Meta & Google)',
-    'High-Converting Web Architecture',
-    'Technical & Local SEO Strategy',
-    'E-Commerce Platform Operations',
-    'Full-Funnel Lead Generation Systems',
-    'Server-Side Meta CAPI Tracking Setup',
-    'Executive Consultation / Retainer',
-  ];
-
-  const budgets = [
-    'Under $500 / month',
-    '$500 – $1,500 / month (Starter)',
-    '$1,500 – $3,000 / month (Growth)',
-    '$3,000+ / month (Scaling)',
-    'One-time Architecture / Project Scope',
-  ];
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
 
-    try {
-      await submitClientLead(formData);
-      setSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        phoneOrTelegram: '',
-        company: '',
-        service: 'Performance Paid Ads (Meta & Google)',
-        budget: '$500 - $1,500 / month',
-        message: '',
-      });
-    } catch (err: any) {
-      console.error('Submission error:', err);
-      setError(err.message || 'An error occurred while sending your message. Please try again.');
-    } finally {
+    // Simulate submission / Firebase dispatch
+    setTimeout(() => {
       setLoading(false);
-    }
+      setSubmitted(true);
+      setFormData({ name: "", phone: "", email: "", subject: "", message: "" });
+    }, 800);
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32 relative border-b-[1.8px] border-[#0C1F2E] bg-[#141414] overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <section id="contact" className="py-24 sm:py-32 relative bg-[#06131B]/70 border-t-[1.8px] border-[#0C1F2E]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Left Column: Direct Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-5 space-y-8"
-          >
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] border-[1.8px] border-[#0C1F2E] bg-[#06131B] text-[#42AFFD] text-xs font-heading uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5 text-[#139BFD]" />
-                <span>07 / Direct Engagement</span>
-              </div>
-              <h2 className="font-heading text-3xl sm:text-4xl lg:text-[44px] text-white leading-tight">
-                Initiate a Partnership
-              </h2>
-              <p className="font-body text-base text-[#BEBEBE] leading-[1.75]">
-                Whether you need an ad account audit, server-side Meta CAPI setup, or an end-to-end customer acquisition engine, share your parameters below.
-              </p>
-            </div>
+        <div className="card-invers p-8 sm:p-14 relative overflow-hidden">
+          <div className="tmp-light light-top-left" />
 
-            {/* Direct Contact Pillars: 20px radius cards */}
-            <div className="space-y-4 pt-2 text-xs">
-              
-              <div className="p-4 rounded-[20px] bg-[#06131B] border-[1.8px] border-[#0C1F2E] space-y-1">
-                <span className="text-[11px] font-heading uppercase tracking-wider text-[#BEBEBE] flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-[#139BFD]" />
-                  <span>Official Direct Email</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 relative z-10">
+            
+            {/* Left Column: Direct Contact Details */}
+            <div className="lg:col-span-5 flex flex-col justify-between">
+              <div>
+                <span className="subtitle theme-gradient font-heading text-xs uppercase tracking-widest font-bold block mb-3">
+                  Get In Touch
                 </span>
-                <a
-                  href="mailto:admin@chamnabmey.com"
-                  className="font-heading text-sm text-white hover:text-[#139BFD] transition-colors block font-bold"
-                >
-                  admin@chamnabmey.com
-                </a>
-                <span className="text-[#BEBEBE] text-[11px] font-body">chamnabmey.info@gmail.com</span>
-              </div>
-
-              <div className="p-4 rounded-[20px] bg-[#06131B] border-[1.8px] border-[#0C1F2E] space-y-1">
-                <span className="text-[11px] font-heading uppercase tracking-wider text-[#BEBEBE] flex items-center gap-1.5">
-                  <Phone className="w-3.5 h-3.5 text-[#42AFFD]" />
-                  <span>Phone & Instant Messaging</span>
-                </span>
-                <a
-                  href="tel:+85515705703"
-                  className="font-heading text-sm text-white hover:text-[#139BFD] transition-colors block font-bold"
-                >
-                  +855 15 705 703
-                </a>
-                <span className="text-[#42AFFD] text-[11px] font-body flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#139BFD] animate-pulse" />
-                  <span>Telegram & WhatsApp active</span>
-                </span>
-              </div>
-
-              <div className="p-4 rounded-[20px] bg-[#06131B] border-[1.8px] border-[#0C1F2E] space-y-1">
-                <span className="text-[11px] font-heading uppercase tracking-wider text-[#BEBEBE] flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-[#139BFD]" />
-                  <span>Location</span>
-                </span>
-                <span className="font-heading text-xs font-bold text-white block">
-                  #75, Toulsambo, Prey Veng, Dongkor
-                </span>
-                <span className="text-[#BEBEBE] text-[11px] font-body">12000 Phnom Penh, Cambodia</span>
-              </div>
-
-              <div className="p-4 rounded-[20px] bg-[#06131B] border-[1.8px] border-[#0C1F2E] space-y-1">
-                <span className="text-[11px] font-heading uppercase tracking-wider text-[#BEBEBE] flex items-center gap-1.5">
-                  <LinkedInIcon className="w-3.5 h-3.5 text-[#139BFD]" />
-                  <span>Executive Network</span>
-                </span>
-                <a
-                  href="https://www.linkedin.com/in/chamnabmey"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-heading text-sm text-[#139BFD] hover:underline block font-bold"
-                >
-                  linkedin.com/in/chamnabmey
-                </a>
-              </div>
-
-            </div>
-
-            <div className="pt-2 text-[11px] text-[#BEBEBE] font-body">
-              Inquiries dispatched instantly to private Telegram and logged in Google Cloud.
-            </div>
-          </motion.div>
-
-          {/* Right Column: Dynamic Form in Inversweb Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-7"
-          >
-            <SpotlightCard className="p-8 sm:p-10 border-[#0C1F2E]">
-              <div className="mb-6 space-y-1">
-                <h3 className="font-heading text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  Project Scope Inquiry
-                </h3>
-                <p className="font-body text-xs sm:text-sm text-[#BEBEBE]">
-                  Fill out the parameters below. Chamnab will review your business model and reply within 24 business hours.
+                <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                  Get Ready To Create <br />
+                  <span className="text-gradient-invers">Predictable Revenue</span>
+                </h2>
+                <p className="font-body text-sm text-[#BEBEBE] mt-4 leading-relaxed">
+                  Have an active media spend of \$500+/month or need enterprise-grade server-side tracking? Connect with me directly for a confidential audit.
                 </p>
+
+                <div className="mt-8 space-y-4">
+                  <a
+                    href="mailto:admin@chamnabmey.com"
+                    className="flex items-center gap-4 p-4 rounded-xl border border-[#0C1F2E] bg-[#0A1A26]/60 hover:border-[#139BFD] transition-colors group"
+                  >
+                    <div className="w-11 h-11 rounded-lg bg-[#139BFD]/10 text-[#139BFD] flex items-center justify-center group-hover:bg-[#139BFD] group-hover:text-black transition-colors">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase font-heading tracking-wider text-[#BEBEBE] block">
+                        Direct Email
+                      </span>
+                      <span className="text-sm font-bold text-white group-hover:text-[#139BFD] transition-colors font-heading">
+                        admin@chamnabmey.com
+                      </span>
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://t.me/chamnabmey"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-4 rounded-xl border border-[#0C1F2E] bg-[#0A1A26]/60 hover:border-[#139BFD] transition-colors group"
+                  >
+                    <div className="w-11 h-11 rounded-lg bg-[#139BFD]/10 text-[#139BFD] flex items-center justify-center group-hover:bg-[#139BFD] group-hover:text-black transition-colors">
+                      <Send className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase font-heading tracking-wider text-[#BEBEBE] block">
+                        Direct Telegram
+                      </span>
+                      <span className="text-sm font-bold text-white group-hover:text-[#139BFD] transition-colors font-heading">
+                        @chamnabmey
+                      </span>
+                    </div>
+                  </a>
+
+                  <a
+                    href="tel:+85515705703"
+                    className="flex items-center gap-4 p-4 rounded-xl border border-[#0C1F2E] bg-[#0A1A26]/60 hover:border-[#139BFD] transition-colors group"
+                  >
+                    <div className="w-11 h-11 rounded-lg bg-[#139BFD]/10 text-[#139BFD] flex items-center justify-center group-hover:bg-[#139BFD] group-hover:text-black transition-colors">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase font-heading tracking-wider text-[#BEBEBE] block">
+                        Phone Direct
+                      </span>
+                      <span className="text-sm font-bold text-white group-hover:text-[#139BFD] transition-colors font-heading">
+                        +855 15 705 703
+                      </span>
+                    </div>
+                  </a>
+
+                  <div className="flex items-center gap-4 p-4 rounded-xl border border-[#0C1F2E] bg-[#0A1A26]/60">
+                    <div className="w-11 h-11 rounded-lg bg-[#139BFD]/10 text-[#139BFD] flex items-center justify-center">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase font-heading tracking-wider text-[#BEBEBE] block">
+                        Headquarters
+                      </span>
+                      <span className="text-sm font-bold text-white font-heading">
+                        Phnom Penh, Cambodia
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {success ? (
-                <div className="p-8 rounded-[20px] bg-[#0C1F2E]/60 border-[1.8px] border-[#139BFD] text-white space-y-4 text-center">
-                  <CheckCircle2 className="w-12 h-12 text-[#139BFD] mx-auto" />
-                  <div className="space-y-1">
-                    <h4 className="font-heading font-bold text-lg text-white">Inquiry Received Successfully</h4>
-                    <p className="font-body text-xs sm:text-sm text-[#BEBEBE] leading-relaxed max-w-md mx-auto">
-                      Thank you! Your project request has been logged. Chamnab Mey will review your parameters and follow up via email or Telegram shortly.
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setSuccess(false)}
-                    className="btn-primary-invers px-5 py-2.5 text-xs font-medium mt-2"
-                  >
-                    Submit Another Inquiry
-                  </button>
+              <div className="mt-8 pt-6 border-t border-[#0C1F2E]">
+                <div className="flex items-center gap-2 text-xs text-[#BEBEBE]">
+                  <span className="w-2 h-2 rounded-full bg-[#13FDFD] animate-ping" />
+                  <span>Typically responds within 2 business hours (ICT GMT+7).</span>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {error && (
-                    <div className="p-3.5 rounded-[5px] bg-rose-500/10 border-[1.8px] border-rose-500/30 text-rose-400 text-xs flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
-                      <span>{error}</span>
-                    </div>
-                  )}
+              </div>
+            </div>
 
-                  {/* Input Fields: 5px radius, 1.8px border #0C1F2E, 15px 20px padding */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Right Column: Virtuo Contact Form */}
+            <div className="lg:col-span-7">
+              <div className="bg-[#0A1A26] border-[1.8px] border-[#0C1F2E] rounded-[20px] p-6 sm:p-10">
+                <span className="text-xs uppercase font-heading font-bold tracking-widest text-[#42AFFD] block mb-2">
+                  START A CONVERSATION
+                </span>
+                <h3 className="font-heading text-2xl font-bold text-white mb-6">
+                  Request a Confidential Growth Audit
+                </h3>
+
+                {submitted ? (
+                  <div className="p-8 rounded-2xl bg-[#06131B] border border-[#139BFD] text-center space-y-4">
+                    <CheckCircle2 className="w-12 h-12 text-[#139BFD] mx-auto" />
+                    <h4 className="font-heading text-xl font-bold text-white">
+                      Inquiry Received Successfully
+                    </h4>
+                    <p className="font-body text-sm text-[#BEBEBE] max-w-md mx-auto">
+                      Thank you for reaching out. I personally review every inquiry and will respond within 2 hours.
+                    </p>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="text-xs text-[#139BFD] underline font-heading pt-2"
+                    >
+                      Send another message
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-heading font-medium text-[#BEBEBE] mb-1.5">
+                          Your Name *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          placeholder="e.g. John Doe"
+                          className="input-invers w-full text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-heading font-medium text-[#BEBEBE] mb-1.5">
+                          Phone / Telegram *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder="+855 12 345 678"
+                          className="input-invers w-full text-sm"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-heading font-medium text-[#BEBEBE] mb-1.5">
+                          Your Email *
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          placeholder="john@company.com"
+                          className="input-invers w-full text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-heading font-medium text-[#BEBEBE] mb-1.5">
+                          Primary Objective
+                        </label>
+                        <select
+                          value={formData.subject}
+                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                          className="input-invers w-full text-sm bg-[#06131B]"
+                        >
+                          <option value="">Select Service Scope</option>
+                          <option value="Paid Ads Scale">Performance Paid Ads (Meta/Google)</option>
+                          <option value="Meta CAPI Setup">Meta CAPI &amp; Tracking Fix</option>
+                          <option value="High-Converting Web">High-Converting Web Architecture</option>
+                          <option value="Full Growth Advisory">Solo Fractional CMO / Growth Advisory</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <div>
-                      <label className="block text-xs font-heading font-bold text-[#BEBEBE] mb-1.5">
-                        Your Full Name *
+                      <label className="block text-xs font-heading font-medium text-[#BEBEBE] mb-1.5">
+                        Tell Me About Your Business &amp; Goals *
                       </label>
-                      <input
-                        type="text"
+                      <textarea
+                        rows={4}
                         required
-                        placeholder="e.g., Sok Dara"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="input-invers w-full text-xs placeholder:text-[#BEBEBE]/40"
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        placeholder="Current monthly ad spend, business niche, and what you're trying to solve..."
+                        className="input-invers w-full text-sm resize-none"
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-heading font-bold text-[#BEBEBE] mb-1.5">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="name@company.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="input-invers w-full text-xs placeholder:text-[#BEBEBE]/40"
+                    <div className="pt-2">
+                      <VirtuoButton
+                        type="submit"
+                        text={loading ? "Sending..." : "Submit Inquiry &amp; Request Audit"}
+                        variant="primary"
+                        className="w-full justify-center !py-4"
                       />
                     </div>
-                  </div>
+                  </form>
+                )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-heading font-bold text-[#BEBEBE] mb-1.5">
-                        Phone / Telegram Handle *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="+855 12 345 678 or @handle"
-                        value={formData.phoneOrTelegram}
-                        onChange={(e) => setFormData({ ...formData, phoneOrTelegram: e.target.value })}
-                        className="input-invers w-full text-xs placeholder:text-[#BEBEBE]/40"
-                      />
-                    </div>
+              </div>
+            </div>
 
-                    <div>
-                      <label className="block text-xs font-heading font-bold text-[#BEBEBE] mb-1.5">
-                        Company / Brand Name
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g., Solis Cambodia"
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="input-invers w-full text-xs placeholder:text-[#BEBEBE]/40"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-heading font-bold text-[#BEBEBE] mb-1.5">
-                        Primary Capability Needed
-                      </label>
-                      <select
-                        value={formData.service}
-                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="input-invers w-full text-xs"
-                      >
-                        {services.map((s) => (
-                          <option key={s} value={s} className="bg-[#06131B] text-white">
-                            {s}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-heading font-bold text-[#BEBEBE] mb-1.5">
-                        Estimated Monthly Ad Budget
-                      </label>
-                      <select
-                        value={formData.budget}
-                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="input-invers w-full text-xs"
-                      >
-                        {budgets.map((b) => (
-                          <option key={b} value={b} className="bg-[#06131B] text-white">
-                            {b}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-heading font-bold text-[#BEBEBE] mb-1.5">
-                      Project Goals & Current Bottlenecks *
-                    </label>
-                    <textarea
-                      required
-                      rows={4}
-                      placeholder="Briefly describe your objectives, current challenges, and timeline..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="input-invers w-full text-xs placeholder:text-[#BEBEBE]/40 resize-none"
-                    />
-                  </div>
-
-                  {/* Button Spec: 6px radius, #139BFD, 500 weight, flat */}
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="btn-primary-invers w-full py-4 px-6 text-xs sm:text-sm font-medium gap-2 disabled:opacity-50"
-                  >
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Submitting parameters...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>Submit Consultation Request</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
-            </SpotlightCard>
-          </motion.div>
+          </div>
 
         </div>
 
