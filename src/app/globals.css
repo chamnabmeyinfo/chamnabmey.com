@@ -1,325 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap");
-@import "tailwindcss";
-
 /* ----------------------------------------------------
-   DESIGN SYSTEM: INVERSWEB.COM VIRTUO SPECIFICATION
+   VIRTUO DESIGN SYSTEM ENHANCEMENTS
 ---------------------------------------------------- */
 
-:root {
-  --color-primary: #139BFD;
-  --color-accent: #42AFFD;
-  --color-surface: #141414;
-  --color-card: #06131B;
-  --color-card-border: #0C1F2E;
-  --color-elevated: #272727;
-  --color-text-main: #FFFFFF;
-  --color-text-muted: #BEBEBE;
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Poppins', sans-serif;
-}
-
-/* Base Body Application */
-body {
-  background-color: #141414;
-  color: #FFFFFF;
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.75;
-  overflow-x: hidden;
+html {
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-::selection {
-  background-color: #139BFD;
-  color: #FFFFFF;
-}
-
-/* Typography Classes */
-.font-heading {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.font-body {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  line-height: 1.75;
-}
-
-/* Inversweb Specific Component Tokens */
-
-/* Button Spec: #139BFD bg, #FFFFFF text, 6px radius, 500 weight, flat */
-.btn-primary-invers {
-  background-color: #139BFD;
-  color: #FFFFFF;
-  border-radius: 6px;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease, transform 0.15s ease;
-}
-
-.btn-primary-invers:hover {
-  background-color: #42AFFD;
-}
-
-.btn-secondary-invers {
-  background-color: #06131B;
-  color: #BEBEBE;
-  border: 1.8px solid #0C1F2E;
-  border-radius: 6px;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.btn-secondary-invers:hover {
-  color: #FFFFFF;
-  border-color: #139BFD;
-  background-color: #0A1C2A;
-}
-
-/* Card Spec: #06131B bg, 1.8px solid #0C1F2E, 20px radius, 20px padding, flat */
-.card-invers {
-  background-color: #06131B;
-  border: 1.8px solid #0C1F2E;
-  border-radius: 20px;
-}
-
-/* Input Spec: 1.8px solid #0C1F2E, 5px radius, 15px 20px padding, #06131B bg */
-.input-invers {
-  background-color: #06131B;
-  border: 1.8px solid #0C1F2E;
-  border-radius: 5px;
-  padding: 15px 20px;
-  color: #FFFFFF;
-  font-family: 'Poppins', sans-serif;
-  transition: border-color 0.2s ease;
-}
-
-.input-invers:focus {
-  border-color: #139BFD;
-  outline: none;
-}
-
-/* Chip / Badge Spec: 10px radius, 1.8px solid #0C1F2E */
-.chip-invers {
-  border-radius: 10px;
-  border: 1.8px solid #0C1F2E;
-  background-color: rgba(6, 19, 27, 0.8);
-}
-
-/* Gradient Spec: #13FDFD, #139BFD */
-.text-gradient-invers {
-  background: linear-gradient(135deg, #13FDFD 0%, #139BFD 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.theme-gradient {
-  background: linear-gradient(135deg, #13FDFD 0%, #139BFD 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Virtuo Signature Hover-Icon-Reverse Button */
-.tmp-btn.hover-icon-reverse {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 13px 28px;
-  border-radius: 500px;
-  border: 1.8px solid #0C1F2E;
-  background: #06131B;
-  color: #FFFFFF;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.tmp-btn.hover-icon-reverse .icon-reverse-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-}
-
-.tmp-btn.hover-icon-reverse .btn-text {
-  display: inline-block;
-  transition: transform 0.5s cubic-bezier(0.1, 0.75, 0.25, 1);
-  margin-left: -18px;
-}
-
-.tmp-btn.hover-icon-reverse .btn-icon-right {
-  display: inline-block;
-  margin-left: 8px;
-  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.1, 0.75, 0.25, 1);
-}
-
-.tmp-btn.hover-icon-reverse .btn-icon-left {
-  display: inline-block;
-  margin-right: 8px;
-  opacity: 0;
-  transform: translateX(-12px);
-  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.1, 0.75, 0.25, 1);
-}
-
-.tmp-btn.hover-icon-reverse:hover {
-  border-color: #139BFD;
-  background: #0A1E2C;
-  color: #FFFFFF;
-}
-
-.tmp-btn.hover-icon-reverse:hover .btn-text {
-  transform: translateX(18px);
-}
-
-.tmp-btn.hover-icon-reverse:hover .btn-icon-right {
-  opacity: 0;
-  transform: translateX(12px);
-}
-
-.tmp-btn.hover-icon-reverse:hover .btn-icon-left {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* Primary Filled Modern Button */
-.tmp-btn-primary {
-  background: #139BFD !important;
-  border-color: #139BFD !important;
-  color: #FFFFFF !important;
-}
-
-.tmp-btn-primary:hover {
-  background: #42AFFD !important;
-  border-color: #42AFFD !important;
-}
-
-/* Kinetic Floating Text */
-.up-down {
-  animation: up-down 2.4s ease-in-out infinite alternate;
-}
-
-.up-down-2 {
-  animation: up-down-2 3.1s ease-in-out infinite alternate;
-}
-
-@keyframes up-down {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-16px);
-  }
-}
-
-@keyframes up-down-2 {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-22px);
-  }
-}
-
-/* Radial Progress Circles */
-svg.radial-progress {
-  height: auto;
-  max-width: 90px;
-  border-radius: 50%;
-  border: 1px solid rgba(19, 155, 253, 0.15);
-  transform: rotate(-90deg);
-  width: 100%;
-  background: #06131B;
-}
-
-svg.radial-progress circle {
-  fill: transparent;
-}
-
-svg.radial-progress circle.bar-static {
-  stroke: #0C1F2E !important;
-  stroke-width: 3px;
-}
-
-svg.radial-progress circle.bar--animated {
-  stroke: #139BFD;
-  stroke-width: 4px;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-svg.radial-progress text {
-  fill: #FFFFFF;
-  font-size: 15px;
-  font-weight: 700;
-  text-anchor: middle;
-  font-family: 'Montserrat', sans-serif;
-}
-
-/* Ambient Lighting Glows */
-.tmp-light {
-  position: absolute;
-  pointer-events: none;
-  border-radius: 50%;
-  filter: blur(80px);
-}
-
-.light-top-left {
-  top: -40px;
-  left: -40px;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, rgba(19, 155, 253, 0.18) 0%, transparent 70%);
-}
-
-.light-center {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 240px;
-  height: 240px;
-  background: radial-gradient(circle, rgba(19, 253, 253, 0.14) 0%, transparent 70%);
-}
-
-/* Continuous Marquee Loop */
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 32s linear infinite;
-  will-change: transform;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #141414;
+  background: #06131B;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -328,5 +25,17 @@ svg.radial-progress text {
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: #139BFD;
+}
+
+body.tmp-white-version ::-webkit-scrollbar-track {
+  background: #f4f6f8;
+}
+
+body.tmp-white-version ::-webkit-scrollbar-thumb {
+  background: #c5d0db;
+}
+
+body.tmp-white-version ::-webkit-scrollbar-thumb:hover {
   background: #139BFD;
 }
