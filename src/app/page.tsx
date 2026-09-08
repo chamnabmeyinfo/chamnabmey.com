@@ -668,7 +668,11 @@ export default async function HomePage() {
                         <div className="my-expertise-card-wrap">
                             <div className="expertise-card-left">
                                 <div className="expertise-card-logo">
-                                    <img src={serv.icon || `/assets/images/my-expertise/logo-${sIdx + 4}.svg`} alt={serv.title} />
+                                    {(() => {
+                                        const isImagePath = serv.icon && (serv.icon.startsWith('/') || serv.icon.startsWith('http')) && !serv.icon.includes('flaticon');
+                                        const iconSrc = isImagePath ? serv.icon : `/assets/images/my-expertise/logo-${((sIdx % 3) + 4)}.svg`;
+                                        return <img src={iconSrc} alt={serv.title} />;
+                                    })()}
                                 </div>
                                 <h3 className="title">{serv.title}</h3>
                             </div>
@@ -705,34 +709,46 @@ export default async function HomePage() {
         <div className="client-testimonial-swiper position-relative">
             <div className="swiper testimonial-swiper-v2">
                 <div className="swiper-wrapper">
-                    {testimonials && testimonials.map((test, tIdx) => (
-                        <div className={`swiper-slide tmp-scroll-trigger animation-order-${tIdx + 1}`} key={test.id || tIdx}>
-                            <div className="client-testimonial-card-wrap">
-                                <div className="client-card-head">
-                                    <div className="client-info">
-                                        <div className="client-img">
-                                            <img src={test.avatar || "/assets/images/testimonial/client-img-1.jpg"} alt={test.name} />
+                    {(() => {
+                        const rawTestimonials = testimonials && testimonials.length > 0 ? testimonials : [];
+                        const displayTestimonials = rawTestimonials.length > 0 && rawTestimonials.length < 5
+                            ? [...rawTestimonials, ...rawTestimonials]
+                            : rawTestimonials;
+
+                        return displayTestimonials.map((test, tIdx) => {
+                            const avatarSrc = test.avatar && test.avatar.startsWith('/')
+                                ? test.avatar
+                                : "/assets/images/testimonial/client-img-1.jpg";
+                            return (
+                                <div className={`swiper-slide tmp-scroll-trigger animation-order-${(tIdx % (rawTestimonials.length || 1)) + 1}`} key={`${test.id || 'test'}-${tIdx}`}>
+                                    <div className="client-testimonial-card-wrap">
+                                        <div className="client-card-head">
+                                            <div className="client-info">
+                                                <div className="client-img">
+                                                    <img src={avatarSrc} alt={test.name} />
+                                                </div>
+                                                <div className="client-details">
+                                                    <h3 className="client-title">{test.name}</h3>
+                                                    <p className="client-para">{test.role}</p>
+                                                </div>
+                                            </div>
+                                            <div className="tmp-star">
+                                                <ul>
+                                                    {[...Array(test.stars || 5)].map((_, stIdx) => (
+                                                        <li key={stIdx}><i className="fa-solid fa-star"></i></li>
+                                                    ))}
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div className="client-details">
-                                            <h3 className="client-title">{test.name}</h3>
-                                            <p className="client-para">{test.role}</p>
+                                        <p className="client-para">{test.quote}</p>
+                                        <div className="quat-logo">
+                                            <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
                                         </div>
                                     </div>
-                                    <div className="tmp-star">
-                                        <ul>
-                                            {[...Array(test.stars || 5)].map((_, stIdx) => (
-                                                <li key={stIdx}><i className="fa-solid fa-star"></i></li>
-                                            ))}
-                                        </ul>
-                                    </div>
                                 </div>
-                                <p className="client-para">{test.quote}</p>
-                                <div className="quat-logo">
-                                    <img src="/assets/images/testimonial/quat-logo.svg" alt="quat-logo" />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                            );
+                        });
+                    })()}
                 </div>
                 <div className="testimonial-arrow-v2">
                     <div className="swiper-button-next"><i className="fa-sharp fa-regular fa-arrow-right"></i></div>
